@@ -15,13 +15,14 @@ return new class extends Migration
     {
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title',150)->required();
-            $table->tinyInteger('rooms_num')->unsigned();
-            $table->tinyInteger('beds_num')->unsigned();
-            $table->tinyInteger('baths_num')->unsigned();
+            $table->unsignedTinyInteger('rooms_num')->required();
+            $table->unsignedTinyInteger('beds_num')->required();
+            $table->unsignedTinyInteger('baths_num')->required();
             $table->text('description')->required();
             $table->decimal('price')->required();
-            $table->smallInteger('mq')->unsigned();
+            $table->unsignedSmallInteger('mq')->required();
             $table->string('image', 255)->required();
             $table->string('full_address', 255)->required();
             $table->decimal('latitude')->required();
