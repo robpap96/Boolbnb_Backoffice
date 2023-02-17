@@ -1,0 +1,25 @@
+#admin-apartments-index {
+    .bg-color-red{
+        background-color: #ff5a5f;
+    }
+    .left-column {
+        border-right: 3px solid #f3f3f3;
+        border-left: 3px solid #f3f3f3;
+    }
+    .right-column {
+        border-right: 3px solid #f3f3f3;
+        overflow-y: scroll;
+        & .card-container {
+            width: 330px;
+            & .apartment__image {
+                width: 330px;
+                height: 330px;
+                object-fit: cover;
+                border-radius: .9375rem;
+            }
+            & .apartment__info {
+                margin-top: .625rem;
+            }
+        }
+    }
+}

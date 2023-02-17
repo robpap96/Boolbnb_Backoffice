@@ -21,14 +21,14 @@ class ApartmentSeeder extends Seeder
         Apartment::truncate();
         Schema::enableForeignKeyConstraints();
 
-        for ($i=0; $i < 10; $i++) {
+        for ($i=0; $i < 4; $i++) {
             $new_apartment = new Apartment();
             $new_apartment->user_id = 1;
             $new_apartment->title = $faker->sentence(4, true);
             $new_apartment->rooms_num = $faker->numberBetween(3,15);
             $new_apartment->beds_num = ceil($new_apartment->rooms_num / 2);
             $new_apartment->baths_num = ceil($new_apartment->rooms_num / 3);
-            $new_apartment->description = $faker->paragraph(800);
+            $new_apartment->description = $faker->paragraph(50);
             $new_apartment->price = $faker->randomFloat(2,35,10000);
             $new_apartment->mq = ($new_apartment->rooms_num * rand(8, 20));
             $new_apartment->image = $faker->imageUrl(640, 480, 'home', true);

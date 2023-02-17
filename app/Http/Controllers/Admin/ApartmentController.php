@@ -6,6 +6,7 @@ use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ApartmentController extends Controller
 {
@@ -16,7 +17,10 @@ class ApartmentController extends Controller
      */
     public function index()
     {
-        //
+        // Get all apartments owned by a logged in user
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+
+        return view('admin.apartments.index', compact('apartments'));
     }
 
     /**
