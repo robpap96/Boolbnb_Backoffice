@@ -1,36 +1,48 @@
-@extends('layouts.app')
+@extends('layouts.main-dashboard')
 
 @section('content')
-    <section id="admin-apartments-index" class="d-flex container" style="height: calc(100vh - 66px)">
-        <div class="col-3 left-column">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link text-white m-2
-                    {{ str_contains(Route::currentRouteName(), 'admin.apartments.index') ? 'bg-color-red' : '' }}"
-                    href="{{route('admin.apartments.index')}}">
-                        <i class="fa-solid fa-house-user fa-lg fa-fw me-2"></i>I miei appartamenti
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="col-9 right-column p-2">
-            @if ($apartments->isEmpty())
-                {{-- fallback message if no apartment is present --}}
-                <h2>Nessun appartamento aggiunto, Inizia subito!</h2>
-            @else
-                <div class="d-flex flex-wrap justify-content-center">
-                    @foreach ($apartments as $apartment)
-                        <div class="card-container m-3">
-                            <img class="apartment__image" src="{{ $apartment->image }}" alt="">
-                            <div class="apartment__info">
-                                <h5 class="mb-0">{{ $apartment->title }}</h5>
-                                <div class="text-muted py-1">{{ $apartment->full_address }}</div>
-                                <span><strong>{{ $apartment->price }}</strong> € /notte</span>
+    <div id="admin-apartments-index">
+        @if ($apartments->isEmpty())
+        {{-- fallback message if no apartment is present --}}
+        <h2>Nessun appartamento aggiunto, Inizia subito!</h2>
+        @else
+        <div class="d-flex flex-wrap justify-content-center">
+            @foreach ($apartments as $apartment)
+                <div class="card-container m-3">
+                    <div id="carousel-{{ $apartment->id }}" class="carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
                             </div>
                         </div>
-                    @endforeach
+                        <button class="carousel-control-prev d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="apartment__info">
+                        <h5 class="mb-0">{{ $apartment->title }}</h5>
+                        <div class="text-muted py-1">{{ $apartment->full_address }}</div>
+                        <span><strong>{{ $apartment->price }}</strong> € /notte</span>
+                    </div>
                 </div>
-            @endif
+            @endforeach
         </div>
-    </section>
+        @endif
+    </div>
 @endsection

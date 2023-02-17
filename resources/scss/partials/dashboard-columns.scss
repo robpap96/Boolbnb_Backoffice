@@ -1,0 +1,24 @@
+#dashboard-columns {
+    height: calc(100vh - 66px);
+    .bg-color-red{
+        background-color: #ff5a5f;
+    }
+    .left-column {
+        border-right: .1875rem solid #f3f3f3;
+        border-left: .1875rem solid #f3f3f3;
+        & ul li {
+            position: relative;
+        }
+        & ul li a#add-apartment-btn {
+            position: absolute;
+            top: 14%;
+            right: 0;
+            font-size: 1.25rem;
+        }
+    }
+    .right-column {
+        position: relative;
+        border-right: .1875rem solid #f3f3f3;
+        overflow-y: scroll;
+    }
+}
