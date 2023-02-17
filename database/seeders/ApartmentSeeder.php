@@ -14,6 +14,6 @@ class ApartmentSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }
