@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="given-name" autofocus>
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
                             <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus>
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="family-name" autofocus>
 
                                 @error('last_name')
                                 <span class="invalid-feedback" role="alert">
@@ -43,7 +43,7 @@
                             <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Date of birth') }}</label>
 
                             <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="date_of_birth" autofocus>
+                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" required autocomplete="bday" autofocus>
 
                                 @error('date_of_birth')
                                 <span class="invalid-feedback" role="alert">
