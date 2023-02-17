@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('apartment_sponsorship', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
+            $table->foreignId('sponsorship_id')->constrained()->onDelete('cascade');
+            $table->dateTime('sponsor_start');
+            $table->dateTime('sponsor_end');
             $table->timestamps();
         });
     }
