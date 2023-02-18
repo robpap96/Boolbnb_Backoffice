@@ -9,7 +9,7 @@ class Apartment extends Model
 {
     use HasFactory;
 
-    protected $guarded = ['user_id'];
+    protected $guarded = ['user_id', 'image', 'latitude', 'longitude', 'is_visible'];
 
     public function messages() {
         return $this->hasMany(Message::class);

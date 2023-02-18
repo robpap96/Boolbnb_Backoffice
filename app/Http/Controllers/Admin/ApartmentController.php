@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Storage;
 
 class ApartmentController extends Controller
 {
@@ -41,7 +43,28 @@ class ApartmentController extends Controller
      */
     public function store(StoreApartmentRequest $request)
     {
-        //
+        $data = $request->validated();
+        $new_apartment = new Apartment();
+        $new_apartment->user_id = Auth::user()->id;
+
+        $new_apartment->image = Storage::disk('public')->put('uploads', $data['image']);
+        
+        $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
+        $answer = $getCoordsFromAddress->json();
+        $coords = $answer['results'][0]['position'];
+        $new_apartment->latitude = $coords['lat'];
+        $new_apartment->longitude = $coords['lon'];
+
+        if ( isset($data['is_visible']) ) {
+            $new_apartment->is_visible = 1;
+        } else {
+            $new_apartment->is_visible = 0;
+        }
+        
+        $new_apartment->fill($data);
+        $new_apartment->save();
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**

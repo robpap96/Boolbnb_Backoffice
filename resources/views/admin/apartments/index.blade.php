@@ -21,13 +21,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
+                                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100" alt="">
                             </div>
-                            <div class="carousel-item">
-                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
+                            <div class="carousel-item active">
+                                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100" alt="">
                             </div>
-                            <div class="carousel-item">
-                                <img src="{{ $apartment->image }}" class="d-block w-100" alt="">
+                            <div class="carousel-item active">
+                                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100" alt="">
                             </div>
                         </div>
                         <button class="carousel-control-prev d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="prev">
