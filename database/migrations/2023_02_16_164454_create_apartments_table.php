@@ -25,8 +25,8 @@ return new class extends Migration
             $table->unsignedSmallInteger('mq')->required();
             $table->string('image', 255)->required();
             $table->string('full_address', 255)->required();
-            $table->decimal('latitude')->required();
-            $table->decimal('longitude')->required();
+            $table->decimal('latitude', $precision = 8, $scale = 5)->required();
+            $table->decimal('longitude', $precision = 8, $scale = 5)->required();
             $table->boolean('is_visible')->default(true);
             $table->timestamps();
         });

@@ -89,7 +89,7 @@
                             <i class="fa-solid fa-house-user fa-lg fa-fw me-2"></i>
                             <span>I miei appartamenti</span>
                         </a>
-                        <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="text-white h-100 px-2"><i class="fa-solid fa-plus"></i></a>
+                        <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="text-white h-100 px-2 {{ Route::currentRouteName() == 'admin.apartments.create' ? 'd-none' : 'd-block'}}"><i class="fa-solid fa-plus"></i></a>
                     </li>
                 </ul>
             </aside>
