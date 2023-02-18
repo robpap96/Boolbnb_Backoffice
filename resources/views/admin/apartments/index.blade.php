@@ -1,5 +1,9 @@
 @extends('layouts.main-dashboard')
 
+@section('page-title')
+    | Miei appartmenti
+@endsection
+
 @section('content')
     <div id="admin-apartments-index">
         @if ($apartments->isEmpty())
