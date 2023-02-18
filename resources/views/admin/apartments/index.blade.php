@@ -8,7 +8,7 @@
     <div id="admin-apartments-index">
         @if ($apartments->isEmpty())
         {{-- fallback message if no apartment is present --}}
-        <h2>Nessun appartamento aggiunto, Inizia subito!</h2>
+        <h2>Nessun appartamento aggiunto, creane subito uno!</h2>
         @else
         <div class="d-flex flex-wrap justify-content-center">
             @foreach ($apartments as $apartment)
@@ -44,6 +44,7 @@
                         <div class="text-muted py-1">{{ $apartment->full_address }}</div>
                         <span><strong>{{ $apartment->price }}</strong> € /notte</span>
                     </div>
+                    <div class="text-white text-center mt-1 {{ $apartment->is_visible ? 'bg-success' : 'bg-danger'}}">{{ $apartment->is_visible ? 'Appartamento visibile' : 'Appartamento nascosto'}}</div>
                 </div>
             @endforeach
         </div>
