@@ -7,43 +7,40 @@
 @section('content')
     <div id="admin-apartments-index">
         @if ($apartments->isEmpty())
-        {{-- fallback message if no apartment is present --}}
-        <h2>Nessun appartamento aggiunto, creane subito uno!</h2>
+            {{-- fallback message if no apartment is present --}}
+            <h2>Nessun appartamento aggiunto, creane subito uno!</h2>
         @else
-        <div class="d-flex flex-wrap justify-content-center">
-            @foreach ($apartments as $apartment)
-                <div class="card-container m-3">
-                    <div id="carousel-{{ $apartment->id }}" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        </div>
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100" alt="">
-                            </div>
-                            <div class="carousel-item active">
-                                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100" alt="">
-                            </div>
-                        </div>
-                        <button class="carousel-control-prev d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <div class="apartment__info">
-                        <h5 class="mb-0">{{ $apartment->title }}</h5>
-                        <div class="text-muted py-1">{{ $apartment->full_address }}</div>
-                        <span><strong>{{ $apartment->price }}</strong> € /notte</span>
-                    </div>
-                    <div class="text-white text-center mt-1 {{ $apartment->is_visible ? 'bg-success' : 'bg-danger'}}">{{ $apartment->is_visible ? 'Appartamento visibile' : 'Appartamento nascosto'}}</div>
+            <nav class="apartments-tabs">
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active w-50 text-dark" id="nav-visible-tab" data-bs-toggle="tab" data-bs-target="#nav-visible" type="button" role="tab" aria-controls="nav-visible" aria-selected="true">Appartamenti visibili</button>
+                <button class="nav-link w-50 text-dark" id="nav-hidden-tab" data-bs-toggle="tab" data-bs-target="#nav-hidden" type="button" role="tab" aria-controls="nav-hidden" aria-selected="false">Appartamenti non visibili</button>
                 </div>
-            @endforeach
-        </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                {{-- Appartamenti visibili tab --}}
+                <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
+                    <div class="d-flex flex-wrap justify-content-center">
+                        @foreach ($apartments as $apartment)
+                            @if ($apartment->is_visible == true)
+                            {{-- Layouts template HTMl blade --}}
+                                @include('layouts.apartments.index', $apartment) 
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- Appartamenti non visibili tab --}}
+                <div class="tab-pane fade" id="nav-hidden" role="tabpanel" aria-labelledby="nav-hidden-tab" tabindex="0">
+                    <div class="d-flex flex-wrap justify-content-center">
+                        @foreach ($apartments as $apartment)
+                            @if ($apartment->is_visible == false)
+                                {{-- Layouts template HTMl blade --}}
+                                @include('layouts.apartments.index', $apartment)
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+            </div>
         @endif
     </div>
 @endsection
