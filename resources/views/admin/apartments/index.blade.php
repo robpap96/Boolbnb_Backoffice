@@ -8,7 +8,9 @@
     <div id="admin-apartments-index">
         @if ($apartments->isEmpty())
             {{-- fallback message if no apartment is present --}}
-            <h2>Nessun appartamento aggiunto, creane subito uno!</h2>
+            <div class="alert alert-danger" role="alert">
+                Pare che tu non abbia ancora creato un appartamento. <a href="{{ route('admin.apartments.create') }}" class="alert-link">Creane subito uno!</a>
+            </div>
         @else
             <nav class="apartments-tabs">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -20,24 +22,44 @@
                 {{-- Appartamenti visibili tab --}}
                 <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
                     <div class="d-flex flex-wrap justify-content-center">
+                        @php( $visible_apartments = [] )
+
                         @foreach ($apartments as $apartment)
                             @if ($apartment->is_visible == true)
-                            {{-- Layouts template HTMl blade --}}
-                                @include('layouts.apartments.index', $apartment) 
+                                @php( $visible_apartments[] = $apartment->id )
+
+                                {{-- Layouts template HTMl blade --}}
+                                @include('layouts.apartments.index', $apartment)
                             @endif
                         @endforeach
+
+                        @if (count($visible_apartments) == 0)
+                            <div class="alert alert-success mt-3" role="alert">
+                                Nessun appartamento visibile.
+                            </div>
+                        @endif
                     </div>
                 </div>
 
                 {{-- Appartamenti non visibili tab --}}
                 <div class="tab-pane fade" id="nav-hidden" role="tabpanel" aria-labelledby="nav-hidden-tab" tabindex="0">
                     <div class="d-flex flex-wrap justify-content-center">
+                        @php( $hidden_apartments = [] )
+
                         @foreach ($apartments as $apartment)
                             @if ($apartment->is_visible == false)
+                                @php( $hidden_apartments[] = $apartment->id )
+
                                 {{-- Layouts template HTMl blade --}}
                                 @include('layouts.apartments.index', $apartment)
-                            @endif
+                            @endif 
                         @endforeach
+
+                        @if (count($hidden_apartments) == 0)
+                            <div class="alert alert-success mt-3" role="alert">
+                                Nessun appartamento nascosto.
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
