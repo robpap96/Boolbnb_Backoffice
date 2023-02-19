@@ -1,4 +1,4 @@
-<div class="card-container m-3">
+<div class="card-container m-3 d-flex flex-column align-items-start">
     <div id="carousel-{{ $apartment->id }}" class="carousel slide">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -21,7 +21,14 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div class="apartment__info">
+
+    <div class="apartment__actions d-flex justify-content-between align-items-center w-100 mt-2 text-white py-2 px-3">
+        <div><a href="{{ route('admin.apartments.show', $apartment->id) }}"><i class="fa-solid fa-circle-info"></i> Info</a></div>
+        <div class="edit-button px-4"><i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</div>
+        <div><i class="fa-solid fa-trash-can"></i> Elimina</div>
+    </div>
+
+    <div class="apartment__info mb-2">
         <h5 class="mb-0">{{ $apartment->title }}</h5>
         <div class="text-muted py-1">{{ $apartment->full_address }}</div>
         <span><strong>{{ $apartment->price }}</strong> € /notte</span>

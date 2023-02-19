@@ -28,6 +28,18 @@
                 border-radius: .9375rem;
             }
         }
+        & .apartment__actions {
+            border-radius: .625rem;
+            background-color: #ff5a5f;
+            & div.edit-button {
+                border-left: .0625rem solid white;
+                border-right: .0625rem solid white;
+            }
+            & a {
+                color: white;
+                text-decoration: none;
+            }
+        }
         & .apartment__info {
             margin-top: .625rem;
         }
