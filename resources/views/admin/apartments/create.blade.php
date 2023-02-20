@@ -73,7 +73,7 @@
                 @enderror
             </div>
 
-            {{-- Checkboxes with technologies --}}
+            {{-- Checkboxes with services --}}
             <div class="my-3 ">
                 <div>
                     <label class="form-label">Lista servizi:</label>
