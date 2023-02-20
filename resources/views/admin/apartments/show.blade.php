@@ -7,12 +7,6 @@
 @section('content')
     <div id="admin-apartments-show">
         <div class="container">
-            {{-- bottoni --}}
-            <div class=" container d-flex">
-                <a class="btn btn-primary me-2" href="{{route ('admin.apartments.index') }}">Indietro</a>
-                <a class="btn btn-secondary me-2" href="#">Modifica</a>
-                <a class="btn btn-success me-2" href="#">Dai visibilità al tuo contenuto</a>
-            </div>
             {{-- card singolo appartamento --}}
             <div class="container">
                 <div class="card-title">
@@ -60,9 +54,12 @@
                     <figcaption class="figure-caption"><i class="fa-solid fa-location-dot"></i>{{ $apartment->full_address }}</figcaption>
                 </figure>
             </div>
-            
+            {{-- bottoni --}}
+            <div class=" container d-flex">
+                <a class="btn btn-primary me-2" href="{{route ('admin.apartments.index') }}">Indietro</a>
+                <a class="btn btn-secondary me-2" href="#">Modifica</a>
+                <a class="btn btn-success me-2" href="#">Dai visibilità al tuo contenuto</a>
+            </div>      
         </div>
-
-
     </div>
 @endsection
