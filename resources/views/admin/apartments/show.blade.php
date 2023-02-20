@@ -33,18 +33,15 @@
             <div class="container">
                 <h5>Cosa troverai</h5>
                 <div class="d-flex">
-                    <ul class="me-3">
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                    </ul>
-                    <ul>
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                        <li>Lorem ipsum dolor</li>
-                    </ul>
+                    @if ($apartment->services->isEmpty())
+                        <span>Non sono presenti servizi aggiuntivi</span>
+                    @else
+                        <ul>
+                            @foreach ($apartment->services as $service)
+                            <li>{{ $service->name }}</li>  
+                            @endforeach
+                        </ul>    
+                    @endif
                 </div>
             </div>
             {{-- sezione mappa --}}
