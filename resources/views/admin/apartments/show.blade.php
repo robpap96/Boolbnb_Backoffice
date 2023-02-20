@@ -57,7 +57,7 @@
             <div class=" container d-flex">
                 <a class="btn btn-primary me-2" href="{{route ('admin.apartments.index') }}">Indietro</a>
                 <a class="btn btn-secondary me-2" href="{{route ('admin.apartments.edit', $apartment) }}">Modifica</a>
-                <a class="btn btn-success me-2" href="#">Dai visibilità al tuo contenuto</a>
+                <a class="btn btn-success me-2" href="{{route ('admin.sponsors.index', $apartment) }}">Dai visibilità al tuo contenuto</a>
             </div>      
         </div>
     </div>
