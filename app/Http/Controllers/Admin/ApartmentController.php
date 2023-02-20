@@ -98,7 +98,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        //
+        $services = Service::All();
+
+        return view('admin.apartments.edit', compact('apartment', 'services'));
     }
 
     /**
@@ -110,7 +112,43 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
-        //
+        $data = $request->validated();
+            if ( isset($data['image']) ) {
+                // Removing old img in DB before adding new
+                if ( $apartment->image ) {
+                    Storage::disk('public')->delete($apartment->image);
+                }
+                $apartment->image = Storage::disk('public')->put('uploads', $data['image']);
+            };
+
+            if( $data['full_address'] != $apartment->full_address ){
+                $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
+                $answer = $getCoordsFromAddress->json();
+        
+                $coords = $answer['results'][0]['position'];
+                $apartment->latitude = $coords['lat'];
+                $apartment->longitude = $coords['lon'];
+
+                $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
+                $apartment->full_address = $fullAddress;
+            }
+
+            if ( isset($data['is_visible']) ) {
+                $apartment->is_visible = true;
+            } else {
+                $apartment->is_visible = false;
+            }
+        $apartment->update($data);
+
+        if( isset($data['services']) ) {
+            // Save records into pivot table if $data['services] is isset
+            $apartment->services()->sync($data['services']);
+        } else {
+            // Else every record to its apartment is cancelled
+            $apartment->services()->sync([]);
+        }
+
+        return redirect()->route('admin.apartments.index');
     }
 
     /**
