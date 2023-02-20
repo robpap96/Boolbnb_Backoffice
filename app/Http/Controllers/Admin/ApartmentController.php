@@ -159,6 +159,12 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        //
+        if ( $apartment->image ) {
+            Storage::disk('public')->delete($apartment->image);
+        }
+
+        $apartment->delete();
+
+        return redirect()->route('admin.apartments.index');;
     }
 }
