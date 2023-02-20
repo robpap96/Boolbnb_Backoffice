@@ -33,6 +33,7 @@ class StoreApartmentRequest extends FormRequest
             'mq' => 'required|numeric|between:1,15000',
             'image' => 'required|image|max:2048',
             'full_address' => 'required|string|max:255',
+            'services' =>  'nullable|exists:services,id',
             'is_visible' => ''
         ];
     }

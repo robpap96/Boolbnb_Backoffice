@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
+use App\Models\Service;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -32,7 +33,9 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::All();
+
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -58,7 +61,7 @@ class ApartmentController extends Controller
 
             $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
             $new_apartment->full_address = $fullAddress;
-
+            
             if ( isset($data['is_visible']) ) {
                 $new_apartment->is_visible = true;
             } else {
@@ -66,7 +69,12 @@ class ApartmentController extends Controller
             }
             
             $new_apartment->fill($data);
+
         $new_apartment->save();
+            
+        if( isset($data['services']) ){
+            $new_apartment->services()->sync($data['services']);
+        }
 
         return redirect()->route('admin.apartments.index');
     }
