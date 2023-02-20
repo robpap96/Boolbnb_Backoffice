@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\SponsorshipController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     })->name('dashboard');
 
     Route::resource('apartments', ApartmentController::class);
+    Route::resource('sponsors', SponsorshipController::class);
+    // Route::get('/sponsors', [SponsorshipController::class], "index")->name('sponsors.index');
 });
 
 require __DIR__.'/auth.php';

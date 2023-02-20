@@ -1,13 +1,16 @@
 #dashboard-columns {
     margin-top: 20px;
     height: calc(100vh - 66px - 20px);
-    .bg-color-red{
+    .bg-color-red {
         background-color: #ff5a5f;
+        & a {
+            color: white !important;
+        }
     }
     .left-column {
-        border-top: .1875rem solid #f3f3f3;
-        border-right: .1875rem solid #f3f3f3;
-        border-left: .1875rem solid #f3f3f3;
+        border-top: 0.1875rem solid #f3f3f3;
+        border-right: 0.1875rem solid #f3f3f3;
+        border-left: 0.1875rem solid #f3f3f3;
         & ul li {
             position: relative;
         }
@@ -20,8 +23,8 @@
     }
     .right-column {
         position: relative;
-        border-top: .1875rem solid #f3f3f3;
-        border-right: .1875rem solid #f3f3f3;
+        border-top: 0.1875rem solid #f3f3f3;
+        border-right: 0.1875rem solid #f3f3f3;
         overflow-y: auto;
     }
 }
