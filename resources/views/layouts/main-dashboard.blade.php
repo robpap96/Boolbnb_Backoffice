@@ -82,16 +82,16 @@
 
         <main id="dashboard-columns" class="d-flex container">
             {{-- Left column --}}
-            <aside class="col-3 left-column">
+            <aside class="col-3 left-column p-2">
                 <ul class="nav flex-column ">
-                    <li class="nav-item m-2 {{ str_contains(Route::currentRouteName(), 'admin.apartments') ? 'bg-color-red' : '' }}">
+                    <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.apartments') ? 'bg-color-red' : '' }}">
                         <a class="nav-link text-dark" href="{{route('admin.apartments.index')}}">
                             <i class="fa-solid fa-house-user fa-lg fa-fw me-2"></i>
                             <span>I miei appartamenti</span>
                         </a>
                         <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="text-white h-100 px-2 {{ Route::currentRouteName() == 'admin.apartments.create' ? 'd-none' : 'd-block'}}"><i class="fa-solid fa-plus"></i></a>
                     </li>
-                    <li class="nav-item m-2  {{ str_contains(Route::currentRouteName(), 'admin.sponsors') ? 'bg-color-red' : '' }}">
+                    <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.sponsors') ? 'bg-color-red' : '' }}">
                         <a class="nav-link text-dark" href="{{route('admin.sponsors.index')}}">
                             <i class="fa-solid fa-bullhorn fa-lg fa-fw me-2"></i>
                             <span>Sponsorizza il tuo appartamento </span>
