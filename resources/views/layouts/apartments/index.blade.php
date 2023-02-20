@@ -25,7 +25,33 @@
     <div class="apartment__actions d-flex justify-content-between align-items-center w-100 mt-2 text-white py-2 px-3">
         <div><a href="{{ route('admin.apartments.show', $apartment->id) }}"><i class="fa-solid fa-circle-info"></i> Info</a></div>
         <div class="edit-button px-4"><a href="{{ route('admin.apartments.edit', $apartment->id) }}"><i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a></div>
-        <div><i class="fa-solid fa-trash-can"></i> Elimina</div>
+        <!-- Button trigger modal -->
+        <div type="div" class="t-4" data-bs-toggle="modal" data-bs-target="#modal{{ $apartment->id }}" style="cursor:pointer">
+            <i class="fa-solid fa-trash-can"></i> Elimina
+        </div>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="modal{{ $apartment->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-dark" id="exampleModalLabel">Stai per cancellare l'appartamento "{{ $apartment->title }}" con ID numero {{ $apartment->id }}.</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-danger text-decoration-underline">
+                        Sei sicuro ?
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form action="{{ route('admin.apartments.destroy', $apartment) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">DELETE</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="apartment__info mb-2">
