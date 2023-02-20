@@ -1,0 +1,65 @@
+.sponsor-container {
+    & .sponsor-card {
+        padding: 0.875rem 0.625rem;
+
+        border: solid 0.0625rem #dee2e6;
+        border-radius: 0.625rem;
+        background-color: #fdfcfc;
+
+        & .sponsor-image-box {
+            position: relative;
+
+            & .Silver {
+                color: #c0c0c0;
+            }
+
+            & .Gold {
+                color: #ffd700;
+            }
+
+            & .Platinum {
+                color: #e5e4e2;
+            }
+
+            & .sponsor-image {
+                width: 9.375rem;
+                height: 9.375rem;
+            }
+
+            & .sponsor-type {
+                position: absolute;
+
+                bottom: 10px;
+                left: 0;
+                right: 0;
+
+                text-align: center;
+                text-transform: uppercase;
+                text-shadow: 0 0 1px #353535;
+            }
+        }
+
+        & .sponsor-info {
+            padding-left: 0.5rem;
+            & .sponsor-dettagli {
+            }
+
+            & .sponsor-price {
+                width: 20%;
+                color: #b5b7b9;
+                font-style: italic;
+
+                & button {
+                    color: white;
+                    background-color: #ff5a5f;
+                    font-size: 0.875rem;
+                }
+
+                & small {
+                    display: flex;
+                    justify-content: end;
+                }
+            }
+        }
+    }
+}
