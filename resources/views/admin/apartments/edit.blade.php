@@ -140,7 +140,7 @@
 
             <button type="submit" class="btn btn-success">Modifica</button>
             <button type="reset" class="btn btn-secondary">Resetta modifiche</button>
-            <a href="{{ route('admin.apartments.index') }}" class="btn btn-danger">Annulla modifica</a>
+            <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-danger">Annulla modifica</a>
         </form>
     </div>
 @endsection
