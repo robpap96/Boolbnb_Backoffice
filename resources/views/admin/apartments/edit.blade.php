@@ -86,11 +86,10 @@
                         @else
                             <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : null }}>
                         @endif
-                        <label class="form-check-label" for="service-{{ $service->name }}}}">{{ $service->name }}</label>
+                        <label class="form-check-label" for="service-{{ $service->name }}">{{ $service->name }}</label>
                     </div>
                 @endforeach
             </div>
-
 
             {{-- Descrizione appartamento --}}
             <div class="mb-3">
