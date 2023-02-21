@@ -87,7 +87,11 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        if( $apartment->user_id === Auth::user()->id ){
+            return view('admin.apartments.show', compact('apartment'));
+        } else {
+            return redirect()->route('admin.apartments.index');
+        }
     }
 
     /**
@@ -98,9 +102,13 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
-        $services = Service::All();
+        if( $apartment->user_id === Auth::user()->id ){
+            $services = Service::All();
 
-        return view('admin.apartments.edit', compact('apartment', 'services'));
+            return view('admin.apartments.edit', compact('apartment', 'services'));
+        } else {
+            return redirect()->route('admin.apartments.index');
+        }
     }
 
     /**
@@ -159,12 +167,15 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
-        if ( $apartment->image ) {
-            Storage::disk('public')->delete($apartment->image);
+        if( $apartment->user_id === Auth::user()->id ){
+            if ( $apartment->image ) {
+                Storage::disk('public')->delete($apartment->image);
+            }
+            $apartment->delete();
+
+            return redirect()->route('admin.apartments.index');;
+        } else {
+            abort(403, 'Stai cercando di eliminare un appartamento che non esiste.');
         }
-
-        $apartment->delete();
-
-        return redirect()->route('admin.apartments.index');;
     }
 }
