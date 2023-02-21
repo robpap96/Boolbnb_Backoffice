@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('apartment_id')->constrained()->onDelete('cascade');
             $table->string('email')->required();
             $table->text('content')->required();
-            $table->dateTime('date')->required();
             $table->timestamps();
         });
     }
