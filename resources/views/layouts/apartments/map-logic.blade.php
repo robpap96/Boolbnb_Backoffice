@@ -80,7 +80,7 @@ function handleMapEvent() {
     var newSearchOptions = Object.assign({}, oldSearchOptions, { center: map.getCenter() });
     var newAutocompleteOptions = Object.assign({}, oldautocompleteOptions, { center: map.getCenter() });
     ttSearchBox.updateOptions(Object.assign({}, searchBoxOptions, {
-        placeholder: 'Query e.g. Washington',
+        placeholder: "{{ Route::currentRouteName() == 'admin.apartments.create' ? 'Inserisci indirizzo' : $apartment->full_address }}",
         searchOptions: newSearchOptions,
         autocompleteOptions: newAutocompleteOptions,
         distanceFromPoint: state.userLocation
@@ -240,6 +240,7 @@ function fillResultsList(results) {
     resultsManager.append(resultList);
 }
 
+// Fix bug map image 
 const ttSidePanel = document.querySelector('.tt-side-panel__close-button');
 ttSidePanel.click();
 setTimeout(() => {
@@ -249,5 +250,6 @@ setTimeout(() => {
 const address = document.querySelector('.tt-search-box-input');
 address.setAttribute('id', 'full_address');
 address.setAttribute('name', 'full_address');
+address.value = "{{ old('full_address') }}"
 
 </script>

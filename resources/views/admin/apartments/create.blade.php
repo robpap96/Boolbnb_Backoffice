@@ -21,15 +21,14 @@
 
             {{-- Indirizzo completo --}}
             <div class="mb-3">
-                <label for="full_address" class="form-label">Indirizzo*</label>
-                @error('full_address')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror 
-
                 <div class="map-view-container">
                     <div class='map-view my-4'>
                         <div class='tt-side-panel'>
                             <header class='tt-side-panel__header'>
+                                <label for="full_address" class="form-label">Indirizzo*</label>
+                                @error('full_address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror 
                             </header>
                             <div class='tt-tabs js-tabs'>
                                 <div class='tt-tabs__panel'>
@@ -126,7 +125,7 @@
                     @enderror
                 </div>
                 <div class="col-6 p-4">
-                    <img id="output" src="" class="fluid-img w-100">
+                    <img id="output" src="" class="fluid-img w-100 border">
                 </div>
     
                 <script>

@@ -53,14 +53,21 @@ class ApartmentController extends Controller
             $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
             $answer = $getCoordsFromAddress->json();
 
+            if ( $answer['results'] !== [] ) {
+                $coords = $answer['results'][0]['position'];
+                $new_apartment->latitude = $coords['lat'];
+                $new_apartment->longitude = $coords['lon'];
+
+                $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
+                $new_apartment->full_address = $fullAddress;
+            } else {
+                $error = \Illuminate\Validation\ValidationException::withMessages([
+                    'full_address' => ['Indirizzo non trovato.'],
+                ]);
+                throw $error;
+            }
+
             $new_apartment->image = Storage::disk('public')->put('uploads', $data['image']);
-
-            $coords = $answer['results'][0]['position'];
-            $new_apartment->latitude = $coords['lat'];
-            $new_apartment->longitude = $coords['lon'];
-
-            $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
-            $new_apartment->full_address = $fullAddress;
             
             if ( isset($data['is_visible']) ) {
                 $new_apartment->is_visible = true;
@@ -76,7 +83,7 @@ class ApartmentController extends Controller
             $new_apartment->services()->sync($data['services']);
         }
 
-        return redirect()->route('admin.apartments.index');
+        return redirect()->route('admin.apartments.show', $new_apartment->id);
     }
 
     /**
@@ -132,13 +139,20 @@ class ApartmentController extends Controller
             if( $data['full_address'] != $apartment->full_address ){
                 $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
                 $answer = $getCoordsFromAddress->json();
-        
-                $coords = $answer['results'][0]['position'];
-                $apartment->latitude = $coords['lat'];
-                $apartment->longitude = $coords['lon'];
-
-                $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
-                $apartment->full_address = $fullAddress;
+                
+                if ( $answer['results'] !== [] ) {
+                    $coords = $answer['results'][0]['position'];
+                    $apartment->latitude = $coords['lat'];
+                    $apartment->longitude = $coords['lon'];
+    
+                    $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
+                    $apartment->full_address = $fullAddress;
+                } else {
+                    $error = \Illuminate\Validation\ValidationException::withMessages([
+                        'full_address' => ['Indirizzo non trovato.'],
+                    ]);
+                    throw $error;
+                }
             }
 
             if ( isset($data['is_visible']) ) {

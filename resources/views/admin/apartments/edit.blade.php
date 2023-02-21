@@ -22,20 +22,14 @@
 
             {{-- Indirizzo completo --}}
             <div class="mb-3">
-                <label for="full_address" class="form-label">Indirizzo corrente*</label>
-
-                <input type="text" class="form-control" value="{{ $apartment->full_address }}" disabled id="old_address_disabled">
-
-                <div class="d-none" id="old_address">{{ old('full_address', $apartment->full_address) }}</div>
-                @error('full_address')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror 
-                
                 <div class="map-view-container">
                     <div class='map-view my-4'>
                         <div class='tt-side-panel'>
                             <header class='tt-side-panel__header'>
-                                <small>Compila questo campo per sovrascrivere l'indirizzo corrente</small>
+                                <label for="full_address" class="form-label">Indirizzo*</label>
+                                @error('full_address')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror 
                             </header>
                             <div class='tt-tabs js-tabs'>
                                 <div class='tt-tabs__panel'>
@@ -175,11 +169,9 @@
 
     <script>
         const button = document.getElementById('submit-button');
-        const oldAddress = document.getElementById('old_address_disabled');
-
         button.addEventListener('click', function() {
             if(address.value == '') {
-                address.value = oldAddress.value;
+                address.value = "{{ $apartment->full_address }}"
             }
         })
     </script>
