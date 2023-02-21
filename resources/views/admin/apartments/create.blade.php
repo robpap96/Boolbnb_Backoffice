@@ -22,10 +22,9 @@
             {{-- Indirizzo completo --}}
             <div class="mb-3">
                 <label for="full_address" class="form-label">Indirizzo completo*</label>
-                <input type="text" id="full_address" name="full_address" class="form-control @error('full_address') is-invalid @enderror" value="{{ old('full_address') }}" placeholder="Indirizzo completo" required>
                 @error('full_address')
                     <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                @enderror 
 
                 <div class="map-view-container">
                     <div class='map-view my-4'>
@@ -402,5 +401,10 @@
         });
         resultsManager.append(resultList);
     }
+
+    const address = document.querySelector('.tt-search-box-input');
+    address.setAttribute('id', 'full_address');
+    address.setAttribute('name', 'full_address');
+
     </script>
 @endsection
