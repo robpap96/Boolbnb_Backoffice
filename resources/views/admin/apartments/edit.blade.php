@@ -8,7 +8,7 @@
     <div id="admin-apartments-edit">
         <h1>Modifica appartamento "{{ $apartment->title }}"</h1>
 
-        <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data" onsubmit="getFullAddress()">
             @method('PUT')
             @csrf
             {{-- Titolo appartamento --}}
@@ -22,11 +22,34 @@
 
             {{-- Indirizzo completo --}}
             <div class="mb-3">
-                <label for="full_address" class="form-label">Indirizzo completo*</label>
-                <input type="text" id="full_address" name="full_address" class="form-control @error('full_address') is-invalid @enderror" value="{{ old('full_address', $apartment->full_address) }}" placeholder="Indirizzo completo" required>
+                <label for="full_address" class="form-label">Indirizzo corrente*</label>
+
+                <input type="text" class="form-control" value="{{ $apartment->full_address }}" disabled id="old_address_disabled">
+
+                <div class="d-none" id="old_address">{{ old('full_address', $apartment->full_address) }}</div>
                 @error('full_address')
                     <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
+                @enderror 
+                
+                <div class="map-view-container">
+                    <div class='map-view my-4'>
+                        <div class='tt-side-panel'>
+                            <header class='tt-side-panel__header'>
+                                <small>Compila questo campo per sovrascrivere l'indirizzo corrente</small>
+                            </header>
+                            <div class='tt-tabs js-tabs'>
+                                <div class='tt-tabs__panel'>
+                                    <div class='js-results' hidden='hidden'></div>
+                                    <div class='js-results-loader' hidden='hidden'>
+                                        <div class='loader-center'><span class='loader'></span></div>
+                                    </div>
+                                    <div class='tt-tabs__placeholder js-results-placeholder'></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id='map' class='full-map'></div>
+                    </div>
+                </div>
             </div>
 
             {{-- Numero di stanze --}}
@@ -141,9 +164,23 @@
                 </div>
             @endif
 
-            <button type="submit" class="btn btn-success">Modifica</button>
+            <button id="submit-button" type="submit" class="btn btn-success">Modifica</button>
             <button type="reset" class="btn btn-secondary">Resetta modifiche</button>
             <a href="{{ route('admin.apartments.show', $apartment) }}" class="btn btn-danger">Annulla modifica</a>
         </form>
     </div>
+    
+    {{-- Logic for displaying TomTom map API --}}
+    @include('layouts.apartments.map-logic')
+
+    <script>
+        const button = document.getElementById('submit-button');
+        const oldAddress = document.getElementById('old_address_disabled');
+
+        button.addEventListener('click', function() {
+            if(address.value == '') {
+                address.value = oldAddress.value;
+            }
+        })
+    </script>
 @endsection
