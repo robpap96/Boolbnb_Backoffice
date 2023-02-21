@@ -29,11 +29,11 @@ class StoreApartmentRequest extends FormRequest
             'beds_num' => 'required|numeric|between:1,15',
             'baths_num' => 'required|numeric|between:1,15',
             'description' => 'required|string',
-            'price' => 'required|decimal:2|between:1,10000',
+            'price' => 'required|decimal:0,2|between:1,10000',
             'mq' => 'required|numeric|between:1,15000',
             'image' => 'required|image|max:2048',
             'full_address' => 'required|string|max:255',
-            'services' =>  'nullable|exists:services,id',
+            'services' =>  'required|exists:services,id',
             'is_visible' => ''
         ];
     }
