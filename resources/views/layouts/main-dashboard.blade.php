@@ -103,7 +103,7 @@
                     </li>  
                     <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.messages') ? 'bg-color-red' : '' }}">
                         <a class="nav-link text-dark" href="{{route('admin.messages.index')}}">
-                            <i class="fa-solid fa-bullhorn fa-lg fa-fw me-2"></i>
+                            <i class="fa-solid fa-comments-dollar fa-lg fa-fw me-2"></i>
                             <span>Messaggi</span>
                         </a>
                         
