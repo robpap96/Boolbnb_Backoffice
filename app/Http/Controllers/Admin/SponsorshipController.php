@@ -6,6 +6,10 @@ use App\Http\Requests\StoresponsorshipRequest;
 use App\Http\Requests\UpdatesponsorshipRequest;
 use App\Models\sponsorship;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SponsorshipController extends Controller
 {
@@ -48,9 +52,11 @@ class SponsorshipController extends Controller
      * @param  \App\Models\sponsorship  $sponsorship
      * @return \Illuminate\Http\Response
      */
-    public function show(sponsorship $sponsorship)
-    {
-        //
+    public function show(sponsorship $sponsor)
+    {  
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+
+        return view('admin.sponsors.show', compact('sponsor', 'apartments'));
     }
 
     /**
@@ -86,4 +92,44 @@ class SponsorshipController extends Controller
     {
         //
     }
+
+    public function buy_sponsor(Request $request, $id, sponsorship $sponsorship){
+        $data = $request->validate([
+            'apartments_sponsored' => 'numeric',
+        ]);
+
+        $sponsorship->id = $id;
+        $sponsor_start = Carbon::now();
+
+        // Split Year[0] from time[1]
+        $split_start = explode(' ', $sponsor_start);
+
+        switch ($sponsorship->id) {
+            case '1':
+                // 24 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 1 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            case '2':
+                // 72 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 3 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            case '3':
+                // 144 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 6 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            default:
+                
+                break;
+        }
+
+        $sponsorship->apartments()->attach($data, [
+            'sponsor_start' => $sponsor_start,
+            'sponsor_end' => $sponsor_end,
+        ]);
+
+        return redirect()->route('admin.sponsors.show', $sponsorship)->with('message', 'Appartamento sponsorizzato con successo!');
+    }   
 }

@@ -27,6 +27,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::resource('apartments', ApartmentController::class);
     Route::resource('sponsors', SponsorshipController::class);
+    Route::get('/sponsors/{id}/buy', [SponsorshipController::class, "buy_sponsor"])->name('sponsors.buy');
+
     // Route::get('/sponsors', [SponsorshipController::class], "index")->name('sponsors.index');
 });
 
