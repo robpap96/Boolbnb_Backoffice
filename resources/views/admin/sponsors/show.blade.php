@@ -8,7 +8,7 @@
     @endif
 
     <div class="sponsor-container">
-        <div class="sponsor-card m-2 d-flex">
+        <div class="sponsor-card mb-3 d-flex">
             <div class="sponsor-image-box">
                 <img class="sponsor-image {{$sponsor->name}}" src="{{ Vite::asset('resources/img/IMG-20230220-WA0002_origin.png')}}" alt="">
                 <div class="sponsor-type {{$sponsor->name}}"><h4>{{$sponsor->name}}</h4></div>
@@ -23,15 +23,23 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.sponsors.buy', $sponsor->id) }}" class="m-2">
+        <form action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
             <select name="apartments_sponsored" id="" class="form-select">
                 <option value="default" selected hidden>Lista appartamenti</option>
                 @foreach ($apartments as $apartment)
-                    <option value="{{$apartment->id}}">{{ $apartment->title }} - {{ $apartment->full_address }}</option>
+                    @if ($apartment->is_visible) 
+                        <option value="{{$apartment->id}}">{{ $apartment->title }} - {{ $apartment->full_address }}</option>
+                    @else 
+                        <option class="text-muted select_disabled" value="{{$apartment->id}}" disabled>{{ $apartment->title }} - {{ $apartment->full_address }}</option>
+                    @endif
                 @endforeach
             </select>
 
-            <div class="sponsor-price d-flex flex-column justify-content-end mt-3">
+            <div class="my-3 alert alert-warning">
+                <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
+            </div>
+
+            <div class="sponsor-price d-flex flex-column justify-content-end">
                 <button type="submit" class="btn btn-success">Aquista {{ $sponsor->price }} €</button>
             </div>
         </form>

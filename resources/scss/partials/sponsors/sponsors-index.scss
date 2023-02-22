@@ -1,4 +1,7 @@
 .sponsor-container {
+    .select_disabled {
+        background-color: rgba($color: #ff5a5f, $alpha: 0.2);
+    }
     & .sponsor-card {
         padding: 0.875rem 0.625rem;
 

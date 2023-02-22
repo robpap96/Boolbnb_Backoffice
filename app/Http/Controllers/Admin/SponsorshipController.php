@@ -53,7 +53,7 @@ class SponsorshipController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(sponsorship $sponsor)
-    {  
+    {
         $apartments = Apartment::where('user_id', Auth::user()->id)->get();
 
         return view('admin.sponsors.show', compact('sponsor', 'apartments'));
@@ -93,12 +93,14 @@ class SponsorshipController extends Controller
         //
     }
 
-    public function buy_sponsor(Request $request, $id, sponsorship $sponsorship){
+    public function buy_sponsor(Request $request, $name, sponsorship $sponsorship){
         $data = $request->validate([
             'apartments_sponsored' => 'numeric',
         ]);
 
-        $sponsorship->id = $id;
+        // Get the sponsor from the name
+        $sponsorship = sponsorship::where('name', $name)->first();
+
         $sponsor_start = Carbon::now();
 
         // Split Year[0] from time[1]
