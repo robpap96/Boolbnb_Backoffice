@@ -29,8 +29,8 @@ function get_coords_from_address($full_address) {
 }
 
 // Get Slug
-function create_slug($title, $rooms, $beds, $user_id) {
-    $slug = Str::slug($title, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
+function create_slug($title, $rooms, $beds, $user_id, $address) {
+    $slug = Str::slug($title, '-') . '-' . Str::slug($address, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
 
     return $slug;
 }
@@ -93,7 +93,7 @@ class ApartmentController extends Controller
             $new_apartment->fill($data);
 
             // Get slug from apartment info
-            $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id);
+            $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id, $new_apartment->full_address);
         $new_apartment->save();
             
         if( isset($data['services']) ){
@@ -167,7 +167,7 @@ class ApartmentController extends Controller
             }
 
             // Get slug from apartment info
-            $apartment->slug = create_slug($data['title'], $data['rooms_num'], $data['beds_num'], $apartment->user_id);
+            $apartment->slug = create_slug($data['title'], $data['rooms_num'], $data['beds_num'], $apartment->user_id, $apartment->full_address);
 
             isset($data['is_visible']) ? ($apartment->is_visible = true) : ($apartment->is_visible = false);
         $apartment->update($data);
