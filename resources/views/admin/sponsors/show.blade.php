@@ -25,7 +25,7 @@
 
         <form action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
             <select name="apartments_sponsored" id="" class="form-select">
-                <option value="default" selected hidden>Lista appartamenti</option>
+                <option value="" selected hidden>Lista appartamenti</option>
                 @foreach ($apartments as $apartment)
                     @if ($apartment->is_visible) 
                         <option value="{{$apartment->id}}">{{ $apartment->title }} - {{ $apartment->full_address }}</option>
@@ -34,6 +34,9 @@
                     @endif
                 @endforeach
             </select>
+            @error('apartments_sponsored')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
 
             <div class="my-3 alert alert-warning">
                 <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
