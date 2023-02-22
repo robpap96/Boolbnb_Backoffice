@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Apartment;
+use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
@@ -25,7 +26,8 @@ class ApartmentSeeder extends Seeder
 
         for ($i=0; $i < 10; $i++) {
             $new_apartment = new Apartment();
-            $new_apartment->user_id = 1;
+            $random_user = User::inRandomOrder()->first();
+            $new_apartment->user_id = $random_user->id;
             $new_apartment->title = $faker->sentence(4, true);
             $new_apartment->rooms_num = $faker->numberBetween(3,15);
             $new_apartment->beds_num = ceil($new_apartment->rooms_num / 2);
@@ -34,8 +36,6 @@ class ApartmentSeeder extends Seeder
             $new_apartment->price = $faker->randomFloat(2,35,10000);
             $new_apartment->mq = ($new_apartment->rooms_num * rand(8, 20));
             $new_apartment->image = $faker->imageUrl(640, 480, 'home', true);
-            $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . Str::slug($new_apartment->beds_num, '-');
-            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
             
             do {
                 $new_apartment->latitude = $faker->latitude(35, 47);
@@ -47,9 +47,12 @@ class ApartmentSeeder extends Seeder
             } while ($answer['summary']['numResults'] === 0);
 
             $address = $answer['addresses'][0]['address'];
-            $new_apartment->full_address = $address['freeformAddress'] . $address['countrySubdivision'] ?: '' . $address['country'];
+            $new_apartment->full_address = $address['freeformAddress'] . ', ' . (array_key_exists('countrySubdivision', $address) ? $address['countrySubdivision'] : '') .  ', ' . $address['country'];
 
             $new_apartment->is_visible = $faker->boolean();
+
+            $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->full_address, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . '-' . Str::slug($new_apartment->beds_num, '-') . '-' . Str::slug($new_apartment->user_id, '-');
+            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
             $new_apartment->save();
         }
     }
