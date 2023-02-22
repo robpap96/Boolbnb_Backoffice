@@ -95,42 +95,52 @@ class SponsorshipController extends Controller
 
     public function buy_sponsor(Request $request, $name, sponsorship $sponsorship){
         $data = $request->validate([
-            'apartments_sponsored' => 'numeric',
+            'apartments_sponsored' => 'required|numeric|exists:apartments,id',
         ]);
 
         // Get the sponsor from the name
         $sponsorship = sponsorship::where('name', $name)->first();
 
-        $sponsor_start = Carbon::now();
+        // Get the apartment from data, sent by sponsor menu
+        $apartment = Apartment::find($data['apartments_sponsored']);
+        
+        if ($apartment->is_visible) {
+            $sponsor_start = Carbon::now();
 
-        // Split Year[0] from time[1]
-        $split_start = explode(' ', $sponsor_start);
+            // Split Year[0] from time[1]
+            $split_start = explode(' ', $sponsor_start);
 
-        switch ($sponsorship->id) {
-            case '1':
-                // 24 hours sponsor
-                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 1 days'));
-                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-                break;
-            case '2':
-                // 72 hours sponsor
-                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 3 days'));
-                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-                break;
-            case '3':
-                // 144 hours sponsor
-                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 6 days'));
-                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-                break;
-            default:
-                
-                break;
+            switch ($sponsorship->id) {
+                case '1':
+                    // 24 hours sponsor
+                    $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 1 days'));
+                    $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                    break;
+                case '2':
+                    // 72 hours sponsor
+                    $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 3 days'));
+                    $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                    break;
+                case '3':
+                    // 144 hours sponsor
+                    $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 6 days'));
+                    $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                    break;
+                default:
+                    
+                    break;
+            }
+            
+            $sponsorship->apartments()->attach($data, [
+                'sponsor_start' => $sponsor_start,
+                'sponsor_end' => $sponsor_end,
+            ]);
+        } else {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'apartments_sponsored' => ['You cannot sponsor an apartment that is not visible.'],
+            ]);
+            throw $error;
         }
-
-        $sponsorship->apartments()->attach($data, [
-            'sponsor_start' => $sponsor_start,
-            'sponsor_end' => $sponsor_end,
-        ]);
 
         return redirect()->route('admin.sponsors.show', $sponsorship)->with('message', 'Appartamento sponsorizzato con successo!');
     }   
