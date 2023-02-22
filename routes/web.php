@@ -27,7 +27,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     })->name('dashboard');
 
     Route::resource('apartments', ApartmentController::class);
-    Route::resource('sponsors', SponsorshipController::class)->parameters(['sponsors' => 'sponsor:name']);
+    Route::resource('sponsors', SponsorshipController::class)->parameters(['sponsors' => 'sponsor:slug']);
     Route::resource('messages', MessageController::class);
     Route::get('/sponsors/{name}/buy', [SponsorshipController::class, "buy_sponsor"])->name('sponsors.buy');
 

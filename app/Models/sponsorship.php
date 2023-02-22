@@ -9,7 +9,7 @@ class sponsorship extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['slug'];
 
     public function apartments(){
         return $this->belongsToMany(Apartment::class);

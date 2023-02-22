@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="sponsor-price d-flex flex-column justify-content-end">
-                            <a href="{{ route('admin.sponsors.show', $sponsor->name) }}">
+                            <a href="{{ route('admin.sponsors.show', $sponsor->slug) }}">
                                 <button class="btn " type="submit">Aquista {{ $sponsor->price }} €</button>
                             </a>
                         </div>

@@ -93,13 +93,13 @@ class SponsorshipController extends Controller
         //
     }
 
-    public function buy_sponsor(Request $request, $name, sponsorship $sponsorship){
+    public function buy_sponsor(Request $request, $slug, sponsorship $sponsorship){
         $data = $request->validate([
             'apartments_sponsored' => 'required|numeric|exists:apartments,id',
         ]);
 
         // Get the sponsor from the name
-        $sponsorship = sponsorship::where('name', $name)->first();
+        $sponsorship = sponsorship::where('slug', $slug)->first();
 
         // Get the apartment from data, sent by sponsor menu
         $apartment = Apartment::find($data['apartments_sponsored']);

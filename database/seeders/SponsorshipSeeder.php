@@ -6,6 +6,7 @@ use App\Models\sponsorship;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class SponsorshipSeeder extends Seeder
 {
@@ -43,6 +44,7 @@ class SponsorshipSeeder extends Seeder
             $new_sponsor->name = $sponsor['name'];
             $new_sponsor->price = $sponsor['price'];
             $new_sponsor->duration = $sponsor['duration'];
+            $new_sponsor->slug = Str::of($new_sponsor->name)->slug('-');
             $new_sponsor->save();
         }
     }
