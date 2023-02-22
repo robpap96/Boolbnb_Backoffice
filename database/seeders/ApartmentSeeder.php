@@ -8,6 +8,7 @@ use App\Models\Apartment;
 use Faker\Generator as Faker;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Schema;
+use illuminate\Support\Str;
 
 class ApartmentSeeder extends Seeder
 {
@@ -33,6 +34,8 @@ class ApartmentSeeder extends Seeder
             $new_apartment->price = $faker->randomFloat(2,35,10000);
             $new_apartment->mq = ($new_apartment->rooms_num * rand(8, 20));
             $new_apartment->image = $faker->imageUrl(640, 480, 'home', true);
+            $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . Str::slug($new_apartment->beds_num, '-');
+            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
             
             do {
                 $new_apartment->latitude = $faker->latitude(35, 47);
@@ -44,7 +47,7 @@ class ApartmentSeeder extends Seeder
             } while ($answer['summary']['numResults'] === 0);
 
             $address = $answer['addresses'][0]['address'];
-            $new_apartment->full_address = "{$address['freeformAddress']}, {$address['countrySubdivision']}, {$address['country']}";
+            $new_apartment->full_address = $address['freeformAddress'] . $address['countrySubdivision'] ?: '' . $address['country'];
 
             $new_apartment->is_visible = $faker->boolean();
             $new_apartment->save();

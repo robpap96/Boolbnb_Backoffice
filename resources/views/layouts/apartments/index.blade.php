@@ -23,8 +23,8 @@
     </div>
 
     <div class="apartment__actions d-flex justify-content-between align-items-center w-100 mt-2 text-white py-2 px-3">
-        <div><a href="{{ route('admin.apartments.show', $apartment->id) }}"><i class="fa-solid fa-circle-info"></i> Info</a></div>
-        <div class="edit-button px-4"><a href="{{ route('admin.apartments.edit', $apartment->id) }}"><i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a></div>
+        <div><a href="{{ route('admin.apartments.show', $apartment->slug) }}"><i class="fa-solid fa-circle-info"></i> Info</a></div>
+        <div class="edit-button px-4"><a href="{{ route('admin.apartments.edit', $apartment->slug) }}"><i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a></div>
         <!-- Button trigger modal -->
         <div type="div" class="t-4" data-bs-toggle="modal" data-bs-target="#modal{{ $apartment->id }}" style="cursor:pointer">
             <i class="fa-solid fa-trash-can"></i> Elimina

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title',150)->required();
+            $table->string('slug');
             $table->unsignedTinyInteger('rooms_num')->required();
             $table->unsignedTinyInteger('beds_num')->required();
             $table->unsignedTinyInteger('baths_num')->required();

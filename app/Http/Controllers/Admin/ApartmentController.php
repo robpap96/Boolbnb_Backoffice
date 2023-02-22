@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ApartmentController extends Controller
 {
@@ -77,13 +78,16 @@ class ApartmentController extends Controller
             
             $new_apartment->fill($data);
 
+            $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . Str::slug($new_apartment->beds_num, '-');
+            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
+
         $new_apartment->save();
             
         if( isset($data['services']) ){
             $new_apartment->services()->sync($data['services']);
         }
 
-        return redirect()->route('admin.apartments.show', $new_apartment->id);
+        return redirect()->route('admin.apartments.show', $new_apartment->slug);
     }
 
     /**
@@ -154,6 +158,9 @@ class ApartmentController extends Controller
                     throw $error;
                 }
             }
+
+            $slug = Str::slug($data['title'], '-') . '-' . Str::slug($data['rooms_num'], '-') . Str::slug($data['beds_num'], '-');
+            $apartment->slug = $slug . '-' . $apartment->user_id;
 
             if ( isset($data['is_visible']) ) {
                 $apartment->is_visible = true;
