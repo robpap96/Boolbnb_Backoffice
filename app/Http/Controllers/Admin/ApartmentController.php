@@ -12,6 +12,29 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+// Get coordinates from Query Address
+function get_coords_from_address($full_address) {
+    $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$full_address}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
+    $res = $getCoordsFromAddress->json();
+
+    // Check if address is found by API
+    if( $res !== null && $res['results'] !== [] ){
+        return $res['results'][0];
+    } else {
+        $error = \Illuminate\Validation\ValidationException::withMessages([
+            'full_address' => ['Indirizzo non trovato.'],
+        ]);
+        throw $error;
+    }
+}
+
+// Get Slug
+function create_slug($title, $rooms, $beds, $user_id) {
+    $slug = Str::slug($title, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
+
+    return $slug;
+}
+
 class ApartmentController extends Controller
 {
     /**
@@ -51,36 +74,26 @@ class ApartmentController extends Controller
         $new_apartment = new Apartment();
             $new_apartment->user_id = Auth::user()->id;
 
-            $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
-            $answer = $getCoordsFromAddress->json();
+            // function to get coords from address query
+            $answer = get_coords_from_address($data['full_address']);
 
-            if ( $answer['results'] !== [] ) {
-                $coords = $answer['results'][0]['position'];
-                $new_apartment->latitude = $coords['lat'];
-                $new_apartment->longitude = $coords['lon'];
+            // Set Lat and Lon
+            $new_apartment->latitude = $answer['position']['lat'];
+            $new_apartment->longitude = $answer['position']['lon'];
 
-                $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
-                $new_apartment->full_address = $fullAddress;
-            } else {
-                $error = \Illuminate\Validation\ValidationException::withMessages([
-                    'full_address' => ['Indirizzo non trovato.'],
-                ]);
-                throw $error;
-            }
+            // Save full address from API answer
+            $answer_address = $answer['address'];
+            $new_apartment->full_address = "{$answer_address['freeformAddress']}, {$answer_address['countrySubdivision']}, {$answer_address['country']}";
 
+            // Save image in server storage
             $new_apartment->image = Storage::disk('public')->put('uploads', $data['image']);
             
-            if ( isset($data['is_visible']) ) {
-                $new_apartment->is_visible = true;
-            } else {
-                $new_apartment->is_visible = false;
-            }
-            
+            isset($data['is_visible']) ? ($new_apartment->is_visible = true) : ($new_apartment->is_visible = false);
+
             $new_apartment->fill($data);
 
-            $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . Str::slug($new_apartment->beds_num, '-');
-            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
-
+            // Get slug from apartment info
+            $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id);
         $new_apartment->save();
             
         if( isset($data['services']) ){
@@ -141,32 +154,22 @@ class ApartmentController extends Controller
             };
 
             if( $data['full_address'] != $apartment->full_address ){
-                $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$data['full_address']}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
-                $answer = $getCoordsFromAddress->json();
-                
-                if ( $answer['results'] !== [] ) {
-                    $coords = $answer['results'][0]['position'];
-                    $apartment->latitude = $coords['lat'];
-                    $apartment->longitude = $coords['lon'];
-    
-                    $fullAddress = "{$answer['results'][0]['address']['freeformAddress']}, {$answer['results'][0]['address']['countrySubdivision']}, {$answer['results'][0]['address']['country']}";
-                    $apartment->full_address = $fullAddress;
-                } else {
-                    $error = \Illuminate\Validation\ValidationException::withMessages([
-                        'full_address' => ['Indirizzo non trovato.'],
-                    ]);
-                    throw $error;
-                }
+                // function to get coords from address query
+                $answer = get_coords_from_address($data['full_address']);
+
+                // Set Lat and Lon
+                $apartment->latitude = $answer['position']['lat'];
+                $apartment->longitude = $answer['position']['lon'];;
+
+                // Save full address from API answer
+                $answer_address = $answer['address'];
+                $apartment->full_address = "{$answer_address['freeformAddress']}, {$answer_address['countrySubdivision']}, {$answer_address['country']}";
             }
 
-            $slug = Str::slug($data['title'], '-') . '-' . Str::slug($data['rooms_num'], '-') . Str::slug($data['beds_num'], '-');
-            $apartment->slug = $slug . '-' . $apartment->user_id;
+            // Get slug from apartment info
+            $apartment->slug = create_slug($data['title'], $data['rooms_num'], $data['beds_num'], $apartment->user_id);
 
-            if ( isset($data['is_visible']) ) {
-                $apartment->is_visible = true;
-            } else {
-                $apartment->is_visible = false;
-            }
+            isset($data['is_visible']) ? ($apartment->is_visible = true) : ($apartment->is_visible = false);
         $apartment->update($data);
 
         if( isset($data['services']) ) {

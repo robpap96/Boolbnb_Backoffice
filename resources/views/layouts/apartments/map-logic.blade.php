@@ -80,7 +80,7 @@ function handleMapEvent() {
     var newSearchOptions = Object.assign({}, oldSearchOptions, { center: map.getCenter() });
     var newAutocompleteOptions = Object.assign({}, oldautocompleteOptions, { center: map.getCenter() });
     ttSearchBox.updateOptions(Object.assign({}, searchBoxOptions, {
-        placeholder: "{{ Route::currentRouteName() == 'admin.apartments.create' ? 'Inserisci indirizzo' : $apartment->full_address }}",
+        placeholder: `{{ Route::currentRouteName() == 'admin.apartments.create' ? 'Inserisci indirizzo' : "$apartment->full_address" }}`,
         searchOptions: newSearchOptions,
         autocompleteOptions: newAutocompleteOptions,
         distanceFromPoint: state.userLocation
