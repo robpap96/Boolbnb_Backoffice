@@ -23,18 +23,37 @@
 
         @php
             $all_sponsors = $apartment->sponsorships->toArray();
-            foreach ($all_sponsors as $sponsor) {
-                $date = new DateTime($sponsor['pivot']['sponsor_end']);
-                $now = new DateTime();
-                $now->format('Y-m-d H:i:s');  
+            $sponsor_name = [];
 
-                if($date < $now) {
-                    // @dd('date passed');
-                } else {
+            if( $all_sponsors !== [] ) {
+                foreach ($all_sponsors as $sponsor) {
+                    $date = new DateTime($sponsor['pivot']['sponsor_end']);
+                    $now = new DateTime();
+                    $now->format('Y-m-d H:i:s');  
+    
+                    if($date > $now) {
+                        if( !in_array($sponsor['name'], $sponsor_name) ) {
+                            $sponsor_name[] = $sponsor['name'];
+                        }
+                    }
+                }
+    
+                if ( in_array('Platinum', $sponsor_name) ) {
                     echo "
-                        <div class='sponsor-badge-icon text-center'>
-                            <i class='fa-solid fa-ribbon fa-lg fa-fw'></i>
-                            <div>{$sponsor['name']}</div>
+                        <div class='sponsor-badge-icon text-center' style='color: rgb(229, 228, 226)'>
+                            <i class='fa-solid fa-gem me-1'></i> PLATINUM
+                        </div>
+                    ";
+                } else if ( in_array('Gold', $sponsor_name) ) {
+                    echo "
+                        <div class='sponsor-badge-icon text-center' style='color: #FFD700'>
+                            <i class='fa-solid fa-crown me-1'></i> GOLD
+                        </div>
+                    ";
+                } else if( in_array('Silver', $sponsor_name) ) {
+                    echo "
+                        <div class='sponsor-badge-icon text-center text-secondary'>
+                            <i class='fa-solid fa-medal me-1'></i> SILVER
                         </div>
                     ";
                 }
