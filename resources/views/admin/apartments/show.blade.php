@@ -5,19 +5,59 @@
     @endsection --}}
 
     @section('content')
-        <div id="admin-apartments-show">
-            <div class="container">
+    <div id="admin-apartments-show">
+        <div class="container">
                 {{-- card singolo appartamento --}}
-                <div class="container">
-                <div class="card-title">
+            <div class="card-title">
+                    {{-- Sponsorizzazione --}}
+                    @php
+                    $all_sponsors = $apartment->sponsorships->toArray();
+                    $sponsor_name = [];
+        
+                    if( $all_sponsors !== [] ) {
+                        foreach ($all_sponsors as $sponsor) {
+                            $date = new DateTime($sponsor['pivot']['sponsor_end']);
+                            $now = new DateTime();
+                            $now->format('Y-m-d H:i:s');  
+            
+                            if($date > $now) {
+                                if( !in_array($sponsor['name'], $sponsor_name) ) {
+                                    $sponsor_name[] = $sponsor['name'];
+                                }
+                            }
+                        }
+            
+                        if ( in_array('Platinum', $sponsor_name) ) {
+                            echo "
+                                <div class='sponsor-badge-icon text-end' style='color: rgb(229, 228, 226)'>
+                                    <i class='fa-solid fa-gem me-1'></i> PLATINUM
+                                </div>
+                            ";
+                        } else if ( in_array('Gold', $sponsor_name) ) {
+                            echo "
+                                <div class='sponsor-badge-icon text-end' style='color: #FFD700'>
+                                    <i class='fa-solid fa-crown me-1'></i> GOLD
+                                </div>
+                            ";
+                        } else if( in_array('Silver', $sponsor_name) ) {
+                            echo "
+                                <div class='sponsor-badge-icon text-end text-secondary'>
+                                    <i class='fa-solid fa-medal me-1'></i> SILVER
+                                </div>
+                            ";
+                        }
+                    }
+                    @endphp
+                <div class="apartment-title py-4">
                     <h3>{{ $apartment->title }}</h3>
-                    <h6 class="m-0">{{ $apartment->price }} <i class="fa-solid fa-euro-sign fa-lg fa-fw me-1"></i>/notte</h6>
-                    <h6><i class="fa-solid fa-location-dot fa-lg fa-fw me-2"></i>{{ $apartment->full_address }}</h6>
                 </div>
-                <div class="card-body">
+                    <h6 class="mb-3">{{ $apartment->price }}<i class="fa-solid fa-euro-sign fa-lg fa-fw me-1"></i>/notte</h6>
+                    <h6 class="mb-3"><i class="fa-solid fa-location-dot fa-lg fa-fw me-2"></i>{{ $apartment->full_address }}</h6>
+                </div>
+                <div class="card-body m-3">
                     <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" alt="" class="w-50 my-2">
                 </div>
-                <div class="card-text">
+                <div class="card-text p-3">
                         <ul class="d-flex list-unstyled">
                             <li class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></li>
                             <li class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></li>
@@ -30,7 +70,7 @@
                 </div>
             </div>
             {{-- sezione servizi singolo appartamento --}}
-            <div class="container">
+            <div class="container p-3">
                 <h5>Cosa troverai</h5>
                 <div class="d-flex">
                     @if ($apartment->services->isEmpty())

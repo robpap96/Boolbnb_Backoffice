@@ -1,0 +1,23 @@
+#admin-apartments-show {
+
+    & div.card-title{
+        & div.sponsor-badge-icon{
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 18px;
+            text-transform: capitalize;
+            border-radius: 10px;
+            padding: 5px 7px;
+            color: #ff5a5f !important;
+            font-weight: bold;
+            font-size: 40px;
+        }
+    }
+    & div.apartment-title {
+        
+        & h3 {
+            font-size: 50px;
+        }
+    }
+}

@@ -46,7 +46,7 @@
                     ";
                 } else if ( in_array('Gold', $sponsor_name) ) {
                     echo "
-                        <div class='sponsor-badge-icon text-center' style='color: #FFD700'>
+                        <div class='sponsor-badge-icon text-center' style='color: #FFD700';'>
                             <i class='fa-solid fa-crown me-1'></i> GOLD
                         </div>
                     ";
