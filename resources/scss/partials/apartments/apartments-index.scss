@@ -18,6 +18,7 @@
     & .card-container {
         width: 20.625rem;
         & .carousel.slide {
+            position: relative;
             &:hover button {
                 display: block !important;
             }
@@ -43,5 +44,12 @@
         & .apartment__info {
             margin-top: .625rem;
         }
+    }
+
+    & .sponsor-badge-icon{
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 20px;
     }
 }

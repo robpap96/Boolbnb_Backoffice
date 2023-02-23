@@ -20,6 +20,26 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
+
+        @php
+            $all_sponsors = $apartment->sponsorships->toArray();
+            foreach ($all_sponsors as $sponsor) {
+                $date = new DateTime($sponsor['pivot']['sponsor_end']);
+                $now = new DateTime();
+                $now->format('Y-m-d H:i:s');  
+
+                if($date < $now) {
+                    // @dd('date passed');
+                } else {
+                    echo "
+                        <div class='sponsor-badge-icon text-center'>
+                            <i class='fa-solid fa-ribbon fa-lg fa-fw'></i>
+                            <div>{$sponsor['name']}</div>
+                        </div>
+                    ";
+                }
+            }
+        @endphp
     </div>
 
     <div class="apartment__actions d-flex justify-content-between align-items-center w-100 mt-2 text-white py-2 px-3">
