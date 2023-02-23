@@ -1,4 +1,7 @@
 #admin-messages-index {
+    & div.card{
+        border: none;
+    }
     & div.message_list_title {
 
 
@@ -8,15 +11,21 @@
             
         }
     }
-
+    & div.mask-custom {
+        background: rgba(47, 220, 67, 0.471);
+        border-radius: 2em;
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(255, 255, 255, 0.05);
+        background-clip: padding-box;
+        box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+        }
     & div.card{
-        background-color: rgba(127, 255, 212, 0.51);
         & div.card-body{
             
             & h5 {
-                color:rgb(184, 128, 25);
+                color:rgb(83, 79, 71);
                 font-style: italic;
-                font-size: 18px;
+                font-size: 22px;
             }
 
             & p {
