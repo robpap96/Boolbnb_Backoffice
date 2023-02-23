@@ -17,7 +17,7 @@
                         <div class="div">
                             <a class="btn btn-success" href="{{route('admin.apartments.show', $message->apartment )}}">Vedi l'appartamento <i class="fa-sharp fa-solid fa-eye"></i></a>
                             {{-- a scopo illustrativo --}}
-                            <a class="btn btn-primary" href="#">Rispondi <i class="fa-solid fa-reply"></i></a>
+                            <a class="btn btn-primary" href="mailto:{{ $message->email }}">Rispondi <i class="fa-solid fa-reply"></i></a>
                         </div>
 
 
