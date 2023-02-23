@@ -52,7 +52,7 @@ class ApartmentSeeder extends Seeder
             $new_apartment->is_visible = $faker->boolean();
 
             $slug = Str::slug($new_apartment->title, '-') . '-' . Str::slug($new_apartment->full_address, '-') . '-' . Str::slug($new_apartment->rooms_num, '-') . '-' . Str::slug($new_apartment->beds_num, '-') . '-' . Str::slug($new_apartment->user_id, '-');
-            $new_apartment->slug = $slug . '-' . $new_apartment->user_id;
+            $new_apartment->slug = $slug;
             $new_apartment->save();
         }
     }
