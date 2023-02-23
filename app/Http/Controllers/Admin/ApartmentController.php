@@ -11,30 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-
-// Get coordinates from Query Address
-function get_coords_from_address($full_address) {
-    $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$full_address}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
-    $res = $getCoordsFromAddress->json();
-
-    // Check if address is found by API
-    if( $res !== null && $res['results'] !== [] ){
-        return $res['results'][0];
-    } else {
-        $error = \Illuminate\Validation\ValidationException::withMessages([
-            'full_address' => ['Indirizzo non trovato.'],
-        ]);
-        throw $error;
-    }
-}
-
-// Get Slug
-function create_slug($title, $rooms, $beds, $user_id, $address) {
-    $slug = Str::slug($title, '-') . '-' . Str::slug($address, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
-
-    return $slug;
-}
-
 class ApartmentController extends Controller
 {
     /**
@@ -199,7 +175,34 @@ class ApartmentController extends Controller
 
             return redirect()->route('admin.apartments.index');;
         } else {
-            abort(403, 'Stai cercando di eliminare un appartamento che non esiste.');
+            abort(403, 'You are trying to delete an apartment that doesn\'t exist.');
         }
     }
 }
+
+
+/*---------------------
+    FUNCTIONS
+---------------------*/
+    // Get coordinates from Query Address
+    function get_coords_from_address($full_address) {
+        $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$full_address}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
+        $res = $getCoordsFromAddress->json();
+
+        // Check if address is found by API
+        if( $res !== null && $res['results'] !== [] ){
+            return $res['results'][0];
+        } else {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'full_address' => ['Indirizzo non trovato.'],
+            ]);
+            throw $error;
+        }
+    }
+
+    // Get Slug
+    function create_slug($title, $rooms, $beds, $user_id, $address) {
+        $slug = Str::slug($title, '-') . '-' . Str::slug($address, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
+
+        return $slug;
+    }
