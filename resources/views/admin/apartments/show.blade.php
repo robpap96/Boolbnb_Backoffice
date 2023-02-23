@@ -1,76 +1,76 @@
     @extends('layouts.main-dashboard')
 
-    {{-- @section('page-title')
-        |   
-    @endsection --}}
+    @section('page-title')
+        |   {{ $apartment->title }}
+    @endsection
 
     @section('content')
     <div id="admin-apartments-show">
         <div class="container">
-                {{-- card singolo appartamento --}}
             <div class="card-title">
+                <div class="apartment-title pb-3 d-flex justify-content-between align-items-center">
+                    <h3 class="col-10 mb-0">{{ $apartment->title }}</h3>
                     {{-- Sponsorizzazione --}}
                     @php
-                    $all_sponsors = $apartment->sponsorships->toArray();
-                    $sponsor_name = [];
-        
-                    if( $all_sponsors !== [] ) {
-                        foreach ($all_sponsors as $sponsor) {
-                            $date = new DateTime($sponsor['pivot']['sponsor_end']);
-                            $now = new DateTime();
-                            $now->format('Y-m-d H:i:s');  
+                        $all_sponsors = $apartment->sponsorships->toArray();
+                        $sponsor_name = [];
             
-                            if($date > $now) {
-                                if( !in_array($sponsor['name'], $sponsor_name) ) {
-                                    $sponsor_name[] = $sponsor['name'];
+                        if( $all_sponsors !== [] ) {
+                            foreach ($all_sponsors as $sponsor) {
+                                $date = new DateTime($sponsor['pivot']['sponsor_end']);
+                                $now = new DateTime();
+                                $now->format('Y-m-d H:i:s');  
+                
+                                if($date > $now) {
+                                    if( !in_array($sponsor['name'], $sponsor_name) ) {
+                                        $sponsor_name[] = $sponsor['name'];
+                                    }
                                 }
                             }
+                
+                            if ( in_array('Platinum', $sponsor_name) ) {
+                                echo "
+                                    <div class='sponsor-badge-icon' style='color: rgb(229, 228, 226)'>
+                                        <i class='fa-solid fa-gem me-1'></i> PLATINUM
+                                    </div>
+                                ";
+                            } else if ( in_array('Gold', $sponsor_name) ) {
+                                echo "
+                                    <div class='sponsor-badge-icon' style='color: #FFD700'>
+                                        <i class='fa-solid fa-crown me-1'></i> GOLD
+                                    </div>
+                                ";
+                            } else if( in_array('Silver', $sponsor_name) ) {
+                                echo "
+                                    <div class='sponsor-badge-icon text-secondary'>
+                                        <i class='fa-solid fa-medal me-1'></i> SILVER
+                                    </div>
+                                ";
+                            }
                         }
-            
-                        if ( in_array('Platinum', $sponsor_name) ) {
-                            echo "
-                                <div class='sponsor-badge-icon text-end' style='color: rgb(229, 228, 226)'>
-                                    <i class='fa-solid fa-gem me-1'></i> PLATINUM
-                                </div>
-                            ";
-                        } else if ( in_array('Gold', $sponsor_name) ) {
-                            echo "
-                                <div class='sponsor-badge-icon text-end' style='color: #FFD700'>
-                                    <i class='fa-solid fa-crown me-1'></i> GOLD
-                                </div>
-                            ";
-                        } else if( in_array('Silver', $sponsor_name) ) {
-                            echo "
-                                <div class='sponsor-badge-icon text-end text-secondary'>
-                                    <i class='fa-solid fa-medal me-1'></i> SILVER
-                                </div>
-                            ";
-                        }
-                    }
                     @endphp
-                <div class="apartment-title py-4">
-                    <h3>{{ $apartment->title }}</h3>
                 </div>
-                    <h6 class="mb-3">{{ $apartment->price }}<i class="fa-solid fa-euro-sign fa-lg fa-fw me-1"></i>/notte</h6>
+                    <h6 class="mb-3">{{ $apartment->price }} € /Notte</h6>
                     <h6 class="mb-3"><i class="fa-solid fa-location-dot fa-lg fa-fw me-2"></i>{{ $apartment->full_address }}</h6>
                 </div>
-                <div class="card-body m-3">
+                <div class="card-body my-3">
                     <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" alt="" class="w-50 my-2">
                 </div>
-                <div class="card-text p-3">
-                        <ul class="d-flex list-unstyled">
-                            <li class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></li>   
-                        </ul>
-                        <div>
-                            <p>{{ $apartment->description }}</p>
-                        </div>
+                <div class="card-text py-3">
+                    <ul class="d-flex list-unstyled">
+                        <li class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></li>
+                        <li class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></li>
+                        <li class="me-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></li>
+                        <li class="me-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></li>   
+                    </ul>
+                    <div>
+                        <p>{{ $apartment->description }}</p>
+                    </div>
                 </div>
             </div>
+
             {{-- sezione servizi singolo appartamento --}}
-            <div class="container p-3">
+            <div class="container px-3">
                 <h5>Cosa troverai</h5>
                 <div class="d-flex">
                     @if ($apartment->services->isEmpty())
