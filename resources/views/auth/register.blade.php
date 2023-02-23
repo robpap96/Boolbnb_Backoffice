@@ -3,101 +3,73 @@
 @section('content')
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Registrazione nuovo utente') }}</div>
-                
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+        <div class="card" style="width: 430px; height: auto">
+            <div class="card-body px-4 py-5">
+                <h3 class="mb-1">{{ __('Registrazione utente') }}</h3>
+                <small class="d-block mb-4">
+                    Ti sei già registrato?
+                    <a class="text-decoration-none" href="{{ route('login') }}">Accedi</a>
+                </small>
 
-                        <div class="mb-4 row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right"> {{ __('Nome') }}</label>
+                {{-- Form login --}}
+                <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    
+                    <div class="mb-4">
+                        <input id="name" type="text" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="given-name" autofocus placeholder="Nome">
+                        @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="given-name" autofocus>
+                    <div class="mb-4">
+                        <input id="last_name" type="text" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" autocomplete="family-name" autofocus placeholder="Cognome">
+                        @error('last_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <input id="date_of_birth" type="date" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="bday" autofocus>
+                        @error('date_of_birth')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                        <div class="mb-4 row">
-                            <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Cognome') }}</label>
+                    <div class="mb-4">
+                        <input id="email" type="email" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail">
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                            <div class="col-md-6">
-                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" autocomplete="family-name" autofocus>
+                    <div class="mb-4">
+                        <input id="password" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                        @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
 
-                                @error('last_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
+                    <div class="mb-4">
+                        <input id="password-confirm" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Conferma Password">
+                    </div>
 
-                        <div class="mb-4 row">
-                            <label for="date_of_birth" class="col-md-4 col-form-label text-md-right">{{ __('Data di nascita') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="date_of_birth" type="date" class="form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="bday" autofocus>
-
-                                @error('date_of_birth')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-4 row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo e-mail *') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-4 row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password *') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="mb-4 row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Conferma Password *') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="mb-4 row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Registrazione') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary rounded-pill px-5 py-2">
+                            {{ __('Registrazione') }}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
