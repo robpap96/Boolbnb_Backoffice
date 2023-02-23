@@ -42,8 +42,9 @@
                 <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
             </div>
 
-            <div class="sponsor-price d-flex flex-column justify-content-end">
-                <button type="submit" class="btn btn-success">Aquista {{ $sponsor->price }} €</button>
+            <div class="sponsor-price">
+                <button type="submit" class="btn btn-success w-25">Aquista {{ $sponsor->price }} €</button>
+                <a href="{{ route('admin.sponsors.index') }}" class="btn btn-secondary">Indietro</a>
             </div>
         </form>
     </div>
