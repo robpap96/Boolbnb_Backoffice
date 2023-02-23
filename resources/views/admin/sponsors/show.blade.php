@@ -34,7 +34,7 @@
                     @endif
                 @endforeach
             </select>
-            @error('apartments_sponsored')
+            @error('apartment_sponsored')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 

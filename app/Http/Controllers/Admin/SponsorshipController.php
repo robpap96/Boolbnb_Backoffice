@@ -100,8 +100,11 @@ class SponsorshipController extends Controller
             'apartment_sponsored' => 'required|numeric|exists:apartments,id',
         ]);
 
-        // Get the apartment from data, sent by sponsor menu
+        // Get the apartment record from $data
         $apartment = Apartment::find($data['apartment_sponsored']);
+
+        // Throw an error if the user id don't match
+        $apartment->toArray()['user_id'] !== Auth::user()->id ? trow_error('Operation not allowed!') : '';
 
         // Get sponsor from the slug
         $sponsorship = sponsorship::where('slug', $slug)->first();
@@ -127,10 +130,7 @@ class SponsorshipController extends Controller
                 }
             }
         } else {
-            $error = \Illuminate\Validation\ValidationException::withMessages([
-                'apartments_sponsored' => ['You cannot sponsor an apartment that is not visible.'],
-            ]);
-            throw $error;
+            trow_error('You cannot sponsor an apartment that is not visible.');
         }
 
         return redirect()->route('admin.sponsors.show', $sponsorship)->with('message', 'Appartamento sponsorizzato con successo!');
@@ -138,35 +138,46 @@ class SponsorshipController extends Controller
 }
 
 
-// Make the apartament sponsored
-function make_a_sponsor($sponsorship, $data, $time){
-    $sponsor_start = $time;
+/*---------------------
+    FUNCTIONS
+---------------------*/
+    // Make a sponsor
+    function make_a_sponsor($sponsorship, $data, $time){
+        $sponsor_start = $time;
 
-    // Split Year[0] from time[1]
-    $split_start = explode(' ', $sponsor_start);
+        // Split Year[0] from time[1]
+        $split_start = explode(' ', $sponsor_start);
 
-    switch ($sponsorship->id) {
-        case '1':
-            // 24 hours sponsor
-            $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 1 days'));
-            $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-            break;
-        case '2':
-            // 72 hours sponsor
-            $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 3 days'));
-            $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-            break;
-        case '3':
-            // 144 hours sponsor
-            $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 6 days'));
-            $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
-            break;
-        default:
-            break;
+        switch ($sponsorship->id) {
+            case '1':
+                // 24 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 1 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            case '2':
+                // 72 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 3 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            case '3':
+                // 144 hours sponsor
+                $get_sponsor_end = date('Y-m-d', strtotime($split_start[0] . '+ 6 days'));
+                $sponsor_end = "{$get_sponsor_end} {$split_start[1]}";
+                break;
+            default:
+                break;
+        }
+        
+        $sponsorship->apartments()->attach($data, [
+            'sponsor_start' => $sponsor_start,
+            'sponsor_end' => $sponsor_end,
+        ]);
     }
-    
-    $sponsorship->apartments()->attach($data, [
-        'sponsor_start' => $sponsor_start,
-        'sponsor_end' => $sponsor_end,
-    ]);
-}
+
+    // Trow an error with a custom message
+    function trow_error($message){
+        $error = \Illuminate\Validation\ValidationException::withMessages([
+            'apartment_sponsored' => [$message],
+        ]);
+        throw $error;
+    }
