@@ -29,6 +29,6 @@ class Apartment extends Model
     }
 
     public function sponsorships() {
-        return $this->belongsToMany(sponsorship::class);
+        return $this->belongsToMany(sponsorship::class)->withPivot('sponsor_start', 'sponsor_end');
     }
 }

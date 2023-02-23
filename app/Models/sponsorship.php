@@ -12,6 +12,6 @@ class sponsorship extends Model
     protected $guarded = ['slug'];
 
     public function apartments(){
-        return $this->belongsToMany(Apartment::class);
+        return $this->belongsToMany(Apartment::class)->withPivot('sponsor_start', 'sponsor_end');
     }
 }
