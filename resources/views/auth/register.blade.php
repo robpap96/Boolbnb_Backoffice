@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <input id="email" type="email" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail">
+                        <input id="email" type="email" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail*">
                         @error('email')
                         <span class="invalid-feedback px-3 py-2" role="alert">
                             <strong>{{ $message }}</strong>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <input id="password" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                        <input id="password" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password*">
                         @error('password')
                         <span class="invalid-feedback px-3 py-2" role="alert">
                             <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="mb-4">
-                        <input id="password-confirm" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Conferma Password">
+                        <input id="password-confirm" type="password" class="bg-light border-white px-3 py-2 rounded-pill form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Conferma Password*">
                     </div>
 
                     <div class="text-center">
