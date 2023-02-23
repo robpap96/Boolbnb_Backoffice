@@ -24,7 +24,7 @@
         </div>
 
         <form action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
-            <select name="apartments_sponsored" id="" class="form-select">
+            <select name="apartment_sponsored" id="" class="form-select">
                 <option value="" selected hidden>Lista appartamenti</option>
                 @foreach ($apartments as $apartment)
                     @if ($apartment->is_visible) 
