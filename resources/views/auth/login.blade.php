@@ -4,7 +4,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="card" style="width: 430px; height: auto">
-                <div class="card-body px-4 py-5">
+                <div class="card-body p-4 my-1">
                     <h3 class="mb-1">{{ __('Accesso utente') }}</h3>
                     <small class="d-block mb-4">
                         Nuovo utente? 
@@ -19,7 +19,7 @@
                         <div class="mb-3">
                             <input id="email" type="email" class="bg-light border-white px-3 py-2 form-control rounded-pill @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Indirizzo E-mail">
                             @error('email')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback px-3 py-2" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
@@ -29,7 +29,7 @@
                         <div class="mb-4">
                             <input id="password" type="password" class="bg-light border-white  px-3 py-2 form-control rounded-pill @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
                             @error('password')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback px-3 py-2" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
