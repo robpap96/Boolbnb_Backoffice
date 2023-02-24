@@ -1,7 +1,7 @@
 #admin-apartments-show {
     & div.card {
-        background-color: #fa4545b6;
-        color: rgb(107, 107, 107);
+        background-color: #fa4545;
+        color: rgb(255, 255, 255);
         & div.card-body {
             
             & div.apartment-images {
@@ -19,6 +19,13 @@
                     padding: 5px 7px;
                     color: #ff5a5f !important;
                     border: 2.5px solid #ff5a5f;
+                }
+            }
+        }
+        & div.container {
+            & figure {
+                & img {
+                    border-radius: 20px;
                 }
             }
         }

@@ -59,8 +59,13 @@
 
                     </div>
                     <div class="card-text d-flex flex-column py-3">
-                        <div class="location">
-                            <h6 class="m-3"><i class="fa-solid fa-location-dot fa-lg fa-fw me-2"></i>{{ $apartment->full_address }}</h6>
+                        <div class="location d-flex ps-2">
+                            <div class="location-icon d-flex flex-column justify-content-center">
+                                <i class="fa-solid fa-location-dot fa-lg fa-fw  ms-auto"></i>
+                            </div>
+                            <div class="location-full_addres">
+                                <h6 class="m-3">{{ $apartment->full_address }}</h6>
+                            </div>
                         </div>
                         <ul class="m-3 d-flex list-unstyled">
                             <li class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></li>
