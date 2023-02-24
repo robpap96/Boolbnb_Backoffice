@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    @if (session('invalid_op'))
+        <div class="alert alert-danger">
+            {{ session('invalid_op') }}
+        </div>
+    @endif
+
     <div id="admin-apartments-index">
         @if ($apartments->isEmpty())
             {{-- fallback message if no apartment is present --}}

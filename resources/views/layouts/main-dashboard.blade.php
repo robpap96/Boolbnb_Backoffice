@@ -96,20 +96,22 @@
                         </a>
                         <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="text-dark h-100 px-2 {{ Route::currentRouteName() == 'admin.apartments.create' ? 'd-none' : 'd-block'}}"><i class="fa-solid fa-plus"></i></a>
                     </li>
-                    <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.sponsors') ? 'bg-color-red' : '' }}">
-                        <a class="nav-link text-dark" href="{{route('admin.sponsors.index')}}">
-                            <i class="fa-solid fa-bullhorn fa-lg fa-fw me-2"></i>
-                            <span>Sponsorizza il tuo appartamento </span>
-                        </a>
-                        
-                    </li>  
-                    <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.messages') ? 'bg-color-red' : '' }}">
-                        <a class="nav-link text-dark" href="{{route('admin.messages.index')}}">
-                            <i class="fa-solid fa-comments-dollar fa-lg fa-fw me-2"></i>
-                            <span>Messaggi</span>
-                        </a>
-                        
-                    </li>                           
+                    @if ( isset($apartments) && !$apartments->isEmpty() || str_contains(Route::currentRouteName(), 'admin.sponsors') || str_contains(Route::currentRouteName(), 'admin.messages') )
+                        <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.sponsors') ? 'bg-color-red' : '' }}">
+                            <a class="nav-link text-dark" href="{{route('admin.sponsors.index')}}">
+                                <i class="fa-solid fa-bullhorn fa-lg fa-fw me-2"></i>
+                                <span>Sponsorizza il tuo appartamento </span>
+                            </a>
+                        </li>
+                    @endif
+                    @if ( isset($apartments) && !$apartments->isEmpty() || str_contains(Route::currentRouteName(), 'admin.sponsors') || str_contains(Route::currentRouteName(), 'admin.messages') )
+                        <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.messages') ? 'bg-color-red' : '' }}">
+                            <a class="nav-link text-dark" href="{{route('admin.messages.index')}}">
+                                <i class="fa-solid fa-comments-dollar fa-lg fa-fw me-2"></i>
+                                <span>Messaggi</span>
+                            </a>
+                        </li>    
+                    @endif
                 </ul>
             </aside>
     
