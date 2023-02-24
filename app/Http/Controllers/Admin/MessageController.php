@@ -11,11 +11,19 @@ class MessageController extends Controller
 {
     public function index()
     {
-        // Get all apartments owned by a logged in user
-        $messages = Message::with('apartment')->get();
+        $messages = [];
         $user_id = Auth::user()->id;
 
-        return view('admin.messages.index', compact('messages', 'user_id'));
+        // Get all apartments owned by a logged in user
+        $data = Message::with('apartment')->get();
+
+        foreach ($data as $message) {
+            if( $message['apartment']['user_id'] === $user_id ) {
+                $messages[] = $message;
+            }
+        }
+
+        return view('admin.messages.index', compact('messages'));
     }
 
 }

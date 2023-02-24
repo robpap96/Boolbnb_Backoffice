@@ -22,7 +22,6 @@
                 </div>
             </div>
         </div>
-
         <form action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
             <select name="apartment_sponsored" id="" class="form-select">
                 <option value="" selected hidden>Lista appartamenti</option>
