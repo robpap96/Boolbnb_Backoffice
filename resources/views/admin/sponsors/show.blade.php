@@ -22,10 +22,13 @@
                 </div>
             </div>
         </div>
+
         <form action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
             <select name="apartment_sponsored" id="" class="form-select">
                 <option value="" selected hidden>Lista appartamenti</option>
-                @if ( $apartments !== [] ) 
+                @if ( $apartments->isEmpty() )
+                    <option value="no_apartments" disabled>Pare che tu non abbia ancora creato un appartamento. Creane subito uno!</option>
+                @else 
                     @foreach ($apartments as $apartment)
                         @if ($apartment->is_visible) 
                             <option value="{{$apartment->id}}">{{ $apartment->title }} - {{ $apartment->full_address }}</option>
@@ -33,8 +36,6 @@
                             <option class="text-muted select_disabled" value="{{$apartment->id}}" disabled>{{ $apartment->title }} - {{ $apartment->full_address }}</option>
                         @endif
                     @endforeach
-                @else
-                    <option value="no_apartments" disabled>Pare che tu non abbia ancora creato un appartamento. Creane subito uno!</option>
                 @endif
             </select>
             @error('apartment_sponsored')
