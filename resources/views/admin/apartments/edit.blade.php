@@ -149,12 +149,12 @@
             @if ($errors->any())
                 <div class="mb-3 form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" {{ old('is_visible') ? 'checked' : ''}}>
-                    <label class="form-check-label" for="is_visible">Appartmento visibile si/no</label>
+                    <label class="form-check-label" for="is_visible">Visibile</label>
                 </div>
             @else 
                 <div class="mb-3 form-check form-switch">
                     <input class="form-check-input" type="checkbox" role="switch" id="is_visible" name="is_visible" {{ $apartment->is_visible ? 'checked' : ''}}>
-                    <label class="form-check-label" for="is_visible">Appartmento visibile si/no</label>
+                    <label class="form-check-label" for="is_visible">Visibile</label>
                 </div>
             @endif
 
