@@ -90,7 +90,7 @@ class ApartmentController extends Controller
         if( $apartment->user_id === Auth::user()->id ){
             return view('admin.apartments.show', compact('apartment'));
         } else {
-            return redirect()->route('admin.apartments.index');
+            return redirect()->route('admin.apartments.index')->with('message', 'Operazione non possibile');
         }
     }
 
