@@ -27,7 +27,7 @@
             <div class="tab-content" id="nav-tabContent">
                 {{-- Appartamenti visibili tab --}}
                 <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
-                    <div class="d-flex flex-wrap justify-content-center">
+                    <div class="d-flex flex-wrap">
                         @php( $visible_apartments = [] )
 
                         @foreach ($apartments as $apartment)
