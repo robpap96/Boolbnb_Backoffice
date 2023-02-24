@@ -33,9 +33,10 @@ class ApartmentController extends Controller
      */
     public function create()
     {
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
         $services = Service::All();
 
-        return view('admin.apartments.create', compact('services'));
+        return view('admin.apartments.create', compact('services', 'apartments'));
     }
 
     /**
@@ -87,10 +88,12 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+
         if( $apartment->user_id === Auth::user()->id ){
-            return view('admin.apartments.show', compact('apartment'));
+            return view('admin.apartments.show', compact('apartment', 'apartments'));
         } else {
-            return redirect()->route('admin.apartments.index')->with('message', 'Operazione non possibile');
+            return redirect()->route('admin.apartments.index')->with('invalid_op', 'Invalid operation.');
         }
     }
 
@@ -102,10 +105,12 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {
+        $apartments = Apartment::where('user_id', Auth::user()->id)->get();
+
         if( $apartment->user_id === Auth::user()->id ){
             $services = Service::All();
 
-            return view('admin.apartments.edit', compact('apartment', 'services'));
+            return view('admin.apartments.edit', compact('apartment', 'services', 'apartments'));
         } else {
             return redirect()->route('admin.apartments.index');
         }
