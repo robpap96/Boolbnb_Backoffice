@@ -1,5 +1,5 @@
 <div class="card-container m-3 d-flex flex-column align-items-start">
-    <div id="carousel-{{ $apartment->id }}" class="carousel slide">
+    <div id="carousel-{{ $apartment->id }}" class="carousel slide m-3 mb-2">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
