@@ -52,8 +52,10 @@ class ApartmentController extends Controller
         // Check if chosen title is unique or not
         $apartments = Apartment::where('user_id', Auth::user()->id)->where('title', $data['title'])->get()->toArray();
 
+        // If apartments is empty then title is unique
         if ( $apartments === [] ) {
             $new_apartment = new Apartment();
+
                 $new_apartment->user_id = Auth::user()->id;
     
                 // function to get coords from address query
@@ -75,7 +77,7 @@ class ApartmentController extends Controller
                 $new_apartment->fill($data);
     
                 // Get slug from apartment info
-                $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id, $new_apartment->full_address);
+                $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->user_id, $new_apartment->full_address, $new_apartment->getNextId());
             $new_apartment->save();
                 
             if( isset($data['services']) ){
@@ -159,7 +161,7 @@ class ApartmentController extends Controller
             }
 
             // Get slug from apartment info
-            $apartment->slug = create_slug($data['title'], $data['rooms_num'], $data['beds_num'], $apartment->user_id, $apartment->full_address);
+            $apartment->slug = create_slug($data['title'], $apartment->user_id, $apartment->full_address, $apartment->id);
 
             isset($data['is_visible']) ? ($apartment->is_visible = true) : ($apartment->is_visible = false);
         $apartment->update($data);
@@ -217,8 +219,8 @@ class ApartmentController extends Controller
     }
 
     // Get Slug
-    function create_slug($title, $rooms, $beds, $user_id, $address) {
-        $slug = Str::slug($title, '-') . '-' . Str::slug($address, '-') . '-' . Str::slug($rooms, '-') . '-' . Str::slug($beds, '-') . '-' . Str::slug($user_id, '-');
+    function create_slug($title, $user_id, $address, $apartment_id) {
+        $slug = Str::slug($title, '-') . '-' . Str::slug($address, '-') . '-' . Str::slug($user_id, '-') . '-' . Str::slug($apartment_id, '-');
 
         return $slug;
     }

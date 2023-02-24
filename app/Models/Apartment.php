@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Apartment extends Model
 {
@@ -30,5 +31,13 @@ class Apartment extends Model
 
     public function sponsorships() {
         return $this->belongsToMany(sponsorship::class)->withPivot('sponsor_start', 'sponsor_end');
+    }
+
+    public function getNextId() 
+    {
+
+        $statement = DB::select("show table status like 'apartments'");
+
+        return $statement[0]->Auto_increment;
     }
 }
