@@ -20,5 +20,8 @@ Route::get('apartments', [ApartmentController::class, 'index']);
 
 Route::get('apartment/{id}', [ApartmentController::class, 'show']);
 
+Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
+
+
 
 
