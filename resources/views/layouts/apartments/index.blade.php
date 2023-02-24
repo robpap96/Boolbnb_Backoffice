@@ -1,5 +1,5 @@
-<div class="card-container m-3 d-flex flex-column align-items-start">
-    <div id="carousel-{{ $apartment->id }}" class="carousel slide m-3 mb-2">
+<div class="card-container d-flex flex-column align-items-start">
+    <div id="carousel-{{ $apartment->id }}" class="carousel slide mt-3 mb-3">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -61,11 +61,17 @@
         @endphp
     </div>
 
-    <div class="apartment__actions d-flex justify-content-between align-items-center w-100 mt-2 text-white py-2 px-3">
-        <div><a href="{{ route('admin.apartments.show', $apartment->slug) }}"><i class="fa-solid fa-circle-info"></i> Info</a></div>
-        <div class="edit-button px-4"><a href="{{ route('admin.apartments.edit', $apartment->slug) }}"><i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a></div>
+    <div class="apartment__actions d-flex">
+        <div class="col-4">
+            <a class="d-block py-2 text-center" href="{{ route('admin.apartments.show', $apartment->slug) }}">
+            <i class="fa-solid fa-circle-info"></i> Info</a>
+        </div>
+        <div class="edit-button col-4 text-center">
+            <a class="d-block py-2" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a>
+        </div>
         <!-- Button trigger modal -->
-        <div type="div" class="t-4" data-bs-toggle="modal" data-bs-target="#modal{{ $apartment->id }}" style="cursor:pointer">
+        <div type="div" class="col-4 py-2 text-white text-center" data-bs-toggle="modal" data-bs-target="#modal{{ $apartment->id }}" style="cursor:pointer">
             <i class="fa-solid fa-trash-can"></i> Elimina
         </div>
         
@@ -93,7 +99,7 @@
         </div>
     </div>
 
-    <div class="apartment__info mb-2">
+    <div class="apartment__info">
         <h5 class="mb-0">{{ $apartment->title }}</h5>
         <div class="text-muted py-1">{{ $apartment->full_address }}</div>
         <span><strong>{{ $apartment->price }}</strong> € /notte</span>

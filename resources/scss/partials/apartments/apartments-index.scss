@@ -16,7 +16,9 @@
     }
 
     & .card-container {
-        width: 20.625rem;
+        // width: 20.625rem;
+        width: calc(100% / 2 - 60px);
+        margin: 20px 30px 0px 30px;
         & .carousel.slide {
             position: relative;
             &:hover button {
@@ -30,6 +32,7 @@
             }
         }
         & .apartment__actions {
+            width: 100%;
             border-radius: .625rem;
             background-color: #ff5a5f;
             & div.edit-button {
