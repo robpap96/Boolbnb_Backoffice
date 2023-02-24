@@ -36,7 +36,7 @@
                     <div class="mb-4">
                         <input id="date_of_birth" type="date" class="bg-light border-white px-3 py-2 rounded-pill form-control @error('date_of_birth') is-invalid @enderror" name="date_of_birth" value="{{ old('date_of_birth') }}" autocomplete="bday" autofocus>
                         @error('date_of_birth')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback px-3 py-2" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
