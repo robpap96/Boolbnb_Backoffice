@@ -48,33 +48,44 @@ class ApartmentController extends Controller
     public function store(StoreApartmentRequest $request)
     {
         $data = $request->validated();
-        $new_apartment = new Apartment();
-            $new_apartment->user_id = Auth::user()->id;
 
-            // function to get coords from address query
-            $answer = get_coords_from_address($data['full_address']);
+        // Check if chosen title is unique or not
+        $apartments = Apartment::where('user_id', Auth::user()->id)->where('title', $data['title'])->get()->toArray();
 
-            // Set Lat and Lon
-            $new_apartment->latitude = $answer['position']['lat'];
-            $new_apartment->longitude = $answer['position']['lon'];
-
-            // Save full address from API answer
-            $answer_address = $answer['address'];
-            $new_apartment->full_address = "{$answer_address['freeformAddress']}, {$answer_address['countrySubdivision']}, {$answer_address['country']}";
-
-            // Save image in server storage
-            $new_apartment->image = Storage::disk('public')->put('uploads', $data['image']);
-            
-            isset($data['is_visible']) ? ($new_apartment->is_visible = true) : ($new_apartment->is_visible = false);
-
-            $new_apartment->fill($data);
-
-            // Get slug from apartment info
-            $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id, $new_apartment->full_address);
-        $new_apartment->save();
-            
-        if( isset($data['services']) ){
-            $new_apartment->services()->sync($data['services']);
+        if ( $apartments === [] ) {
+            $new_apartment = new Apartment();
+                $new_apartment->user_id = Auth::user()->id;
+    
+                // function to get coords from address query
+                $answer = get_coords_from_address($data['full_address']);
+    
+                // Set Lat and Lon
+                $new_apartment->latitude = $answer['position']['lat'];
+                $new_apartment->longitude = $answer['position']['lon'];
+    
+                // Save full address from API answer
+                $answer_address = $answer['address'];
+                $new_apartment->full_address = "{$answer_address['freeformAddress']}, {$answer_address['countrySubdivision']}, {$answer_address['country']}";
+    
+                // Save image in server storage
+                $new_apartment->image = Storage::disk('public')->put('uploads', $data['image']);
+                
+                isset($data['is_visible']) ? ($new_apartment->is_visible = true) : ($new_apartment->is_visible = false);
+    
+                $new_apartment->fill($data);
+    
+                // Get slug from apartment info
+                $new_apartment->slug = create_slug($new_apartment->title, $new_apartment->rooms_num, $new_apartment->beds_num, $new_apartment->user_id, $new_apartment->full_address);
+            $new_apartment->save();
+                
+            if( isset($data['services']) ){
+                $new_apartment->services()->sync($data['services']);
+            }
+        } else {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'title' => ['You cannot use the same title for multiple apartments.'],
+            ]);
+            throw $error;
         }
 
         return redirect()->route('admin.apartments.show', $new_apartment->slug);
