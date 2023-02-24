@@ -40,7 +40,7 @@
                         @endforeach
 
                         @if (count($visible_apartments) == 0)
-                            <div class="alert alert-success mt-3" role="alert">
+                            <div class="alert alert-success mt-3 mx-auto" role="alert">
                                 Nessun appartamento visibile.
                             </div>
                         @endif
@@ -49,7 +49,7 @@
 
                 {{-- Appartamenti non visibili tab --}}
                 <div class="tab-pane fade" id="nav-hidden" role="tabpanel" aria-labelledby="nav-hidden-tab" tabindex="0">
-                    <div class="d-flex flex-wrap justify-content-center">
+                    <div class="d-flex flex-wrap">
                         @php( $hidden_apartments = [] )
 
                         @foreach ($apartments as $apartment)
@@ -62,7 +62,7 @@
                         @endforeach
 
                         @if (count($hidden_apartments) == 0)
-                            <div class="alert alert-success mt-3" role="alert">
+                            <div class="alert alert-success mx-auto mt-3" role="alert">
                                 Nessun appartamento nascosto.
                             </div>
                         @endif

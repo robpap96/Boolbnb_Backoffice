@@ -7,7 +7,7 @@
 
     @section('content')
     <div id="admin-apartments-show">
-        <div class="container p-3">
+        <div class="container p-0">
             <div class="card p-4">
                 <div class="card-title">
                     <div class="apartment-title pb-3 d-flex justify-content-between align-items-center">
@@ -53,10 +53,9 @@
                         @endphp
                     </div>
                 </div>    
-                <div class="card-body d-flex justify-content-around my-3">
+                <div class="card-body d-flex justify-content-between my-3">
                     <div class="apartment-images">
-                        <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" alt="" class="w-100 my-2">
-
+                        <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" alt="">
                     </div>
                     <div class="card-text d-flex flex-column py-3">
                         <div class="location d-flex ps-2">
@@ -101,13 +100,14 @@
                 </div>
                 
                 {{-- sezione mappa --}}
-                <div class="container">
+                <div class="container find-us">
                     <h3>Dove Trovarci <i class="fa-solid fa-location-crosshairs"></i></h3>
-                    <figure class="figure">
+                    <div class="img-container">
                         <img id="map-container" src="" class="figure-img img-fluid" alt="">
-                        <figcaption class="figure-caption"><i class="fa-solid fa-location-dot me-2"></i>{{ $apartment->full_address }}</figcaption>
-                    </figure>
-    
+                        <div class="full-address mb-2">
+                            <i class="fa-solid fa-location-dot me-2"></i>{{ $apartment->full_address }}
+                        </div>
+                    </div>
                 </div>
                 
                 {{-- bottoni --}}
