@@ -85,7 +85,7 @@ class ApartmentController extends Controller
             }
         } else {
             $error = \Illuminate\Validation\ValidationException::withMessages([
-                'title' => ['You cannot use the same title for multiple apartments.'],
+                'title' => ['Title already exists.'],
             ]);
             throw $error;
         }
@@ -139,6 +139,10 @@ class ApartmentController extends Controller
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
         $data = $request->validated();
+
+        $apartments = Apartment::where('user_id', Auth::user()->id)->where('id', '!=', $apartment->id)->where('title', $data['title'])->get()->toArray();
+        
+        if ( $apartments === [] ) {
             if ( isset($data['image']) ) {
                 // Removing old img in DB before adding new
                 if ( $apartment->image ) {
@@ -146,33 +150,40 @@ class ApartmentController extends Controller
                 }
                 $apartment->image = Storage::disk('public')->put('uploads', $data['image']);
             };
-
+    
             if( $data['full_address'] != $apartment->full_address ){
                 // function to get coords from address query
                 $answer = get_coords_from_address($data['full_address']);
-
+    
                 // Set Lat and Lon
                 $apartment->latitude = $answer['position']['lat'];
                 $apartment->longitude = $answer['position']['lon'];;
-
+    
                 // Save full address from API answer
                 $answer_address = $answer['address'];
                 $apartment->full_address = "{$answer_address['freeformAddress']}, {$answer_address['countrySubdivision']}, {$answer_address['country']}";
             }
-
+    
             // Get slug from apartment info
             $apartment->slug = create_slug($data['title'], $apartment->user_id, $apartment->full_address, $apartment->id);
-
+    
             isset($data['is_visible']) ? ($apartment->is_visible = true) : ($apartment->is_visible = false);
-        $apartment->update($data);
-
-        if( isset($data['services']) ) {
-            // Save records into pivot table if $data['services] is isset
-            $apartment->services()->sync($data['services']);
-        } else {
-            // Else every record to its apartment is cancelled
-            $apartment->services()->sync([]);
+            $apartment->update($data);
+        
+            if( isset($data['services']) ) {
+                // Save records into pivot table if $data['services] is isset
+                $apartment->services()->sync($data['services']);
+            } else {
+                // Else every record to its apartment is cancelled
+                $apartment->services()->sync([]);
+            }
+        }  else {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'title' => ['Title already exists.'],
+            ]);
+            throw $error;
         }
+
 
         return redirect()->route('admin.apartments.show', $apartment);
     }
