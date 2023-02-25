@@ -28,14 +28,8 @@ class MessageSeeder extends Seeder
 
             $new_message = new Message();
                 $new_message->apartment_id = $random_apartment->id;
-
-                $prob = rand(0,1);
-                if( $prob ) {
-                    $random_user = User::inRandomOrder()->first(); // Get a random (full) record from user Model
-                    $new_message->email = $random_user->email;
-                } else {
-                    $new_message->email = $faker->email();
-                }
+                
+                $new_message->email = $faker->email();
 
                 $new_message->content = $faker->paragraph(20);
             $new_message->save();
