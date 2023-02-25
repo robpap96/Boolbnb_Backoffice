@@ -23,23 +23,60 @@ class ServiceSeeder extends Seeder
         Schema::enableForeignKeyConstraints();
 
         $services = [
-            'Wifi',
-            'Vasca',
-            'Vasca idromassaggio',
-            'Spa zonarelax',
-            'Cancellazione gratuita', 
-            'Animali ammessi',
-            'Parcheggio gratuito', 
-            'Area intrattenimento bimbi',
-            'TV',
-            'Stanza climatizzata',
-            'Servizio navetta',
-            'Zona fumatori',
+            [
+                'name' => 'Wifi', 
+                'icon' => '<i class="fa-solid fa-wifi"></i>'
+            ],
+            [
+                'name' => 'Doccia', 
+                'icon' => '<i class="fa-solid fa-shower"></i>'
+            ],
+            [
+                'name' => 'Vasca idromassaggio', 
+                'icon' => '<i class="fa-solid fa-bath"></i>'
+            ],
+            [
+                'name' => 'Spa zonarelax', 
+                'icon' => '<i class="fa-solid fa-spray-can-sparkles"></i>'
+            ],
+            [
+                'name' => 'Cancellazione gratuita', 
+                'icon' => '<i class="fa-regular fa-calendar-xmark"></i>'
+            ], 
+            [
+                'name' => 'Animali ammessi', 
+                'icon' => '<i class="fa-solid fa-paw"></i>'
+            ],
+            [
+                'name' => 'Parcheggio gratuito', 
+                'icon' => '<i class="fa-solid fa-square-parking"></i>'
+            ], 
+            [
+                'name' => 'Area intrattenimento bimbi', 
+                'icon' => '<i class="fa-solid fa-children"></i>'
+            ],
+            [
+                'name' => 'TV', 
+                'icon' => '<i class="fa-solid fa-tv"></i>'
+            ],
+            [
+                'name' => 'Stanza climatizzata', 
+                'icon' => '<i class="fa-regular fa-snowflake"></i>'
+            ],
+            [
+                'name' => 'Servizio navetta', 
+                'icon' => '<i class="fa-solid fa-van-shuttle"></i>'
+            ],
+            [
+                'name' => 'Zona fumatori', 
+                'icon' => '<i class="fa-solid fa-smoking"></i>'
+            ]
         ];
 
         foreach ($services as $service) {
             $new_service = new Service();
-            $new_service->name = $service;
+            $new_service->name = $service['name'];
+            $new_service->icon = $service['icon'];
             $new_service->save();
         }
     }
