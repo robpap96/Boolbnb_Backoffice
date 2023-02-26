@@ -21,10 +21,10 @@ class ApartmentController extends Controller
         return $apartments;
     }
 
-    public function show($id){
+    public function show($slug){
         
         try {
-            $apartment = Apartment::where('id', $id)->with('services', 'user', 'sponsorships')->firstOrFail();
+            $apartment = Apartment::where('slug', $slug)->with('services', 'user', 'sponsorships')->firstOrFail();
             return $apartment;  
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             return response([

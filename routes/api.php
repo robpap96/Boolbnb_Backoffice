@@ -19,11 +19,12 @@ use App\Http\Controllers\Api\ServiceController;
 /*----------------------
     APARTMENTS API 
 ----------------------*/
-Route::get('apartments', [ApartmentController::class, 'index']);
+    // Get all apartments
+    Route::get('apartments', [ApartmentController::class, 'index']);
 
-Route::get('apartment/{id}', [ApartmentController::class, 'show']);
+    Route::get('apartment/show/{slug}', [ApartmentController::class, 'show']);
 
-Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
+    Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
 
 /*----------------------
     SERVICES API 
