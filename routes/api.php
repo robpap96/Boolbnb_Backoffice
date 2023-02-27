@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApartmentController;
+use App\Http\Controllers\Api\MessageController;
 use App\Http\Controllers\Api\ServiceController;
 
 /*
@@ -33,7 +34,10 @@ use App\Http\Controllers\Api\ServiceController;
 /*----------------------
     SERVICES API 
 ----------------------*/
-Route::get('services', [ServiceController::class, 'index']);
+    Route::get('services', [ServiceController::class, 'index']);
 
+/*----------------------
+    MESSAGE API
+----------------------*/
 
-
+    Route::get('message/create/email={email}&content={content}', [MessageController::class, 'create']);
