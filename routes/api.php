@@ -22,6 +22,8 @@ use App\Http\Controllers\Api\ServiceController;
     // Get all apartments
     Route::get('apartments', [ApartmentController::class, 'index']);
 
+    Route::get('apartments/{services}', [ApartmentController::class, 'apartments_w_services']);
+
     Route::get('apartment/show/{slug}', [ApartmentController::class, 'show']);
 
     Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);

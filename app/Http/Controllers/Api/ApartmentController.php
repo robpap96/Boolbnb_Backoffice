@@ -21,6 +21,28 @@ class ApartmentController extends Controller
         return $apartments;
     }
 
+    public function apartments_w_services($services) {
+        // Trasformo i servizi su cui filtrare in array 
+        $service_array = explode(",", $services);
+
+        // Inizializzo variabile degli appartmenti che verranno stampati
+        $filtered_apartments=[];
+        $apartments = Apartment::with('user', 'services', 'sponsorships')->get();
+
+        // Ciclo su tutti gli appartamenti
+        foreach ($apartments as $apartment) {
+            $how_many_services = count($service_array);
+            $services_found = 0;
+
+            // Ciclo su tutti i servizi degli appartamenti
+            foreach ($apartment->services as $apartment_service) {
+                in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
+            }
+            $how_many_services === $services_found ? $filtered_apartments[] = $apartment : '';
+        }
+        return $filtered_apartments;
+    }
+
     public function show($slug){
         
         try {
