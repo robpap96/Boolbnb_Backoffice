@@ -16,7 +16,7 @@ class Apartment extends Model
     protected $appends = ['image_url'];
 
     protected function getImageUrlAttribute() {
-        return $this->image ? asset("storage/$this->image") : '';
+        return str_contains($this->image, 'uploads') ? asset("storage/$this->image") : $this->image;
     }
 
     public function messages() {
