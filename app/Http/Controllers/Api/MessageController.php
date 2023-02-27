@@ -8,14 +8,13 @@ use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function create($email,$content)
+    public function create($email, $content, $apartment_id)
     {
         $new_message = new Message();
         $new_message->email = $email;
         $new_message->content = $content;
-        $new_message->apartment_id = 1;
+        $new_message->apartment_id = $apartment_id;
         $new_message->save();
-
     }
 }
 
