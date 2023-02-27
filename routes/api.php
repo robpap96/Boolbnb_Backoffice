@@ -28,6 +28,8 @@ use App\Http\Controllers\Api\ServiceController;
 
     Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
 
+    Route::get('search/apartment/{query}/{services}', [ApartmentController::class, 'search_by_address_with_filter']);
+
 /*----------------------
     SERVICES API 
 ----------------------*/
