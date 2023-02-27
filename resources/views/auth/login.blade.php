@@ -16,8 +16,9 @@
                         @csrf
 
                         {{-- Email field --}}
-                        <div class="mb-3">
-                            <input id="email" type="email" class="bg-light border-white px-3 py-2 form-control rounded-pill @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Indirizzo E-mail">
+                        <div class="mb-3 form-floating">
+                            <input id="email" type="email" class="ps-3 bg-light border-white form-control rounded-pill @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Indirizzo E-mail">
+                            <label for="floatingInput" class="ms-1">Indirizzo E-mail</label>
                             @error('email')
                             <span class="invalid-feedback px-3 py-2" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -26,10 +27,11 @@
                         </div>
 
                         {{-- Password field --}}
-                        <div class="mb-4">
-                            <input id="password" type="password" class="bg-light border-white  px-3 py-2 form-control rounded-pill @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                        <div class="mb-4 form-floating">
+                            <input id="password" type="password" class="ps-3 bg-light border-white form-control rounded-pill @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                            <label for="floatingInput" class="ms-1">Password</label>
                             @error('password')
-                            <span class="invalid-feedback px-3 py-2" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
