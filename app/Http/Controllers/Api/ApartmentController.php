@@ -58,7 +58,7 @@ class ApartmentController extends Controller
     }
 
     public function search_by_address($query){
-        $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->get();
+        $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->with('user', 'services', 'sponsorships')->get();
 
         return $apartments;
     }
