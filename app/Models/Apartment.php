@@ -12,6 +12,13 @@ class Apartment extends Model
 
     protected $guarded = ['user_id', 'image', 'latitude', 'longitude', 'is_visible', 'full_address', 'slug'];
 
+    // To get the full URL of the uploaded images
+    protected $appends = ['image_url'];
+
+    protected function getImageUrlAttribute() {
+        return $this->image ? asset("storage/$this->image") : '';
+    }
+
     public function messages() {
         return $this->hasMany(Message::class);
     }
