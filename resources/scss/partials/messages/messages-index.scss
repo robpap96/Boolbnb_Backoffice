@@ -1,41 +1,10 @@
 #admin-messages-index {
-    & div.card {
-        border: none;
-    }
     & div.message_list_title {
         & h2 {
             font-size: 25px;
         }
     }
-    & div.mask-custom {
-        color: white;
-        background: #fa4545;
-        border-radius: 2em;
-        backdrop-filter: blur(15px);
-        border: 2px solid rgba(255, 255, 255, 0.05);
-        background-clip: padding-box;
-        box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-    }
-    & div.card {
-        & div.card-body {
-            & h5 {
-                color: rgb(83, 79, 71);
-                font-style: italic;
-                font-size: 22px;
-            }
-
-            & p {
-                font-size: 15px;
-            }
-
-            & div.card-title {
-            }
-
-            div.card-text {
-            }
-        }
-    }
-    & .apartment-details {
+    & .message-details {
         & .field {
             border-top-right-radius: 13px;
             border-top-left-radius: 13px;
@@ -45,9 +14,59 @@
         }
         & .details-body {
             border: 2px solid #ff5a5f;
+            border-bottom-left-radius: 13px;
+            border-bottom-right-radius: 13px;
         }
-        & .service-box {
-            width: calc(100% / 4);
+        & .my-btn {
+            font-size: 14px;
+            margin-right: 10px;
+            padding: 7px 15px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            border-radius: 10px;
+            display: block;
+            border: 0px;
+            font-weight: 500;
+
+            cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+
+            &.btn-show-apartment {
+                box-shadow: 0px 0px 14px -7px #ff9400s;
+                background-image: linear-gradient(
+                    45deg,
+                    #ffd226 0%,
+                    #ff9400 51%,
+                    #ffd226 100%
+                );
+            }
+
+            &.btn-reply {
+                box-shadow: 0px 0px 14px -7px #00db84;
+                background-image: linear-gradient(
+                    45deg,
+                    #9fed84 0%,
+                    #00db84 51%,
+                    #9fed84 100%
+                );
+            }
+
+            &:hover {
+                background-position: right center;
+                /* change the direction of the change here */
+                color: #fff;
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: scale(0.95);
+            }
         }
     }
 }
