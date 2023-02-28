@@ -1,25 +1,8 @@
 <div class="card-container d-flex flex-column align-items-start">
-    <div id="carousel-{{ $apartment->id }}" class="carousel slide mt-3 mb-3">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <div class="mt-3 mb-3 image-container">
+        <div class="apartment__image">
+            <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="" alt="">
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100 apartment__image" alt="">
-            </div>
-            <div class="carousel-item active">
-                <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="d-block w-100 apartment__image" alt="">
-            </div>
-        </div>
-        <button class="carousel-control-prev d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next d-none" type="button" data-bs-target="#carousel-{{ $apartment->id }}" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
 
         @php
             $all_sponsors = $apartment->sponsorships->toArray();
