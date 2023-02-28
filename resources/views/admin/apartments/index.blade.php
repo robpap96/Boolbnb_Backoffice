@@ -27,7 +27,7 @@
             <div class="tab-content" id="nav-tabContent">
                 {{-- Appartamenti visibili tab --}}
                 <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
-                    <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-wrap pb-4 pt-2">
                         @php( $visible_apartments = [] )
 
                         @foreach ($apartments as $apartment)
@@ -49,7 +49,7 @@
 
                 {{-- Appartamenti non visibili tab --}}
                 <div class="tab-pane fade" id="nav-hidden" role="tabpanel" aria-labelledby="nav-hidden-tab" tabindex="0">
-                    <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-wrap pb-4 pt-2">
                         @php( $hidden_apartments = [] )
 
                         @foreach ($apartments as $apartment)

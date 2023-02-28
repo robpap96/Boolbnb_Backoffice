@@ -19,16 +19,16 @@
         // width: 20.625rem;
         width: calc(100% / 2 - 60px);
         margin: 20px 30px 0px 30px;
-        & .carousel.slide {
+        & .image-container {
             position: relative;
-            &:hover button {
-                display: block !important;
-            }
-            & .apartment__image {
-                width: 20.625rem;
-                height: 16.25rem;
-                object-fit: cover;
+        }
+        & .apartment__image {
+            height: 16.25rem;
+            position: relative;
+            & img{
                 border-radius: .9375rem;
+                width: 406.44px;
+                height: 16.25rem;
             }
         }
         & .apartment__actions {
@@ -52,7 +52,7 @@
     & .sponsor-badge-icon{
         position: absolute;
         top: -20px;
-        right: -25px;
+        right: -23px;
         font-size: 18px;
         text-transform: capitalize;
         border-radius: 10px;
