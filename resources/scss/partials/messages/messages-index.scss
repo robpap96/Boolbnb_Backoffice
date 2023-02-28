@@ -38,22 +38,22 @@
             touch-action: manipulation;
 
             &.btn-show-apartment {
-                box-shadow: 0px 0px 14px -7px #ff9400s;
+                box-shadow: 0px 0px 14px -7px #d4029f;
                 background-image: linear-gradient(
                     45deg,
-                    #ffd226 0%,
-                    #ff9400 51%,
-                    #ffd226 100%
+                    #fa4546 0%,
+                    #d4029f 51%,
+                    #fa4546 100%
                 );
             }
 
             &.btn-reply {
-                box-shadow: 0px 0px 14px -7px #00db84;
+                box-shadow: 0px 0px 14px -7px #103d53;
                 background-image: linear-gradient(
                     45deg,
-                    #9fed84 0%,
-                    #00db84 51%,
-                    #9fed84 100%
+                    #0872c5 0%,
+                    #103d53 51%,
+                    #0872c5 100%
                 );
             }
 
