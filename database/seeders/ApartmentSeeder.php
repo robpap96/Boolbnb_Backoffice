@@ -24,6 +24,19 @@ class ApartmentSeeder extends Seeder
         Apartment::truncate();
         Schema::enableForeignKeyConstraints();
 
+        $home_images = [
+            'https://static9.depositphotos.com/1086013/1149/i/450/depositphotos_11497591-stock-photo-superb-backyard.jpg',
+            'https://st2.depositphotos.com/1370441/7847/i/450/depositphotos_78479540-stock-photo-luxury-home-with-pool-at.jpg',
+            'https://st.depositphotos.com/1053646/4438/i/450/depositphotos_44386219-stock-photo-luxury-beach-resort.jpg',
+            'https://static5.depositphotos.com/1040082/460/i/450/depositphotos_4601928-stock-photo-luxury-tropical-villa-garden-swimming.jpg',
+            'https://static6.depositphotos.com/1005018/596/i/600/depositphotos_5961491-stock-photo-outdooroutdoor.jpg',
+            'https://st.depositphotos.com/1017187/3043/i/450/depositphotos_30430657-stock-photo-luxury-home-with-a-garden.jpg',
+            'https://st2.depositphotos.com/1370441/7847/i/450/depositphotos_78479454-stock-photo-luxury-home-with-pool-at.jpg',
+            'https://st2.depositphotos.com/1247468/6774/i/450/depositphotos_67746161-stock-photo-modern-home-at-dusk.jpg',
+            'https://st.depositphotos.com/2018053/2924/i/450/depositphotos_29246729-stock-photo-modern-villa-by-night.jpg',
+            'https://st2.depositphotos.com/1672917/6935/i/450/depositphotos_69353471-stock-photo-outdoor-interior-of-modern-house.jpg'
+        ];
+
         for ($i=0; $i < 10; $i++) {
             $new_apartment = new Apartment();
             $random_user = User::inRandomOrder()->first();
@@ -35,7 +48,7 @@ class ApartmentSeeder extends Seeder
             $new_apartment->description = $faker->paragraph(50);
             $new_apartment->price = $faker->randomFloat(2,35,10000);
             $new_apartment->mq = ($new_apartment->rooms_num * rand(8, 20));
-            $new_apartment->image = $faker->imageUrl(640, 480, 'home', true);
+            $new_apartment->image = $home_images[$i];
             
             do {
                 $new_apartment->latitude = $faker->latitude(35, 47);
