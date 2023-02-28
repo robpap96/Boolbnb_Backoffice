@@ -104,7 +104,7 @@ class SponsorshipController extends Controller
         $apartment = Apartment::find($data['apartment_sponsored']);
 
         // Throw an error if the user id don't match
-        $apartment->toArray()['user_id'] !== Auth::user()->id ? trow_error('Operation not allowed!') : '';
+        $apartment->toArray()['user_id'] !== Auth::user()->id ? trow_error('Operazione non consentita!') : '';
 
         // Get sponsor from the slug
         $sponsorship = sponsorship::where('slug', $slug)->first();
@@ -116,7 +116,7 @@ class SponsorshipController extends Controller
             if( $apartment_sponsors === [] ){
                 make_a_sponsor($sponsorship, $data, $time = Carbon::now());
             } else {
-                // Get the last sponsor
+                // Get the last sponsor date time
                 $last_sponsor = end($apartment_sponsors);
                 $last_sponsor_end = $last_sponsor['pivot']['sponsor_end'];
 
@@ -130,7 +130,7 @@ class SponsorshipController extends Controller
                 }
             }
         } else {
-            trow_error('You cannot sponsor an apartment that is not visible.');
+            trow_error('Non puoi sponsorizzare un appartamento che non è visibile.');
         }
 
         return redirect()->route('admin.sponsors.show', $sponsorship)->with('message', 'Appartamento sponsorizzato con successo!');
