@@ -89,7 +89,7 @@ class ApartmentController extends Controller
 
     public function get_sponsored_apartments() {
         $sponsored_apartments = [];
-        $apartments = Apartment::with('sponsorships')->get();
+        $apartments = Apartment::with('sponsorships', 'user', 'services')->get();
 
         foreach ($apartments as $i => $apartment) {
             if( !$apartment['sponsorships']->isEmpty() ) {
