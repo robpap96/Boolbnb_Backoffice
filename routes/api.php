@@ -23,13 +23,20 @@ use App\Http\Controllers\Api\ServiceController;
     // Get all apartments
     Route::get('apartments', [ApartmentController::class, 'index']);
 
+    // Filtro appartamenti con i servizi
     Route::get('apartments/{services}', [ApartmentController::class, 'apartments_w_services']);
 
+    // Ottenre i dati per la single page
     Route::get('apartment/show/{slug}', [ApartmentController::class, 'show']);
 
+    // Filtro appartamenti per indirizzo
     Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
 
+    // Filtro appartamenti per indirizzo con servizi
     Route::get('search/apartment/{query}/{services}', [ApartmentController::class, 'search_by_address_with_filter']);
+
+    // Ottenere tutti gli appartamenti attualmente sponsorizzati
+    Route::get('sponsored-apartments', [ApartmentController::class, 'get_sponsored_apartments']);
 
 /*----------------------
     SERVICES API 
@@ -39,5 +46,4 @@ use App\Http\Controllers\Api\ServiceController;
 /*----------------------
     MESSAGE API
 ----------------------*/
-
     Route::post('message/create/email={email}&content={content}&apartmentId={apartment_id}', [MessageController::class, 'create']);
