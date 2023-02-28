@@ -13,7 +13,7 @@
             
                 <div class="col-12 mb-5">
                     <div class="apartment-details services mt-2 mb-4">
-                        <h6 class="field p-1 text-center text-white"><span>{{$message->email}}</span> <span>{{$message->created_at}}</span></h6>
+                        <h6 class="field p-1 px-3 text-center text-white d-flex justify-content-between"><span>{{$message->email}}</span> <span>{{$message->created_at}}</span></h6>
                         <div class="bg-light details-body h-100 py-3 px-3 d-flex flex-wrap justify-content-start align-items-center">
                             {{$message->content}}
                             <div class="div py-3">
