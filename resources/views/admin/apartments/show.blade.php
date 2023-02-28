@@ -72,7 +72,7 @@
                         <h6 class="field p-1 text-center text-white">Indirizzo</h6>
                         <div class="bg-light details-body h-100 p-1 d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-map-pin fa-lg fa-fw"></i>
-                            <h6 class="mb-0 d-inline-block"> {{ $apartment->full_address }}</h6>
+                            <h6 class="mb-0 d-inline-block ms-1"> {{ $apartment->full_address }}</h6>
                         </div>
                     </div>
                     <div class="col-6">
@@ -94,8 +94,8 @@
                             <span>Non sono presenti servizi aggiuntivi</span>
                         @else
                             @foreach ($apartment->services as $service)
-                            <div class="service-box d-flex flex-column justify-content-center align-items-center p-2 text-center">
-                                {!! $service->icon !!}
+                            <div class="service-box d-flex flex-column justify-content-center align-items-center my-3 text-center">
+                                <span class="fa-lg fa-fw">{!! $service->icon !!}</span>
                                 {{ $service->name }}
                             </div>  
                             @endforeach
