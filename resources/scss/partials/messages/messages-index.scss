@@ -1,14 +1,10 @@
 #admin-messages-index {
-    & div.card{
+    & div.card {
         border: none;
     }
     & div.message_list_title {
-
-
-
         & h2 {
             font-size: 25px;
-            
         }
     }
     & div.mask-custom {
@@ -19,12 +15,11 @@
         border: 2px solid rgba(255, 255, 255, 0.05);
         background-clip: padding-box;
         box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
-        }
-    & div.card{
-        & div.card-body{
-            
+    }
+    & div.card {
+        & div.card-body {
             & h5 {
-                color:rgb(83, 79, 71);
+                color: rgb(83, 79, 71);
                 font-style: italic;
                 font-size: 22px;
             }
@@ -33,13 +28,26 @@
                 font-size: 15px;
             }
 
-            & div.card-title{
-                
+            & div.card-title {
             }
 
             div.card-text {
-
             }
+        }
+    }
+    & .apartment-details {
+        & .field {
+            border-top-right-radius: 13px;
+            border-top-left-radius: 13px;
+            background-color: #ff5a5f;
+            border: 2px solid #ff5a5f;
+            margin: 0;
+        }
+        & .details-body {
+            border: 2px solid #ff5a5f;
+        }
+        & .service-box {
+            width: calc(100% / 4);
         }
     }
 }
