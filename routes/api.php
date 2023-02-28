@@ -40,4 +40,4 @@ use App\Http\Controllers\Api\ServiceController;
     MESSAGE API
 ----------------------*/
 
-    Route::get('message/create/email={email}&content={content}&apartmentId={apartment_id}', [MessageController::class, 'create']);
+    Route::post('message/create/email={email}&content={content}&apartmentId={apartment_id}', [MessageController::class, 'create']);
