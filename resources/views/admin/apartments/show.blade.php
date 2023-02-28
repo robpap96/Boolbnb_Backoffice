@@ -53,65 +53,66 @@
                         @endphp
                     </div>
                 </div>    
-                <div class="card-body d-flex justify-content-between my-3">
-                    <div class="apartment-images">
+                <div class="row">
+                    <div class="apartment-images col-7 pe-1">
                         <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" alt="">
                     </div>
-                    <div class="card-text d-flex flex-column py-3">
-                        <div class="location d-flex ps-2">
-                            <div class="location-icon d-flex flex-column justify-content-center">
-                                <i class="fa-solid fa-location-dot fa-lg fa-fw  ms-auto"></i>
-                            </div>
-                            <div class="location-full_addres">
-                                <h6 class="m-3">{{ $apartment->full_address }}</h6>
+                    <div class="col-5 ps-1">
+                        {{-- sezione mappa --}}
+                        <div class="find-us">
+                            <div class="img-container">
+                                <img id="map-container" src="" class="figure-img img-fluid" alt="">
                             </div>
                         </div>
-                        <ul class="m-3 d-flex list-unstyled">
-                            <li class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></li>
-                            <li class="me-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></li>   
-                        </ul>
-                        {{-- sezione servizi aggiuntivi singolo appartamento --}}
-                        <div class="container px-3">
-                            <h5>Cosa troverai</h5>
-                            <div class="d-flex">
-                                @if ($apartment->services->isEmpty())
-                                    <span>Non sono presenti servizi aggiuntivi</span>
-                                @else
-                                    <ul>
-                                        @foreach ($apartment->services as $service)
-                                        <li>{{ $service->name }}</li>  
-                                        @endforeach
-                                    </ul>    
-                                @endif
-                            </div>
-                        </div>
+                    </div>
+                </div>
 
-                        <div class="price mt-auto ms-auto">
-                            <h6 class="mt-3">{{ $apartment->price }}€ Notte</h6>
+                <div class="apartment-details mt-4 mb-5 row">
+                    <div class="col-6">
+                        <h6 class="field p-1 text-center text-white">Indirizzo</h6>
+                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-center align-items-center">
+                            <i class="fa-solid fa-map-pin fa-lg fa-fw"></i>
+                            <h6 class="mb-0 d-inline-block"> {{ $apartment->full_address }}</h6>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="field p-1 text-center text-white">Dettagli appartamento</h6>
+                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
+                            <div class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></div>
+                            <div class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></div>
+                            <div class="me-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></div>
+                            <div class="me-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></div>   
                         </div>
                     </div>
                 </div>
+
+                {{-- sezione servizi aggiuntivi singolo appartamento --}}
+                <div class="apartment-details services mt-2 mb-4">
+                    <h6 class="field p-1 text-center text-white">Servizi:</h6>
+                    <div class="bg-light details-body h-100 py-3 d-flex flex-wrap justify-content-start align-items-center">
+                        @if ($apartment->services->isEmpty())
+                            <span>Non sono presenti servizi aggiuntivi</span>
+                        @else
+                            @foreach ($apartment->services as $service)
+                            <div class="service-box d-flex flex-column justify-content-center align-items-center p-2 text-center">
+                                {!! $service->icon !!}
+                                {{ $service->name }}
+                            </div>  
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+
                 {{-- Descrizione dell'appartamento --}}
-                <div class="container description">
-                    <h3>Descrizione dell'appartamento <i class="fa-solid fa-pen-nib"></i></h3>
-                    <p>{{ $apartment->description }}</p>
-                </div>
-                
-                {{-- sezione mappa --}}
-                <div class="container find-us">
-                    <h3>Dove Trovarci <i class="fa-solid fa-location-crosshairs"></i></h3>
-                    <div class="img-container">
-                        <img id="map-container" src="" class="figure-img img-fluid" alt="">
-                        <div class="full-address mb-2">
-                            <i class="fa-solid fa-location-dot me-2"></i>{{ $apartment->full_address }}
-                        </div>
-                    </div>
+                <div class="apartment-details description services mb-2">
+                    <h6 class="field p-1 text-center text-white">Descrizione:</h6>
+                    <p class="bg-light details-body h-100 p-2">
+                        {{ $apartment->description }}
+                    </p>
                 </div>
                 
                 {{-- bottoni --}}
-                <div class=" container d-flex">
+                <div class="d-flex">
                     <a class="btn btn-primary me-2" href="{{route ('admin.apartments.index') }}">Indietro</a>
                     <a class="btn btn-secondary me-2" href="{{route ('admin.apartments.edit', $apartment) }}">Modifica</a>
                     <a class="btn btn-success me-2" href="{{route ('admin.sponsors.index', $apartment) }}">Dai visibilità al tuo contenuto</a>

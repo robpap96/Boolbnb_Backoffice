@@ -1,7 +1,5 @@
 #admin-apartments-show {
     & .card {
-        background-color: #fa4545;
-        color: rgb(255, 255, 255);
         & .card-title{
             & .sponsor-badge-icon{
                 text-transform: capitalize;
@@ -10,24 +8,24 @@
                 font-weight: bold;
                 padding: 5px 7px;
                 color: white;
-                border: 1px solid white;
+                border: 1px solid currentColor;
             }
         }
-        & .card-body {
-            & .apartment-images {
-                & img {
-                    border-radius: 20px;
-                    object-fit: cover;
-                    width: 450px !important;
-                    height: 260px !important;
-                }
+        & .apartment-images {
+            & img {
+                object-fit: cover;
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 10px;
             }
         }
         & div.find-us {
             & .img-container {
-                & img {
-                    position: relative;
-                    border-radius: 20px;
+                & img { 
+                    object-fit: cover;
+                    width: 100% !important;
+                    height: 100% !important;
+                    border-radius: 10px;
                 }
             }
         }
@@ -35,6 +33,21 @@
     & div.apartment-title {
         & h3 {
             font-size: 50px;
+        }
+    }
+    & .apartment-details {
+        & .field {
+            border-top-right-radius: 13px;
+            border-top-left-radius: 13px;
+            background-color: #ff5a5f;
+            border: 2px solid #ff5a5f;
+            margin: 0;
+        }
+        & .details-body {
+            border: 2px solid #ff5a5f;
+        }
+        & .service-box {
+            width: calc(100% / 4);
         }
     }
 }
