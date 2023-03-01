@@ -106,24 +106,35 @@ class ApartmentController extends Controller
         return $sponsored_apartments;
     }
 
-    public function get_near_apartments($address, $radius, $rooms, $beds) {
+    public function get_near_apartments($address, $radius, $rooms, $beds, $services) {
         $apartments = Apartment::where('rooms_num', '>=', $rooms)
         ->where('beds_num', '>=', $beds)
         ->with('sponsorships', 'user', 'services')->get();
 
         $near_aparments = [];
 
+        $service_array = explode(",", strtolower($services));
+        
         $coords = get_coords_from_address($address);
-
+        
         foreach ($apartments as $apartment) {
-            $latitude = $apartment['latitude'];
-            $longitude = $apartment['longitude'];
+            $how_many_services = count($service_array);
+            $services_found = 0;
 
-            $distance = round(point2point_distance($coords['position']['lat'], $coords['position']['lon'], $latitude, $longitude));
-
-            if( $distance <= $radius ) {
-                $near_aparments[] = $apartment;
+            // Ciclo su tutti i servizi degli appartamenti
+            foreach ($apartment->services as $apartment_service) {
+                in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
             }
+            if($how_many_services === $services_found){
+                $latitude = $apartment['latitude'];
+                $longitude = $apartment['longitude'];
+    
+                $distance = round(point2point_distance($coords['position']['lat'], $coords['position']['lon'], $latitude, $longitude));
+    
+                if( $distance <= $radius ) {
+                    $near_aparments[] = $apartment;
+                }
+            }            
         }
 
         return [$near_aparments, $coords];

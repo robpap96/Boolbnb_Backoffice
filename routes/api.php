@@ -30,15 +30,15 @@ use App\Http\Controllers\Api\ServiceController;
     Route::get('apartment/show/{slug}', [ApartmentController::class, 'show']);
 
     // Filtro appartamenti per indirizzo
-    Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
+    // Route::get('search/apartment/{query}', [ApartmentController::class, 'search_by_address']);
 
     // Filtro appartamenti per indirizzo con servizi
-    Route::get('search/apartment/{query}/{services}', [ApartmentController::class, 'search_by_address_with_filter']);
+    // Route::get('search/apartment/{query}/{services}', [ApartmentController::class, 'search_by_address_with_filter']);
 
     // Ottenere tutti gli appartamenti attualmente sponsorizzati
     Route::get('sponsored-apartments', [ApartmentController::class, 'get_sponsored_apartments']);
 
-    Route::get('near-apartments-to/address={address}&radius={radius}&rooms={rooms}&beds={beds}', [ApartmentController::class, 'get_near_apartments']);
+    Route::get('near-apartments-to/address={address}&radius={radius}&rooms={rooms}&beds={beds}&services={services}', [ApartmentController::class, 'get_near_apartments']);
 
 /*----------------------
     SERVICES API 
