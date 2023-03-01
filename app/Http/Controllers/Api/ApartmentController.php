@@ -8,6 +8,9 @@ use App\Models\Service;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Validator;
+
+use function PHPUnit\Framework\throwException;
 
 class ApartmentController extends Controller
 {
@@ -106,7 +109,7 @@ class ApartmentController extends Controller
         return $sponsored_apartments;
     }
 
-    public function get_near_apartments($address, $radius, $rooms, $beds, $services) {
+    public function get_near_apartments($address, $radius, $rooms, $beds, $services = null) {
         $apartments = Apartment::where('rooms_num', '>=', $rooms)
         ->where('beds_num', '>=', $beds)
         ->with('sponsorships', 'user', 'services')->get();
@@ -117,15 +120,28 @@ class ApartmentController extends Controller
         
         $coords = get_coords_from_address($address);
         
-        foreach ($apartments as $apartment) {
-            $how_many_services = count($service_array);
-            $services_found = 0;
-
-            // Ciclo su tutti i servizi degli appartamenti
-            foreach ($apartment->services as $apartment_service) {
-                in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
+        if ( $services !== null ) {
+            foreach ($apartments as $apartment) {
+                $how_many_services = count($service_array);
+                $services_found = 0;
+    
+                // Ciclo su tutti i servizi degli appartamenti
+                foreach ($apartment->services as $apartment_service) {
+                    in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
+                }
+                if($how_many_services === $services_found){
+                    $latitude = $apartment['latitude'];
+                    $longitude = $apartment['longitude'];
+        
+                    $distance = round(point2point_distance($coords['position']['lat'], $coords['position']['lon'], $latitude, $longitude));
+        
+                    if( $distance <= $radius ) {
+                        $near_aparments[] = $apartment;
+                    }
+                }            
             }
-            if($how_many_services === $services_found){
+        } else {
+            foreach ($apartments as $apartment) {
                 $latitude = $apartment['latitude'];
                 $longitude = $apartment['longitude'];
     
@@ -133,8 +149,8 @@ class ApartmentController extends Controller
     
                 if( $distance <= $radius ) {
                     $near_aparments[] = $apartment;
-                }
-            }            
+                }     
+            }
         }
 
         return [$near_aparments, $coords];

@@ -38,7 +38,7 @@ use App\Http\Controllers\Api\ServiceController;
     // Ottenere tutti gli appartamenti attualmente sponsorizzati
     Route::get('sponsored-apartments', [ApartmentController::class, 'get_sponsored_apartments']);
 
-    Route::get('near-apartments-to/address={address}&radius={radius}&rooms={rooms}&beds={beds}&services={services}', [ApartmentController::class, 'get_near_apartments']);
+    Route::get('near-apartments-to/address={address}&radius={radius}&rooms={rooms}&beds={beds}&services={services?}', [ApartmentController::class, 'get_near_apartments']);
 
 /*----------------------
     SERVICES API 
