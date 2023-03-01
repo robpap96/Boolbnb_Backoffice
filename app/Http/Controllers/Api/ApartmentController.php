@@ -7,6 +7,7 @@ use App\Models\Apartment;
 use App\Models\Service;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ApartmentController extends Controller
 {
@@ -110,4 +111,67 @@ class ApartmentController extends Controller
         }
         return $sponsored_apartments;
     }
+
+    public function get_near_apartments($address, $radius) {
+        $apartments = Apartment::with('sponsorships', 'user', 'services')->get();
+        $near_aparments = [];
+
+        $coords = get_coords_from_address($address);
+
+        foreach ($apartments as $apartment) {
+            $latitude = $apartment['latitude'];
+            $longitude = $apartment['longitude'];
+
+            $distance = round(point2point_distance($coords['position']['lat'], $coords['position']['lon'], $latitude, $longitude));
+
+            if( $distance <= $radius ) {
+                $near_aparments[] = $apartment;
+            }
+        }
+
+        return [$near_aparments, $coords];
+    }
 }
+
+
+/*---------------------
+    FUNCTIONS
+---------------------*/
+    // Get coordinates from Query Address
+    function get_coords_from_address($full_address) {
+        $getCoordsFromAddress = Http::get("https://api.tomtom.com/search/2/geocode/{$full_address}.json?key=S7Di8WQbB2pqxqTH8RYmhO63cZwgtNgp&storeResult=true&typeahead=true&limit=1&view=Unified");
+        $res = $getCoordsFromAddress->json();
+
+        // Check if address is found by API
+        if( $res !== null && $res['results'] !== [] ){
+            return $res['results'][0];
+        } else {
+            $error = \Illuminate\Validation\ValidationException::withMessages([
+                'full_address' => ['Indirizzo non trovato.'],
+            ]);
+            throw $error;
+        }
+    }
+
+    function point2point_distance($lat1, $lon1, $lat2, $lon2, $unit='K') 
+    { 
+        $theta = $lon1 - $lon2; 
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)); 
+        $dist = acos($dist); 
+        $dist = rad2deg($dist); 
+        $miles = $dist * 60 * 1.1515;
+        $unit = strtoupper($unit);
+
+        if ($unit == "K") 
+        {
+            return ($miles * 1.609344); 
+        } 
+        else if ($unit == "N") 
+        {
+        return ($miles * 0.8684);
+        } 
+        else 
+        {
+        return $miles;
+        }
+    }   
