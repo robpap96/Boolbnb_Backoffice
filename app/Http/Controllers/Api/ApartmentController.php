@@ -60,33 +60,27 @@ class ApartmentController extends Controller
         return $apartment;
     }
 
-    public function search_by_address($query){
-        $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->with('user', 'services', 'sponsorships')->get();            
+    // public function search_by_address_with_filter($query, $services) {
+    //     // Trasformo i servizi su cui filtrare in array 
+    //     $service_array = explode(",", $services);
 
-        return $apartments;
-    }
+    //     // Inizializzo variabile degli appartmenti che verranno stampati
+    //     $filtered_apartments=[];
+    //     $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->with('user', 'services', 'sponsorships')->get();            
 
-    public function search_by_address_with_filter($query, $services) {
-        // Trasformo i servizi su cui filtrare in array 
-        $service_array = explode(",", $services);
-
-        // Inizializzo variabile degli appartmenti che verranno stampati
-        $filtered_apartments=[];
-        $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->with('user', 'services', 'sponsorships')->get();            
-
-        // Ciclo su tutti gli appartamenti
-        foreach ($apartments as $apartment) {
-            $how_many_services = count($service_array);
-            $services_found = 0;
+    //     // Ciclo su tutti gli appartamenti
+    //     foreach ($apartments as $apartment) {
+    //         $how_many_services = count($service_array);
+    //         $services_found = 0;
             
-            // Ciclo su tutti i servizi degli appartamenti
-            foreach ($apartment->services as $apartment_service) {
-                in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
-            }
-            $how_many_services === $services_found ? $filtered_apartments[] = $apartment : '';
-        }
-        return $filtered_apartments;
-    }
+    //         // Ciclo su tutti i servizi degli appartamenti
+    //         foreach ($apartment->services as $apartment_service) {
+    //             in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
+    //         }
+    //         $how_many_services === $services_found ? $filtered_apartments[] = $apartment : '';
+    //     }
+    //     return $filtered_apartments;
+    // }
 
     public function get_sponsored_apartments() {
         $sponsored_apartments = [];
@@ -112,8 +106,11 @@ class ApartmentController extends Controller
         return $sponsored_apartments;
     }
 
-    public function get_near_apartments($address, $radius) {
-        $apartments = Apartment::with('sponsorships', 'user', 'services')->get();
+    public function get_near_apartments($address, $radius, $rooms, $beds) {
+        $apartments = Apartment::where('rooms_num', '>=', $rooms)
+        ->where('beds_num', '>=', $beds)
+        ->with('sponsorships', 'user', 'services')->get();
+
         $near_aparments = [];
 
         $coords = get_coords_from_address($address);
