@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
@@ -14,7 +15,10 @@ class MessageController extends Controller
         $messages = [];
         $user_id = Auth::user()->id;
 
-        // Get all apartments owned by a logged in user
+        // get all apartments owned by logged user
+        $my_apartments = Apartment::where('user_id', $user_id)->get();
+
+        // Get all messages owned by a logged in user
         $data = Message::with('apartment')->get();
 
         foreach ($data as $message) {
@@ -23,7 +27,7 @@ class MessageController extends Controller
             }
         }
 
-        return view('admin.messages.index', compact('messages'));
+        return view('admin.messages.index', compact('messages', 'my_apartments'));
     }
 
 }

@@ -67,6 +67,22 @@
                     </div>
                 </div>
 
+                <div class="apartment-details mt-4 mb-4 row">
+                    <div>
+                        <h6 class="field p-1 text-center text-white">Statistiche</h6>
+                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
+                            <div>
+                                Messaggi ricevuti: 
+                                <span class="fw-bold">{{ count($apartment->messages) }}</span>
+                            </div>
+                            <div>
+                                Visualizzazioni appartamento:
+                                <span class="fw-bold">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="apartment-details mt-4 mb-5 row">
                     <div class="col-6">
                         <h6 class="field p-1 text-center text-white">Indirizzo</h6>

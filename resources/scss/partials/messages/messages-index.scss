@@ -17,56 +17,82 @@
             border-bottom-left-radius: 13px;
             border-bottom-right-radius: 13px;
         }
-        & .my-btn {
-            font-size: 14px;
-            margin-right: 10px;
-            padding: 7px 15px;
-            text-align: center;
-            text-transform: uppercase;
+    }
+    & .my-btn {
+        font-size: 14px;
+        padding: 7px 15px;
+        text-align: center;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        border-radius: 10px;
+        display: block;
+        border: 0px;
+        font-weight: 500;
+
+        cursor: pointer;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+
+        &.btn-show-apartment {
+            box-shadow: 0px 0px 14px -7px #d4029f;
+            background-image: linear-gradient(
+                45deg,
+                #fa4546 0%,
+                #d4029f 51%,
+                #fa4546 100%
+            );
+        }
+
+        &.btn-reply {
+            box-shadow: 0px 0px 14px -7px #103d53;
+            background-image: linear-gradient(
+                45deg,
+                #0872c5 0%,
+                #103d53 51%,
+                #0872c5 100%
+            );
+        }
+
+        &:hover {
+            background-position: right center;
+            /* change the direction of the change here */
+            color: #fff;
             text-decoration: none;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: white;
-            border-radius: 10px;
-            display: block;
-            border: 0px;
-            font-weight: 500;
+        }
 
-            cursor: pointer;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
+        &:active {
+            transform: scale(0.95);
+        }
 
-            &.btn-show-apartment {
-                box-shadow: 0px 0px 14px -7px #d4029f;
-                background-image: linear-gradient(
-                    45deg,
-                    #fa4546 0%,
-                    #d4029f 51%,
-                    #fa4546 100%
-                );
-            }
-
-            &.btn-reply {
-                box-shadow: 0px 0px 14px -7px #103d53;
-                background-image: linear-gradient(
-                    45deg,
-                    #0872c5 0%,
-                    #103d53 51%,
-                    #0872c5 100%
-                );
-            }
-
-            &:hover {
-                background-position: right center;
-                /* change the direction of the change here */
-                color: #fff;
-                text-decoration: none;
-            }
-
-            &:active {
-                transform: scale(0.95);
-            }
+    }
+    .accordion {
+        & .accordion-button:not(.collapsed) {
+            box-shadow: 0px 0px 14px -7px #d4029f;
+            background-image: linear-gradient(
+                45deg,
+                #fa4546 0%,
+                #d4029f 51%,
+                #fa4546 100%
+            );
+            background-position: right center;
+            text-decoration: none;
+            color: white !important;
+        }
+        & .accordion-button {
+            color: black !important;
+        }
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+        & .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
+        }
+        & .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
         }
     }
 }
