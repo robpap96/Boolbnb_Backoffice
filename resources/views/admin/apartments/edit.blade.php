@@ -6,7 +6,7 @@
 
 @section('content')
     <div id="admin-apartments-edit">
-        <h1>Modifica appartamento "{{ $apartment->title }}"</h1>
+        <h1 class="m-text-cursive text-center mb-2">Modifica appartamento "{{ $apartment->title }}"</h1>
 
         <form action="{{ route('admin.apartments.update', $apartment) }}" method="POST" enctype="multipart/form-data" onsubmit="getFullAddress()">
             @method('PUT')

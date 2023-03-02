@@ -11,7 +11,7 @@
             <div class="card p-4">
                 <div class="card-title">
                     <div class="apartment-title pb-3 d-flex justify-content-between align-items-center">
-                        <h3 class="col-10 mb-0">{{ $apartment->title }}</h3>
+                        <h3 class="col-10 mb-0 m-text-cursive">{{ $apartment->title }}</h3>
                         {{-- Sponsorizzazione --}}
                         @php
                             $all_sponsors = $apartment->sponsorships->toArray();

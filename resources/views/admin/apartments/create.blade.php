@@ -6,7 +6,7 @@
 
 @section('content')
     <div id="admin-apartments-create">
-        <h1>Creazione di un nuovo appartamento</h1>
+        <h1 class="m-text-cursive text-center mb-2">Creazione di un nuovo appartamento</h1>
 
         <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
