@@ -4,7 +4,7 @@
     }
     & .sponsor-card {
         padding: 0.875rem 0.625rem;
-
+        padding-top: 0px;
         border: solid 0.0625rem #dee2e6;
         border-radius: 0.625rem;
         background-color: #fdfcfc;
@@ -61,6 +61,15 @@
                     justify-content: end;
                 }
             }
+        }
+    }
+    .sponsors-how {
+        img {
+            width: 60%;
+        }
+        small {
+            font-weight: bold;
+            font-size: 12px;
         }
     }
 }
