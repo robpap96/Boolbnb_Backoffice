@@ -8,7 +8,9 @@ use App\Models\Service;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Validator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 use function PHPUnit\Framework\throwException;
 
@@ -63,31 +65,9 @@ class ApartmentController extends Controller
         return $apartment;
     }
 
-    // public function search_by_address_with_filter($query, $services) {
-    //     // Trasformo i servizi su cui filtrare in array 
-    //     $service_array = explode(",", $services);
-
-    //     // Inizializzo variabile degli appartmenti che verranno stampati
-    //     $filtered_apartments=[];
-    //     $apartments = Apartment::where('full_address', 'like', '%' . $query . '%')->with('user', 'services', 'sponsorships')->get();            
-
-    //     // Ciclo su tutti gli appartamenti
-    //     foreach ($apartments as $apartment) {
-    //         $how_many_services = count($service_array);
-    //         $services_found = 0;
-            
-    //         // Ciclo su tutti i servizi degli appartamenti
-    //         foreach ($apartment->services as $apartment_service) {
-    //             in_array( strtolower($apartment_service->name),  $service_array ) ? $services_found++ : '';
-    //         }
-    //         $how_many_services === $services_found ? $filtered_apartments[] = $apartment : '';
-    //     }
-    //     return $filtered_apartments;
-    // }
-
     public function get_sponsored_apartments() {
         $sponsored_apartments = [];
-        $apartments = Apartment::with('sponsorships', 'user', 'services')->get();
+        $apartments = Apartment::with('sponsorships', 'user', 'services')->where('is_visible', 1)->get();
 
         foreach ($apartments as $i => $apartment) {
             if( !$apartment['sponsorships']->isEmpty() ) {
@@ -106,12 +86,13 @@ class ApartmentController extends Controller
                 }
             }
         }
-        return $sponsored_apartments;
+        return paginate($sponsored_apartments);
     }
 
     public function get_near_apartments($address, $radius, $rooms, $beds, $services = null) {
         $apartments = Apartment::where('rooms_num', '>=', $rooms)
         ->where('beds_num', '>=', $beds)
+        ->where('is_visible', 1)
         ->with('sponsorships', 'user', 'services')->get();
 
         $near_aparments = [];
@@ -199,3 +180,10 @@ class ApartmentController extends Controller
         return $miles;
         }
     }   
+
+    function paginate($items, $perPage = 8, $page = 0, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    }
