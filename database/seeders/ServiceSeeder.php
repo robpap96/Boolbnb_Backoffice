@@ -32,27 +32,27 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-solid fa-shower"></i>'
             ],
             [
-                'name' => 'Vasca idromassaggio', 
+                'name' => 'Idromassaggio', 
                 'icon' => '<i class="fa-solid fa-bath"></i>'
             ],
             [
-                'name' => 'Spa zonarelax', 
+                'name' => 'Zonarelax', 
                 'icon' => '<i class="fa-solid fa-spray-can-sparkles"></i>'
             ],
             [
-                'name' => 'Cancellazione gratuita', 
+                'name' => 'Cancellazione', 
                 'icon' => '<i class="fa-regular fa-calendar-xmark"></i>'
             ], 
             [
-                'name' => 'Animali ammessi', 
+                'name' => 'Animali', 
                 'icon' => '<i class="fa-solid fa-paw"></i>'
             ],
             [
-                'name' => 'Parcheggio gratuito', 
+                'name' => 'Parcheggio', 
                 'icon' => '<i class="fa-solid fa-square-parking"></i>'
             ], 
             [
-                'name' => 'Area intrattenimento bimbi', 
+                'name' => 'Intrattenimento', 
                 'icon' => '<i class="fa-solid fa-children"></i>'
             ],
             [
@@ -60,15 +60,15 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-solid fa-tv"></i>'
             ],
             [
-                'name' => 'Stanza climatizzata', 
+                'name' => 'Climatizato', 
                 'icon' => '<i class="fa-regular fa-snowflake"></i>'
             ],
             [
-                'name' => 'Servizio navetta', 
+                'name' => 'Navetta', 
                 'icon' => '<i class="fa-solid fa-van-shuttle"></i>'
             ],
             [
-                'name' => 'Zona fumatori', 
+                'name' => 'Fumatori', 
                 'icon' => '<i class="fa-solid fa-smoking"></i>'
             ]
         ];
