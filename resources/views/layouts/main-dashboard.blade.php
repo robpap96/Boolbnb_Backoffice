@@ -60,24 +60,25 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name ?: 'Admin'}}
-                            </a>
+                            <div class="btn-group rounded-pill ms-3" style="border: 1px solid #ced4da;">
+                                <div class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 7px 13px;">
+                                    <i class="fa-solid fa-bars me-1"></i>
+                                    <span class="ms-2 me-2">{{ Auth::user()->name ?: 'Admin'}}</span>
+                                    <img class="rounded-pill" src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3" alt="" style="width: 30px; height: 30px;">
+                                </div>
+                                <ul class="dropdown-menu dropdown-menu-end mt-2">
+                                    <a class="dropdown-item" href="{{ env("APP_FRONTEND") }}">Homepage</a>
+                                    <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{__('I miei appartamenti')}}</a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                        {{ __('Esci') }}
+                                    </a>
 
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ env("APP_FRONTEND") }}">Homepage</a>
-                                <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{__('I miei appartamenti')}}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Esci') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </ul>
                             </div>
-                        </li>
                         @endguest
                     </ul>
                 </div>
