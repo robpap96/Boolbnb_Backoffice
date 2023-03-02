@@ -33,11 +33,11 @@
                                                         <span class="fs-6">{{$message->created_at}}</span>
                                                     </h6>
                                                     <div class="bg-light details-body h-100 py-3 px-3 d-flex flex-wrap aling-item-start justify-content-center flex-column">
-                                                        {{$message->content}}
+                                                        {{ $message->content }}
                                                         <div class="div pt-3 pb-1 d-flex justify-content-between align-items-center">
                                                             <div class="d-flex">
                                                                 {{-- a scopo illustrativo --}}
-                                                                <a class="my-btn btn-reply" href="mailto:{{ $message->email }}">Rispondi <i class="fa-solid fa-reply"></i></a>
+                                                                <a class="my-btn btn-reply" href="mailto:{{ $message->email }}?subject=In Risposta al tuo quesito | BoolBnB&body=Riferimento messaggio ricevuto: {{ $message->content }}. Risposta: ">Rispondi <i class="fa-solid fa-reply"></i></a>
                                                             </div>
                                                             <div class="text-decoration-underline">
                                                                 <strong>Inviato da: </strong>{{ $message->name }}
