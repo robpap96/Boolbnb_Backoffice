@@ -20,8 +20,8 @@
         @else
             <nav class="apartments-tabs">
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active w-50 text-dark" id="nav-visible-tab" data-bs-toggle="tab" data-bs-target="#nav-visible" type="button" role="tab" aria-controls="nav-visible" aria-selected="true">Appartamenti visibili</button>
-                <button class="nav-link w-50 text-dark" id="nav-hidden-tab" data-bs-toggle="tab" data-bs-target="#nav-hidden" type="button" role="tab" aria-controls="nav-hidden" aria-selected="false">Appartamenti non visibili</button>
+                <button class="nav-link active w-50 text-dark m-text-cursive fs-4" id="nav-visible-tab" data-bs-toggle="tab" data-bs-target="#nav-visible" type="button" role="tab" aria-controls="nav-visible" aria-selected="true">Appartamenti visibili</button>
+                <button class="nav-link w-50 text-dark m-text-cursive fs-4" id="nav-hidden-tab" data-bs-toggle="tab" data-bs-target="#nav-hidden" type="button" role="tab" aria-controls="nav-hidden" aria-selected="false">Appartamenti non visibili</button>
                 </div>
             </nav>
             <div class="tab-content" id="nav-tabContent">

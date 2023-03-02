@@ -4,7 +4,7 @@
     <div id="admin-messages-index" class="messages-container m-3">
         @if ( $messages !== [] )
             <div class="message_list_title mb-3">
-                <h2 class="text-center">Messaggi Ricevuti</ class="text-center">
+                <h1 class="m-text-cursive text-center">Messaggi Ricevuti</h1>
             </div>
 
             {{-- Apartments accordion --}}
@@ -15,7 +15,7 @@
                             <h2 class="accordion-header" id="panelsStayOpen-heading-{{ $my_apartment->id }}">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse-{{ $my_apartment->id }}" aria-expanded="false" aria-controls="panelsStayOpen-collapse-{{ $my_apartment->id }}">
                                     <div>
-                                        {{ $my_apartment->title }} - {{ $my_apartment->full_address }} 
+                                        {{ $my_apartment->title }} | {{ $my_apartment->full_address }} 
                                     </div>
                                 </button>
                             </h2>
