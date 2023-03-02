@@ -29,7 +29,7 @@
             @endforeach
         </div>
 
-        <h2 class="m-text-cursive text-center mt-2 mb-0">Come funziona ?</h2>
+        <h2 class="m-text-cursive text-center mt-4 mb-0">Come funziona ?</h2>
         <div class="row align-items-center m-2 mt-0 sponsors-how">
             <div class="col-9">
                 <h5>Un appartamento sponsorizzato ha le seguenti particolarità:</h5>
