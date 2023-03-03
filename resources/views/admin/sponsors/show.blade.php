@@ -45,11 +45,36 @@
             <div class="my-3 alert alert-warning">
                 <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
             </div>
-
-            <div class="sponsor-price">
-                <button type="submit" class="btn btn-success w-25">Aquista {{ $sponsor->price }} €</button>
+            
+            <div class="payments w-75 m-auto">
+                <div id="dropin-container"></div>
+                <button type="button" id="submit-button" class="btn btn-success">Aquista {{ $sponsor->price }} €</button>
                 <a href="{{ route('admin.sponsors.index') }}" class="btn btn-secondary">Indietro</a>
             </div>
         </form>
     </div>
+
+    <script src="https://js.braintreegateway.com/web/dropin/1.35.0/js/dropin.js"></script>
+    <script>
+        var button = document.querySelector('#submit-button');
+
+        braintree.dropin.create({
+        authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+        selector: '#dropin-container'
+        }, function (err, instance) {
+            button.addEventListener('click', function () {
+                instance.requestPaymentMethod(function (err, payload) {
+                    if ( payload !== undefined ) {
+                        // Pagamento andato a buon fine
+                        let paymenSubmitButton = document.getElementById('submit-button');
+                        paymenSubmitButton.type = 'submit';
+                        paymenSubmitButton.click();
+                    } else {
+                        // Pagamento non andato a buon fine
+                        console.log('compila i campi !')
+                    }
+                });
+            })
+        });
+    </script>
 @endsection
