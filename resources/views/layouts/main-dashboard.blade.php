@@ -29,7 +29,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="main-dashboard-header navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ env("APP_FRONTEND") }}">
                     <div class="logo_boolbnb d-flex align-items-center">
@@ -38,8 +38,12 @@
                     </div>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="button-small-profile navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <div class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 7px 13px;">
+                        <i class="fa-solid fa-bars me-1"></i>
+                        <span class="ms-2 me-2">{{ Auth::user()->name ?: 'Admin'}}</span>
+                        <img class="rounded-pill" src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3" alt="" style="width: 30px; height: 30px;">
+                    </div>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -48,7 +52,7 @@
                     </ul> -->
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto ml-auto">
+                    <ul class="navbar-nav ms-auto ml-auto" id="profile-account-button" >
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
@@ -60,7 +64,8 @@
                         </li>
                         @endif
                         @else
-                            <div class="btn-group rounded-pill ms-3" style="border: 1px solid #ced4da;">
+                        <div class="d-none d-md-block btn-group rounded-pill ms-md-3" style="border: 1px solid #ced4da;">
+                                {{-- Menu aperto da md in poi --}}
                                 <div class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 7px 13px;">
                                     <i class="fa-solid fa-bars me-1"></i>
                                     <span class="ms-2 me-2">{{ Auth::user()->name ?: 'Admin'}}</span>
@@ -78,6 +83,20 @@
                                         @csrf
                                     </form>
                                 </ul>
+
+                            </div>
+                            {{-- Menu aperto fino a md --}}
+                            <div class="d-md-none">
+                                <a class="dropdown-item" href="{{ env("APP_FRONTEND") }}">Homepage</a>
+                                <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{__('I miei appartamenti')}}</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Esci') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </div>
                         @endguest
                     </ul>
@@ -87,28 +106,28 @@
 
         <main id="dashboard-columns" class="d-flex container">
             {{-- Left column --}}
-            <aside class="col-3 left-column p-2">
+            <aside class="col-xs-1 col-sm-2 col-md-3 left-column p-2">
                 <ul class="nav flex-column ">
                     <li class="d-flex align-items-center nav-item {{ str_contains(Route::currentRouteName(), 'admin.apartments') ? 'bg-color-red' : '' }}">
-                        <a class="nav-link text-dark w-100" href="{{route('admin.apartments.index')}}">
+                        <a class="nav-link text-dark w-100 d-flex align-items-center" href="{{route('admin.apartments.index')}}">
                             <i class="fa-solid fa-house-user fa-lg fa-fw me-2"></i>
-                            <span>I miei appartamenti</span>
+                            <span class="tab-name">I miei appartamenti</span>
                         </a>
                         <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="text-dark h-100 px-2 {{ Route::currentRouteName() == 'admin.apartments.create' ? 'd-none' : 'd-block'}}"><i class="fa-solid fa-plus"></i></a>
                     </li>
                     @if ( isset($apartments) && !$apartments->isEmpty() || str_contains(Route::currentRouteName(), 'admin.sponsors') || str_contains(Route::currentRouteName(), 'admin.messages') )
                         <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.sponsors') ? 'bg-color-red' : '' }}">
-                            <a class="nav-link text-dark" href="{{route('admin.sponsors.index')}}">
+                            <a class="nav-link text-dark d-flex align-items-center" href="{{route('admin.sponsors.index')}}">
                                 <i class="fa-solid fa-bullhorn fa-lg fa-fw me-2"></i>
-                                <span>Sponsorizza il tuo appartamento </span>
+                                <span class="tab-name">Sponsorizza il tuo appartamento </span>
                             </a>
                         </li>
                     @endif
                     @if ( isset($apartments) && !$apartments->isEmpty() || str_contains(Route::currentRouteName(), 'admin.sponsors') || str_contains(Route::currentRouteName(), 'admin.messages') )
                         <li class="nav-item {{ str_contains(Route::currentRouteName(), 'admin.messages') ? 'bg-color-red' : '' }}">
-                            <a class="nav-link text-dark" href="{{route('admin.messages.index')}}">
+                            <a class="nav-link text-dark d-flex align-items-center" href="{{route('admin.messages.index')}}">
                                 <i class="fa-solid fa-comments-dollar fa-lg fa-fw me-2"></i>
-                                <span>Messaggi</span>
+                                <span class="tab-name">Messaggi</span>
                             </a>
                         </li>    
                     @endif
@@ -116,7 +135,7 @@
             </aside>
     
             {{-- Right column --}}
-            <section class="col-9 right-column p-2">
+            <section class="col-xs-11 col-sm-10 col-md-9 right-column p-2">
                 @yield('content')
             </section>
         </main>

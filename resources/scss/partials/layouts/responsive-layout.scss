@@ -1,0 +1,44 @@
+// 320 500 667 768 992 1200 1400
+.main-dashboard-header {
+    @media screen and (max-width: 768px) {
+        .button-small-profile {
+            &:focus {
+                box-shadow: none !important;
+            }
+        }
+    }
+    @media screen and (max-width: 344px) {
+        .button-small-profile {
+            i, span {
+                display: none;
+            }
+        }
+    }
+}
+
+#dashboard-columns {
+    @media screen and (max-width: 992px) {
+        .left-column {
+            .tab-name {
+                font-size: 9px;
+            }
+        }
+    }
+    @media screen and (max-width: 768px) {
+        .left-column {
+            & #add-apartment-btn {
+                display: none !important;
+            }
+            & a.nav-link {
+                justify-content: center;
+            }
+            i {
+                padding: 11px 0;
+                margin-right: 0 !important;
+            }
+            .tab-name {
+                display: none;
+            }
+        }
+    }
+}
