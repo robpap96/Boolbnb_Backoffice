@@ -1,6 +1,6 @@
 #dashboard-columns {
     margin-top: 20px;
-    height: calc(100vh - 66px - 20px);
+    height: calc(100vh - 66px - 20px) !important;
     .bg-color-red {
         background-color: #ff5a5f;
         & a {
@@ -8,6 +8,7 @@
         }
     }
     .left-column {
+        // height: calc(100vh - 66px - 20px) !important;
         border-top: 0.1875rem solid #f3f3f3;
         border-right: 0.1875rem solid #f3f3f3;
         border-left: 0.1875rem solid #f3f3f3;
@@ -20,6 +21,7 @@
         }
     }
     .right-column {
+        // height: calc(100vh - 66px - 20px) !important;
         position: relative;
         border-top: 0.1875rem solid #f3f3f3;
         border-right: 0.1875rem solid #f3f3f3;

@@ -38,8 +38,8 @@
                     </div>
                 </a>
 
-                <button class="button-small-profile navbar-toggler rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <div class="d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 7px 13px;">
+                <button class="button-small-profile navbar-toggler rounded-pill p-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <div class="drop d-flex align-items-center" data-bs-toggle="dropdown" aria-expanded="false" style="padding: 7px 13px;">
                         <i class="fa-solid fa-bars me-1"></i>
                         <span class="ms-2 me-2">{{ Auth::user()->name ?: 'Admin'}}</span>
                         <img class="rounded-pill" src="https://a0.muscache.com/defaults/user_pic-50x50.png?v=3" alt="" style="width: 30px; height: 30px;">
@@ -47,10 +47,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar 
-                    <ul class="navbar-nav me-auto">
-                    </ul> -->
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto ml-auto" id="profile-account-button" >
                         <!-- Authentication Links -->
@@ -87,10 +83,10 @@
                             </div>
                             {{-- Menu aperto fino a md --}}
                             <div class="d-md-none">
-                                <a class="dropdown-item" href="{{ env("APP_FRONTEND") }}">Homepage</a>
-                                <a class="dropdown-item" href="{{ route('admin.apartments.index') }}">{{__('I miei appartamenti')}}</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item text-end" href="{{ env("APP_FRONTEND") }}">Homepage</a>
+                                <a class="dropdown-item text-end" href="{{ route('admin.apartments.index') }}">{{__('I miei appartamenti')}}</a>
+                                <a class="dropdown-item text-end" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
                                     {{ __('Esci') }}
                                 </a>
 
@@ -105,10 +101,10 @@
         </nav>
 
         <main id="dashboard-columns">
-            <div class="d-flex container">
+            <div class="container row m-auto">
                 {{-- Left column --}}
-                <aside class="col-xs-1 col-sm-2 col-md-3 left-column p-2">
-                    <ul class="nav flex-column ">
+                <aside class="col-md-12 col-lg-3 left-column p-2">
+                    <ul class="nav flex-column">
                         <li class="d-flex align-items-center nav-item {{ str_contains(Route::currentRouteName(), 'admin.apartments') ? 'bg-color-red' : '' }}">
                             <a class="nav-link text-dark w-100 d-flex align-items-center" href="{{route('admin.apartments.index')}}">
                                 <i class="fa-solid fa-house-user fa-lg fa-fw me-2"></i>
@@ -136,7 +132,7 @@
                 </aside>
         
                 {{-- Right column --}}
-                <section class="col-xs-11 col-sm-10 col-md-9 right-column p-2">
+                <section class="col-md-12 col-lg-9 right-column p-2">
                     @yield('content')
                 </section>
             </div>

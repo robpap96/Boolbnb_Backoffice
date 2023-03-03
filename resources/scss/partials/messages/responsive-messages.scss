@@ -22,20 +22,30 @@
     @media screen and (max-width: 992px) {
         h1.m-text-cursive {
             &::before {
-                width: 24%;
+                width: 35%;
             }
             &::after {
-                width: 24%;
+                width: 35%;
+            }
+        }
+    }
+    @media screen and (max-width: 841px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 33%;
+            }
+            &::after {
+                width: 33%;
             }
         }
     }
     @media screen and (max-width: 768px) {
         & h1.m-text-cursive {
             &::before {
-                width: 20%;
+                width: 32%;
             }
             &::after {
-                width: 20%;
+                width: 32%;
             }
         }
         & h6 {
@@ -54,9 +64,39 @@
             margin: 10px auto 0 auto;
         }
     }
+    @media screen and (max-width: 710px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 30%;
+            }
+            &::after {
+                width: 30%;
+            }
+        }
+    }
+    @media screen and (max-width: 596px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 26%;
+            }
+            &::after {
+                width: 26%;
+            }
+        }
+    }
     @media screen and (max-width: 576px) {
         & .accordion-button::after {
             display: none;
+        }
+    }
+    @media screen and (max-width: 495px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 22%;
+            }
+            &::after {
+                width: 22%;
+            }
         }
     }
     @media screen and (max-width: 481px) {
