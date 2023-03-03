@@ -24,8 +24,9 @@ class ServiceSeeder extends Seeder
 
         $services = [
             [
-                'name' => 'Wifi', 
-                'icon' => '<i class="fa-solid fa-wifi"></i>'
+                'name' => 'Intrattenimento', 
+                'icon' => '<i class="fa-solid fa-children"></i>'
+
             ],
             [
                 'name' => 'Doccia', 
@@ -52,8 +53,9 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-solid fa-square-parking"></i>'
             ], 
             [
-                'name' => 'Intrattenimento', 
-                'icon' => '<i class="fa-solid fa-children"></i>'
+                'name' => 'Navetta', 
+                'icon' => '<i class="fa-solid fa-van-shuttle"></i>'
+                
             ],
             [
                 'name' => 'TV', 
@@ -64,8 +66,8 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-regular fa-snowflake"></i>'
             ],
             [
-                'name' => 'Navetta', 
-                'icon' => '<i class="fa-solid fa-van-shuttle"></i>'
+                'name' => 'Wifi', 
+                'icon' => '<i class="fa-solid fa-wifi"></i>'
             ],
             [
                 'name' => 'Fumatori', 
