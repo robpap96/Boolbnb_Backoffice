@@ -181,7 +181,7 @@ class ApartmentController extends Controller
         }
     }   
 
-    function paginate($items, $perPage = 4, $page = 0, $options = [])
+    function paginate($items, $perPage = 8, $page = 0, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);
