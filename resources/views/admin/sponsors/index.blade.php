@@ -32,15 +32,16 @@
         <h2 class="m-text-cursive text-center mt-4 mb-0">Come funziona ?</h2>
         <div class="row align-items-center m-2 mt-0 sponsors-how">
             <div class="col-9">
-                <h5>Un appartamento sponsorizzato ha le seguenti particolarità:</h5>
+                <h5>Sponsorizzando il tuo appartamento otterrai i seguenti benefici:</h5>
 
-                <li>Appare in Homepage nella sezione “Appartamenti in Evidenza”</li>
-                <li>Nella pagina di ricerca, viene posizionato sempre prima di un appartamento non sponsorizzato 
+                <li>Apparirà in Homepage nella sezione “Appartamenti in Evidenza”</li>
+                <li>Nelle pagine di ricerca, verrà sempre posizionato prima di un appartamento non sponsorizzato 
                 che soddisfa le stesse caratteristiche di ricerca</li>
             </div>
             <div class="col-3 text-center">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-cETReGrSEnsS4Sef4AY1eAzkVECciLGPjA&usqp=CAU" alt="">
             </div>
+            
             <small class="mt-3 text-center">Terminato il periodo di sponsorizzazione, l’appartamento tornerà ad essere visualizzato normalmente, senza alcuna priorità.</small>
         </div>
     </div>
