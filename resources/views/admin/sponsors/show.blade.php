@@ -1,9 +1,12 @@
 @extends('layouts.main-dashboard')
 
 @section('content')
-    <div class="sponsor-container">
+    <div class="sponsor-container show">
+        <div class="sponsor_list_title text-center mb-3">
+            <h1 class="m-text-cursive m-3">Completa l'acquisto !</h1>
+        </div>
         {{-- Sponsor card with apartments select --}}
-        <div class="sponsor-card">
+        <div class="sponsor-card m-2">
             <div class="sponsor-image-box text-center">
                 <img class="sponsor-image {{$sponsor->name}}" src="{{ Vite::asset('resources/img/IMG-20230220-WA0002_origin.png')}}" alt="" width="150px" height="150px">
                 <div class="sponsor-type {{$sponsor->name}}"><h4>{{$sponsor->name}}</h4></div>
@@ -29,14 +32,14 @@
                 @enderror
             </form>
 
-            <div class="my-3 alert alert-warning">
+            <div class="mt-3 alert alert-warning">
                 <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
             </div>
         </div>
 
         {{-- Make payment container --}}
         <div class="payments"> 
-            <div class="form-container m-0">
+            <div class="form-container m-2">
                 <form id="my-sample-form" class="scale-down">
                     <div class="cardinfo-card-number">
                         <label class="cardinfo-label" for="card-number">Numero identificativo carta</label>

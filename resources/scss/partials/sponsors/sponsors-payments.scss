@@ -6,6 +6,35 @@
     bottom: 10px;
 }
 
+.sponsor-container.show {
+    & h1.m-text-cursive {
+        position: relative;
+        z-index: 2;
+        &::before {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            left: 0;
+            content: "";
+            display: block;
+            width: 32%;
+            height: 0.5px;
+            background-color: black;
+        }
+        &::after {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            right: 0;
+            content: "";
+            display: block;
+            width: 32%;
+            height: 0.5px;
+            background-color: black;
+        }
+    }
+}
+
 .sponsor-image-box {
     & .Silver {
         color: #c0c0c0;
@@ -68,12 +97,11 @@ body {
 
 .form-container {
   display: flex;
-//   background-color: #EEE;
   justify-content: center;
   align-items: center;
   height: 100%;
   flex-direction: column;
-  border: 1em solid #fff;
+//   border: 1em solid #fff;
   box-sizing: border-box;
   position: relative;
   
