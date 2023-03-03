@@ -36,7 +36,7 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-solid fa-bath"></i>'
             ],
             [
-                'name' => 'Zonarelax', 
+                'name' => 'Zona-relax', 
                 'icon' => '<i class="fa-solid fa-spray-can-sparkles"></i>'
             ],
             [
@@ -60,7 +60,7 @@ class ServiceSeeder extends Seeder
                 'icon' => '<i class="fa-solid fa-tv"></i>'
             ],
             [
-                'name' => 'Climatizato', 
+                'name' => 'Climatizzato', 
                 'icon' => '<i class="fa-regular fa-snowflake"></i>'
             ],
             [
