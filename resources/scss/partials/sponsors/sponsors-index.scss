@@ -1,4 +1,30 @@
 .sponsor-container {
+    h1.m-text-cursive {
+        position: relative;
+        z-index: 2;
+        &::before {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            left: 0;
+            content: "";
+            display: block;
+            width: 20%;
+            height: 0.5px;
+            background-color: black;
+        }
+        &::after {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            right: 0;
+            content: "";
+            display: block;
+            width: 20%;
+            height: 0.5px;
+            background-color: black;
+        }
+    }
     .select_disabled {
         background-color: rgba($color: #ff5a5f, $alpha: 0.2);
     }

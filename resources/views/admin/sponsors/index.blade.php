@@ -3,10 +3,10 @@
 @section('content')
     <div class="sponsor-container">
         <div class="sponsor_list_title text-center mb-3">
-            <h1 class="m-text-cursive">Segli la promozione più adatta a te !</h1>
+            <h1 class="m-text-cursive m-3">Segli la promozione più adatta a te !</h1>
         </div>
 
-        <div class="sponsors-card-container d-flex">
+        <div class="sponsors-card-container d-flex mt-2">
             @foreach ($sponsorships as $sponsor)
                 <div class="sponsor-card m-2">
                     <div class="sponsor-image-box d-flex flex-column align-items-center">

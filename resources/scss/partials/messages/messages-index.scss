@@ -1,4 +1,31 @@
 #admin-messages-index {
+    h1.m-text-cursive {
+        position: relative;
+        z-index: 2;
+        &::before {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            left: 0;
+            content: "";
+            display: block;
+            width: 34%;
+            height: 0.5px;
+            background-color: black;
+        }
+        &::after {
+            z-index: 1;
+            position: absolute;
+            top: 58%;
+            right: 0;
+            content: "";
+            display: block;
+            width: 34%;
+            height: 0.5px;
+            background-color: black;
+        }
+    }
+
     & div.message_list_title {
         & h2 {
             font-size: 25px;
