@@ -1,4 +1,11 @@
-// 320 500 667 768 992 1200 1400
+.main-dashboard-header, #dashboard-columns {
+    @media screen and (max-width: 992px) {
+        .container {
+            max-width: 100%;
+        }
+    }
+}
+
 .main-dashboard-header {
     @media screen and (max-width: 768px) {
         .button-small-profile {
@@ -38,6 +45,13 @@
             }
             .tab-name {
                 display: none;
+            }
+        }
+    }
+    @media screen and (max-width: 576px) {
+        .left-column {
+            ul li {
+                border-radius: 50%;
             }
         }
     }
