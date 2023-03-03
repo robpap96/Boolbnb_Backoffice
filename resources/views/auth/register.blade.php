@@ -12,10 +12,10 @@
                 </small>
 
                 {{-- Form login --}}
-                <form method="POST" action="{{ route('register') }}" class="row">
+                <form method="POST" action="{{ route('register') }}" class="row flex-columns">
                     @csrf
                     
-                    <div class="col-6 pe-4 d-flex flex-column justify-content-around" style="border-right: 1.5px solid rgba(0, 0, 0, 0.08); min-height: 270px">
+                    <div class="col-sm-6 col-12 pe-sm--4 d-flex flex-column justify-content-around border-right">
                         <div class="form-floating">
                             <input id="name" type="text" class="bg-light border-white ps-3 rounded-pill form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="given-name" autofocus placeholder="Nome">
                             <label for="floatingInput" class="ms-1">Nome</label>
@@ -46,7 +46,7 @@
                         </div>
                     </div>
 
-                    <div class="col-6 ps-4 d-flex flex-column justify-content-around" style="border-left: 1.5px solid rgba(0, 0, 0, 0.08); min-height: 270px">
+                    <div class="col-sm-6 col-12 ps-sm-4 d-flex flex-column justify-content-around border-left">
                         <div class="form-floating">
                             <input id="email" type="email" class="bg-light border-white ps-3 rounded-pill form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="E-mail*">
                             <label for="floatingInput" class="ms-1">Indirizzo E-mail</label>

@@ -1,0 +1,22 @@
+.border-right{
+    border-right: 1.5px solid rgba(0, 0, 0, 0.08);
+    min-height: 270px;
+}
+
+.border-left{
+    border-left: 1.5px solid rgba(0, 0, 0, 0.08);
+    min-height: 270px;
+}
+
+// RESPONSIVE
+
+@media screen and (max-width: 575px){
+    .border-right{
+        border-right: none !important;
+        min-height: none !important;
+    }
+    .border-left{
+        border-left: none !important;
+        min-height: none !important;
+    }
+}

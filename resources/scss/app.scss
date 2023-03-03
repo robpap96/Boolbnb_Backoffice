@@ -10,8 +10,11 @@
     font-family: 'Dancing Script', cursive !important;
 }
 
+
+
 @import "~bootstrap/scss/bootstrap";
 @import "./partials/layouts/dashboard-columns.scss";
+@import "./partials/auth/register.scss";
 @import "./partials/apartments/apartments-index.scss";
 @import "./partials/apartments/apartments-show.scss";
 @import "./partials/sponsors/sponsors-index.scss";
