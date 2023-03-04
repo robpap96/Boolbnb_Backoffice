@@ -12,7 +12,7 @@
                 <div class="card-title">
                     <div class="apartment-title pb-3 d-flex flex-wrap justify-content-between align-items-center">
                         <h3 class="col-10 mb-0 m-text-cursive">{{ $apartment->title }}</h3>
-                        {{-- Sponsorizzazione --}}
+                        {{-- stampare il tipo di Sponsorizzazione attivo --}}
                         @php
                             $all_sponsors = $apartment->sponsorships->toArray();
                             $sponsor_name = [];
@@ -45,7 +45,8 @@
                                 } else if( in_array('Silver', $sponsor_name) ) {
                                     echo "
                                         <div class='sponsor-badge-icon d-flex align-items-center text-secondary'>
-                                            <i class='fa-solid fa-medal me-1'></i> SILVER
+                                            <div><i class='fa-solid fa-medal me-1'></i> SILVER</div>
+                                            <span class='ms-2'>$last_active_sponsor</span>
                                         </div>
                                     ";
                                 }

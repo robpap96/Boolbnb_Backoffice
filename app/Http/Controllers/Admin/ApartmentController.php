@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
@@ -104,7 +105,25 @@ class ApartmentController extends Controller
         $apartments = Apartment::where('user_id', Auth::user()->id)->get();
 
         if( $apartment->user_id === Auth::user()->id ){
-            return view('admin.apartments.show', compact('apartment', 'apartments'));
+
+            // Check if showed apartment is sponsored
+            if( !$apartment->sponsorships->isEmpty() ) {
+                // Get all sponsors from apartment in array
+                $apartment_sponsors = $apartment['sponsorships']->toArray();
+
+                // Get the last sponsor date time
+                $last_sponsor = end($apartment_sponsors);
+                $last_sponsor_end = $last_sponsor['pivot']['sponsor_end'];
+            
+                // Check if last sponsor end is passed
+                $is_passed = Carbon::createFromFormat('Y-m-d H:i:s', $last_sponsor_end)->isPast();
+                
+                if( !$is_passed ) {
+                    $last_active_sponsor = $last_sponsor_end;
+                }
+            }
+
+            return view('admin.apartments.show', compact('apartment', 'last_active_sponsor', 'apartments'));
         } else {
             return redirect()->route('admin.apartments.index')->with('invalid_op', 'Invalid operation.');
         }
