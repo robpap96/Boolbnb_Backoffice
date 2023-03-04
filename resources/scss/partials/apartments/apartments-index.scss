@@ -17,7 +17,7 @@
 
     & .card-container {
         // width: 20.625rem;
-        width: calc(100% / 2 - 60px);
+        width: calc(100% - 60px);
         margin: 20px 30px 0px 30px;
         & .image-container {
             position: relative;
@@ -29,10 +29,12 @@
                 border-radius: .9375rem;
                 width: 406.44px;
                 height: 16.25rem;
+                max-width: 100%;
             }
         }
         & .apartment__actions {
-            width: 100%;
+            width: calc(100% - 60px);
+            max-width: 100%;
             border-radius: .625rem;
             background-color: #ff5a5f;
             & div.edit-button {
