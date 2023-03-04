@@ -80,9 +80,31 @@ class ApartmentSeeder extends Seeder
             'https://st3.depositphotos.com/1041088/15491/i/1600/depositphotos_154911518-stock-photo-nice-craftsman-home-exterior-on.jpg',
             'https://st.depositphotos.com/1041088/5032/i/950/depositphotos_50323051-stock-photo-light-green-house-exterior-with.jpg',
             // 50
+            'https://st2.depositphotos.com/17484154/45589/i/450/depositphotos_455897316-stock-photo-two-storied-villa-green-trees.jpg',
+            'https://st2.depositphotos.com/1247468/6412/i/450/depositphotos_64122055-stock-photo-small-cottage.jpg',
+            'https://st3.depositphotos.com/4933223/18835/i/450/depositphotos_188354816-stock-photo-expensive-modern-house-huge-windows.jpg',
+            'https://st3.depositphotos.com/4933223/16485/i/450/depositphotos_164854746-stock-photo-expensive-modern-townhouses-with-huge.jpg',
+            'https://st3.depositphotos.com/4933223/18481/i/450/depositphotos_184817886-stock-photo-expensive-old-house-huge-windows.jpg',
+            'https://static9.depositphotos.com/1004757/1193/i/450/depositphotos_11935829-stock-photo-australian-house.jpg',
+            'https://static8.depositphotos.com/1392258/865/i/450/depositphotos_8657675-stock-photo-foyer-with-curved-staircase.jpg',
+            'https://static4.depositphotos.com/1008216/347/i/450/depositphotos_3473001-stock-photo-living-a-room-with-a.jpg', 
+            'https://st.depositphotos.com/1010710/3400/i/450/depositphotos_34008939-stock-photo-house-exterior-with-sunloungers-on.jpg',
+            'https://static7.depositphotos.com/1086013/753/i/450/depositphotos_7536759-stock-photo-kitchen-and-dining-area.jpg',
+            // 60
+            'https://st.depositphotos.com/1041088/1812/i/450/depositphotos_18123219-stock-photo-luxury-living-room-with-stobe.jpg',
+            'https://static8.depositphotos.com/1009647/905/i/450/depositphotos_9052175-stock-photo-living-room.jpg',
+            'https://static8.depositphotos.com/1392258/867/i/450/depositphotos_8670099-stock-photo-kitchen-with-large-island.jpg',
+            'https://static9.depositphotos.com/1041088/1091/i/450/depositphotos_10919657-stock-photo-luxury-kitchen-interior-with-green.jpg',
+            'https://static4.depositphotos.com/1007602/351/i/450/depositphotos_3515902-stock-photo-modern-apartment-interior-3d.jpg',
+            'https://st3.depositphotos.com/2018053/15820/i/450/depositphotos_158201450-stock-photo-furnish-living-room-with-beautiful.jpg',
+            'https://st3.depositphotos.com/2249091/31839/i/450/depositphotos_318393642-stock-photo-stylish-copper-colored-coffee-table.jpg',
+            'https://st2.depositphotos.com/1041088/5519/i/450/depositphotos_55195603-stock-photo-luxury-house-with-open-floor.jpg', 
+            'https://st2.depositphotos.com/1370441/5379/i/450/depositphotos_53796061-stock-photo-kitchen-in-modern-home.jpg',
+            'https://st.depositphotos.com/1749882/2345/i/450/depositphotos_23453056-stock-photo-blue-sofa-with-colorful-pillows.jpg',
+            // 70
         ];
 
-        for ($i=0; $i < 50; $i++) {
+        for ($i=0; $i < 70; $i++) {
             $new_apartment = new Apartment();
             $random_user = User::inRandomOrder()->first();
             $new_apartment->user_id = $random_user->id;
