@@ -89,7 +89,7 @@
                     {{-- Address --}}
                     <div class="col-6 detail-address">
                         <h6 class="field p-1 text-center text-white">Indirizzo</h6>
-                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-center align-items-center">
+                        <div class="bg-light details-body h-100 p-2 d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-map-pin fa-lg fa-fw"></i>
                             <h6 class="mb-0 d-inline-block ms-1"> {{ $apartment->full_address }}</h6>
                         </div>
@@ -98,10 +98,11 @@
                     <div class="col-6 detail-panoramic">
                         <h6 class="field p-1 text-center text-white">Dettagli appartamento</h6>
                         <div class="bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
-                            <div class="rooms me-lg-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></div>
-                            <div class="beds me-lg-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></div>
-                            <div class="baths me-lg-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></div>
-                            <div class="mq me-lg-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></div>   
+                            <div class="rooms">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></div>
+                            <div class="beds">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></div>
+                            <div class="baths">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></div>
+                            <div class="mq">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></div>   
+                            <div class="price">{{ $apartment->price }} <i class="fa-solid fa-euro-sign"></i></div>   
                         </div>
                     </div>
                 </div>

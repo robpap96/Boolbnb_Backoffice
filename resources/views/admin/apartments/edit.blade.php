@@ -99,25 +99,27 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                @foreach ($services as $service)
-                    <div class="service-container form-check form-check-inline  m-0 me-4 mb-3 p-0">
-                        @if ( $errors->any() )
-                            <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : null }}>
-                        @else
-                            <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : null }}>
-                        @endif
-                        <label class="text-muted service-box form-check-label d-flex flex-column align-items-center 
+                <div class="d-flex flex-wrap justify-content-start">
+                    @foreach ($services as $service)
+                        <div class="service-container form-check form-check-inline p-0 mx-2 mb-3">
                             @if ( $errors->any() )
-                                {{ in_array($service->id, old('services', [])) ? 'service-clicked' : null }}
-                            @else 
-                                {{ $apartment->services->contains($service->id) ? 'service-clicked' : null }}
-                            @endif" 
-                        for="service-{{ $service->name }}">
-                            {!! $service->icon !!}
-                            {{ $service->name }}
-                        </label>
-                    </div>
-                @endforeach
+                                <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : null }}>
+                            @else
+                                <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : null }}>
+                            @endif
+                            <label class="text-muted service-box form-check-label d-flex flex-column align-items-center 
+                                @if ( $errors->any() )
+                                    {{ in_array($service->id, old('services', [])) ? 'service-clicked' : null }}
+                                @else 
+                                    {{ $apartment->services->contains($service->id) ? 'service-clicked' : null }}
+                                @endif" 
+                            for="service-{{ $service->name }}">
+                                {!! $service->icon !!}
+                                {{ $service->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
                 <script>
                     const serviceBox = document.querySelectorAll('.service-box');
                     serviceBox.forEach(elm => {
