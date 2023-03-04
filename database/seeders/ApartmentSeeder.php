@@ -70,6 +70,16 @@ class ApartmentSeeder extends Seeder
             'https://st.depositphotos.com/1041088/2033/i/950/depositphotos_20330761-stock-photo-large-farm-country-house-with.jpg',
             // 40
             'https://static7.depositphotos.com/1041088/774/i/950/depositphotos_7743917-stock-photo-covered-front-porch-of-the.jpg',
+            'https://st.depositphotos.com/1041088/4081/i/950/depositphotos_40812493-stock-photo-big-house-with-beautiful-curb.jpg ',
+            'https://st.depositphotos.com/1041088/4500/i/950/depositphotos_45003645-stock-photo-house-exterior-view-of-entrance.jpg',
+            'https://st.depositphotos.com/1041088/4123/i/950/depositphotos_41234039-stock-photo-curb-appeal-idea.jpg',
+            'https://st.depositphotos.com/1041088/3974/i/950/depositphotos_39740939-stock-photo-two-story-american-house-with.jpg',
+            'https://st2.depositphotos.com/1041088/7905/i/950/depositphotos_79056084-stock-photo-elegant-entrance-to-large-american.jpg',
+            'https://st2.depositphotos.com/1041088/12181/i/950/depositphotos_121814166-stock-photo-small-craftsman-one-story-exterior.jpg',
+            'https://st2.depositphotos.com/1041088/5430/i/950/depositphotos_54307919-stock-photo-house-exterior-with-large-window.jpg',
+            'https://st3.depositphotos.com/1041088/15491/i/1600/depositphotos_154911518-stock-photo-nice-craftsman-home-exterior-on.jpg',
+            'https://st.depositphotos.com/1041088/5032/i/950/depositphotos_50323051-stock-photo-light-green-house-exterior-with.jpg',
+            // 50
         ];
 
         for ($i=0; $i < 31; $i++) {
