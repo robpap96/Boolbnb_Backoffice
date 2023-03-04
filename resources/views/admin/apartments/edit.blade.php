@@ -100,15 +100,36 @@
                     @enderror
                 </div>
                 @foreach ($services as $service)
-                    <div class="form-check form-check-inline">
+                    <div class="service-container form-check form-check-inline  m-0 me-4 mb-3 p-0">
                         @if ( $errors->any() )
                             <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : null }}>
                         @else
                             <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ $apartment->services->contains($service->id) ? 'checked' : null }}>
                         @endif
-                        <label class="form-check-label" for="service-{{ $service->name }}">{{ $service->name }}</label>
+                        <label class="text-muted service-box form-check-label d-flex flex-column align-items-center 
+                            @if ( $errors->any() )
+                                {{ in_array($service->id, old('services', [])) ? 'service-clicked' : null }}
+                            @else 
+                                {{ $apartment->services->contains($service->id) ? 'service-clicked' : null }}
+                            @endif" 
+                        for="service-{{ $service->name }}">
+                            {!! $service->icon !!}
+                            {{ $service->name }}
+                        </label>
                     </div>
                 @endforeach
+                <script>
+                    const serviceBox = document.querySelectorAll('.service-box');
+                    serviceBox.forEach(elm => {
+                        elm.addEventListener('click', function() {
+                            if ( elm.classList.contains('service-clicked') ) {
+                                elm.classList.remove('service-clicked');
+                            } else {
+                                elm.classList.add('service-clicked');
+                            }
+                        })
+                    });
+                </script>
             </div>
 
             {{-- Descrizione appartamento --}}
