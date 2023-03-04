@@ -84,26 +84,43 @@
             {{-- Prezzo a notte --}}
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo a notte*</label>
-                <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Prezzo" min="1" max="10000" step=".01" required>
+                <input type="number" id="price" name="price" class="form-control @error('price') is-invalid @enderror" value="{{ old('price') }}" placeholder="Prezzo" min="1" max="10000" step=".01">
                 @error('price')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
 
             {{-- Checkboxes with services --}}
-            <div class="my-3 ">
+            <div class="my-3">
                 <div>
                     <label class="form-label">Lista servizi:</label>
                     @error('services')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                @foreach ($services as $service)
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : null }}>
-                        <label class="form-check-label" for="service-{{ $service->name }}">{{ $service->name }}</label>
-                    </div>
-                @endforeach
+                <div class="d-flex flex-wrap justify-content-start">
+                    @foreach ($services as $service)
+                        <div class="service-container form-check form-check-inline p-0 mx-2 mb-3">
+                            <input class="form-check-input" type="checkbox" id="service-{{ $service->name }}" name="services[]" value="{{ $service->id }}" {{ in_array($service->id, old('services', [])) ? 'checked' : null }}>
+                            <label class="text-muted service-box form-check-label d-flex flex-column align-items-center {{ in_array($service->id, old('services', [])) ? 'service-clicked' : null }}" for="service-{{ $service->name }}">
+                                {!! $service->icon !!}
+                                {{ $service->name }}
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+                <script>
+                    const serviceBox = document.querySelectorAll('.service-box');
+                    serviceBox.forEach(elm => {
+                        elm.addEventListener('click', function() {
+                            if ( elm.classList.contains('service-clicked') ) {
+                                elm.classList.remove('service-clicked');
+                            } else {
+                                elm.classList.add('service-clicked');
+                            }
+                        })
+                    });
+                </script>
             </div>
 
             {{-- Descrizione appartamento --}}

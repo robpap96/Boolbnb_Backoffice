@@ -10,7 +10,7 @@
         <div class="container p-0">
             <div class="card p-4">
                 <div class="card-title">
-                    <div class="apartment-title pb-3 d-flex justify-content-between align-items-center">
+                    <div class="apartment-title pb-3 d-flex flex-wrap justify-content-between align-items-center">
                         <h3 class="col-10 mb-0 m-text-cursive">{{ $apartment->title }}</h3>
                         {{-- Sponsorizzazione --}}
                         @php
@@ -32,19 +32,19 @@
                     
                                 if ( in_array('Platinum', $sponsor_name) ) {
                                     echo "
-                                        <div class='sponsor-badge-icon' style='color: rgb(229, 228, 226)'>
+                                        <div class='sponsor-badge-icon d-flex align-items-center' style='color: rgb(229, 228, 226)'>
                                             <i class='fa-solid fa-gem me-1'></i> PLATINUM
                                         </div>
                                     ";
                                 } else if ( in_array('Gold', $sponsor_name) ) {
                                     echo "
-                                        <div class='sponsor-badge-icon' style='color: #FFD700'>
+                                        <div class='sponsor-badge-icon d-flex align-items-center' style='color: #FFD700'>
                                             <i class='fa-solid fa-crown me-1'></i> GOLD
                                         </div>
                                     ";
                                 } else if( in_array('Silver', $sponsor_name) ) {
                                     echo "
-                                        <div class='sponsor-badge-icon text-secondary'>
+                                        <div class='sponsor-badge-icon d-flex align-items-center text-secondary'>
                                             <i class='fa-solid fa-medal me-1'></i> SILVER
                                         </div>
                                     ";
@@ -67,15 +67,16 @@
                     </div>
                 </div>
 
+                {{-- Statistiche --}}
                 <div class="apartment-details mt-4 mb-4 row">
                     <div>
                         <h6 class="field p-1 text-center text-white">Statistiche</h6>
-                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
-                            <div>
+                        <div class="statistics bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
+                            <div class="received-messages">
                                 Messaggi ricevuti: 
                                 <span class="fw-bold">{{ count($apartment->messages) }}</span>
                             </div>
-                            <div>
+                            <div class="views">
                                 Visualizzazioni appartamento:
                                 <span class="fw-bold">0</span>
                             </div>
@@ -83,21 +84,25 @@
                     </div>
                 </div>
 
+                {{-- Dettagli appartamento --}}
                 <div class="apartment-details mt-4 mb-5 row">
-                    <div class="col-6">
+                    {{-- Address --}}
+                    <div class="col-6 detail-address">
                         <h6 class="field p-1 text-center text-white">Indirizzo</h6>
-                        <div class="bg-light details-body h-100 p-1 d-flex justify-content-center align-items-center">
+                        <div class="bg-light details-body h-100 p-2 d-flex justify-content-center align-items-center">
                             <i class="fa-solid fa-map-pin fa-lg fa-fw"></i>
                             <h6 class="mb-0 d-inline-block ms-1"> {{ $apartment->full_address }}</h6>
                         </div>
                     </div>
-                    <div class="col-6">
+                    {{-- Caratteristiche --}}
+                    <div class="col-6 detail-panoramic">
                         <h6 class="field p-1 text-center text-white">Dettagli appartamento</h6>
                         <div class="bg-light details-body h-100 p-1 d-flex justify-content-around align-items-center">
-                            <div class="me-3">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></div>
-                            <div class="me-3">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></div>
-                            <div class="me-3">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></div>
-                            <div class="me-3">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></div>   
+                            <div class="rooms">{{ $apartment->rooms_num }} <i class="fa-solid fa-house fa-lg fa-fw"></i></div>
+                            <div class="beds">{{ $apartment->beds_num }} <i class="fa-solid fa-bed fa-lg fa-fw"></i></div>
+                            <div class="baths">{{ $apartment->baths_num }} <i class="fa-solid fa-shower fa-lg fa-fw"></i></div>
+                            <div class="mq">{{ $apartment->mq }}mq <i class="fa-solid fa-ruler-combined fa-lg fa-fw"></i></div>   
+                            <div class="price">{{ $apartment->price }} <i class="fa-solid fa-euro-sign"></i></div>   
                         </div>
                     </div>
                 </div>
@@ -128,7 +133,7 @@
                 </div>
                 
                 {{-- bottoni --}}
-                <div class="d-flex">
+                <div class="button-group-actions d-flex">
                     <a class="btn btn-primary me-2" href="{{route ('admin.apartments.index') }}">Indietro</a>
                     <a class="btn btn-secondary me-2" href="{{route ('admin.apartments.edit', $apartment) }}">Modifica</a>
                     <a class="btn btn-success me-2" href="{{route ('admin.sponsors.index', $apartment) }}">Dai visibilità al tuo contenuto</a>

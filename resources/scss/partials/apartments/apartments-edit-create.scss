@@ -1,0 +1,23 @@
+#admin-apartments-create, #admin-apartments-edit{
+    .service-container {
+        & input {
+            display: none !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            left: -100px;
+        }
+        .service-box {
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            &:hover {
+                border-color: rgba(0,0,0,0.18);
+                color: black !important;
+            }
+        }
+    }
+
+    .service-clicked {
+        color: black !important;
+        border-color: black !important;
+    }
+}
