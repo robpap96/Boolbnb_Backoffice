@@ -65,3 +65,87 @@
         }
     }
 }
+
+#admin-apartments-show {
+    @media screen and (max-width: 681px) {
+        & .apartment-details {
+            .detail-address, .detail-panoramic {
+                width: 100% !important;
+            }
+            .detail-address {
+                margin-bottom: 1.5rem;
+            }
+            .detail-panoramic {
+                margin-top: 1.5rem;
+            }
+        }
+    }
+    @media screen and (max-width: 662px) {
+        & .apartment-title h3 {
+            width: 100% !important;
+            text-align: center !important;
+        }
+        & .card-title{
+            & .sponsor-badge-icon{
+                margin: 10px auto !important;
+            }
+        }
+    }
+    @media screen and (max-width: 630px) {
+        & .apartment-details {
+            & .service-box {
+                width: calc(100% / 3);
+            }
+        }
+    }
+    @media screen and (max-width: 590px) {
+        & .apartment-details {
+            .statistics {
+                flex-direction: column !important;
+            }
+        }
+    }
+    @media screen and (max-width: 560px) {
+        & .button-group-actions{
+            flex-wrap: wrap;
+            & a.btn {
+                margin-bottom: 15px !important;
+            }
+        }
+    }
+    @media screen and (max-width: 507px) {
+        & .apartment-details {
+            & .service-box {
+                width: calc(100% / 2);
+            }
+        }
+    }
+    @media screen and (max-width: 440px) {
+        & .apartment-details {
+            & .service-box {
+                width: calc(100%);
+            }
+        }
+    }
+    @media screen and (max-width: 401px) {
+        & .apartment-title h3 {
+            font-size: 30px !important;
+        }
+    }
+    @media screen and (max-width: 382px) {
+        & .apartment-details {
+            .statistics {
+                font-size: 13px;
+            }
+        }
+    }
+    @media screen and (max-width: 312px) {
+        & .apartment-details {
+            .statistics {
+                .received-messages, .views {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
