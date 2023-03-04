@@ -34,24 +34,31 @@
                                     echo "
                                         <div class='sponsor-badge-icon d-flex align-items-center' style='color: rgb(229, 228, 226)'>
                                             <i class='fa-solid fa-gem me-1'></i> PLATINUM
+                                            <span class='d-none last-active-sponsor'>$last_active_sponsor</span>
                                         </div>
                                     ";
                                 } else if ( in_array('Gold', $sponsor_name) ) {
                                     echo "
                                         <div class='sponsor-badge-icon d-flex align-items-center' style='color: #FFD700'>
                                             <i class='fa-solid fa-crown me-1'></i> GOLD
+                                            <span class='d-none last-active-sponsor'>$last_active_sponsor</span>
                                         </div>
                                     ";
                                 } else if( in_array('Silver', $sponsor_name) ) {
                                     echo "
                                         <div class='sponsor-badge-icon d-flex align-items-center text-secondary'>
                                             <div><i class='fa-solid fa-medal me-1'></i> SILVER</div>
-                                            <span class='ms-2'>$last_active_sponsor</span>
+                                            <span class='d-none last-active-sponsor'>$last_active_sponsor</span>
                                         </div>
                                     ";
                                 }
                             }
                         @endphp
+
+                        <script>
+                            const lastActiveSponsor = document.querySelector('.last-active-sponsor');
+                            console.log(lastActiveSponsor.innerHTML)
+                        </script>
                     </div>
                 </div>    
                 <div class="row">
