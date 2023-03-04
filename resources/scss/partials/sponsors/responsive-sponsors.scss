@@ -124,3 +124,124 @@
         }
     }
 }
+
+.sponsor-container.show{
+    @media screen and (max-width: 1400px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 28%;
+            }
+            &::after {
+                width: 28%;
+            }
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 26%;
+            }
+            &::after {
+                width: 26%;
+            }
+        }
+    }
+    @media screen and (max-width: 991px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 32%;
+            }
+            &::after {
+                width: 32%;
+            }
+        }
+    }
+    @media screen and (max-width: 800px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 30%;
+            }
+            &::after {
+                width: 30%;
+            }
+        }
+    }
+    @media screen and (max-width: 675px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 28%;
+            }
+            &::after {
+                width: 28%;
+            }
+        }
+    }
+    @media screen and (max-width: 600px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 26%;
+            }
+            &::after {
+                width: 26%;
+            }
+        }
+    }
+    @media screen and (max-width: 540px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 22%;
+            }
+            &::after {
+                width: 22%;
+            }
+        }
+    }
+    @media screen and (max-width: 470px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 18%;
+            }
+            &::after {
+                width: 18%;
+            }
+        }
+    }
+    @media screen and (max-width: 400px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 14%;
+            }
+            &::after {
+                width: 14%;
+            }
+        }
+    }
+    @media screen and (max-width: 350px) {
+        h1.m-text-cursive {
+            &::before , &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.cardinfo-wrapper{
+    @media screen and (max-width: 470px) {
+        flex-direction: column;
+    }
+}
+
+#button-pay{
+    @media screen and (max-width: 470px) {
+        font-size: 12px !important;
+        padding: 0 8px !important;
+    }
+
+}
+
+#card-image{
+    @media screen and (max-width: 360px) {
+        display: none !important;
+    }
+
+}

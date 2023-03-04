@@ -35,6 +35,10 @@
     }
 }
 
+select{
+  word-wrap: break-word;
+}
+
 .sponsor-image-box {
     & .Silver {
         color: #c0c0c0;
@@ -136,8 +140,12 @@ body {
 
 // Form wrapper styling 
 #my-sample-form {
-  background-color: #ff5a5f;
-  border-radius: 20px;
+  background-image: url('https://c4.wallpaperflare.com/wallpaper/829/442/461/interior-the-maldives-pool-the-hotel-wallpaper-preview.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  // background-color: #ff5a5f;
+  border-radius: 10px;
   color: white !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
   padding: 2em 3em 2em;
@@ -160,17 +168,20 @@ body {
   &.visa {
     @extend .card-shape;
     color: $white;
+    background-image: none;
     background-color: #0D4AA2;
   }
   &.master-card {
     @extend .card-shape;
     color: $white;
+    background-image: none;
     background-color: #363636;
     background: linear-gradient(115deg,#d82332, #d82332 50%, #f1ad3d 50%, #f1ad3d);
   }
   &.maestro {
     @extend .card-shape;
     color: $white;
+    background-image: none;
     background-color: #363636;
     background: linear-gradient(115deg,#009ddd, #009ddd 50%, #ed1c2e 50%, #ed1c2e);
   }
@@ -178,15 +189,18 @@ body {
     @extend .card-shape;
     color: $white;
     background-color: #007CC3;
+    background-image: none;
   }
   &.discover {
     @extend .card-shape;
     color: $white;
     background-color: #ff6000;
     background: linear-gradient(#d14310, #f7961e);
+    background-image: none;
   }
   &.unionpay, &.jcb, &.diners-club {
     @extend .card-shape;
+    background-image: none;
     color: $white;
     background-color: #363636;
   }
@@ -209,23 +223,23 @@ body {
 }
 
 #button-pay {
-  cursor: pointer;
-  width: 16em;
-  font-size: 15px;
-  border: 0;
-  padding: 1em 0.8em;
-  color: #fff;
-  background: #282c37;
-  border-radius: $radius;
-  z-index: 0;
-  transform: translateY(-100px);
-  transition: all 500ms $bouncy;
-  opacity: 0;
-  -webkit-appearance: none;
+  width: 50%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+  border: none;
+  transition: 0.5s;
+  background-size: 200% auto;
+  // transform: translateY(-100px);
+  
   
   &:hover {
-    background: lime;
-    color: #282c37;
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
   }
   &:active {
     animation: cardIntro 200ms $bouncy;

@@ -13,7 +13,7 @@
             </div>
 
             <form id="sponsors-buy-form" action="{{ route('admin.sponsors.buy', $sponsor->name) }}">
-                <select name="apartment_sponsored" id="" class="form-select">
+                <select name="apartment_sponsored" id="" class="form-select" aria-label="">
                     <option value="" selected hidden>Scegliere un appartamento da sponsorizzare</option>
                     @if ( $apartments->isEmpty() )
                         <option value="no_apartments" disabled>Pare che tu non abbia ancora creato un appartamento. Creane subito uno!</option>
@@ -41,6 +41,7 @@
         <div class="payments"> 
             <div class="form-container m-2">
                 <form id="my-sample-form" class="scale-down">
+                    <h2 class="text-center mb-4">Dettagli Pagamento</h2>
                     <div class="cardinfo-card-number">
                         <label class="cardinfo-label" for="card-number">Numero identificativo carta</label>
                         <div class='input-wrapper' id="card-number"></div>
@@ -60,7 +61,7 @@
                     </div>
                 </form>
                 
-                <input id="button-pay" type="submit" value="Acquista per {{$sponsor->price}} €" />
+                <input id="button-pay" class="btn btn-primary mb-3" type="submit" value="Acquista per {{$sponsor->price}} €" />
             </div>
         </div>
 
