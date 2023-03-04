@@ -1,0 +1,126 @@
+// title responsive
+.sponsor-container {
+    @media screen and (max-width: 1400px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 15%;
+            }
+            &::after {
+                width: 15%;
+            }
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 10%;
+            }
+            &::after {
+                width: 10%;
+            }
+        }
+    }
+    @media screen and (max-width: 992px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 22%;
+            }
+            &::after {
+                width: 22%;
+            }
+        }
+    }
+    @media screen and (max-width: 900px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 19%;
+            }
+            &::after {
+                width: 19%;
+            }
+        }
+    }
+    @media screen and (max-width: 785px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 15%;
+            }
+            &::after {
+                width: 15%;
+            }
+        }
+    }
+    @media screen and (max-width: 675px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 12%;
+            }
+            &::after {
+                width: 12%;
+            }
+        }
+    }
+    @media screen and (max-width: 608px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 10%;
+            }
+            &::after {
+                width: 10%;
+            }
+        }
+    }
+    @media screen and (max-width: 608px) {
+        h1.m-text-cursive {
+            &::before {
+                width: 7%;
+            }
+            &::after {
+                width: 7%;
+            }
+        }
+    }
+    @media screen and (max-width: 547px) {
+        h1.m-text-cursive {
+            &::before , &::after {
+                display: none;
+            }
+        }
+    }
+}
+
+.sponsor-container {
+    @media screen and (max-width: 768px) {
+        & .sponsors-how {
+            & img {
+                max-width: 150px;
+                margin-top: 1rem;
+            }
+        }
+    }
+    @media screen and (max-width: 648px) {
+        & .sponsors-card-container {
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: space-around;
+            & .sponsor-card {
+                margin: 0 !important;
+                margin-bottom: 15px !important;
+                width: calc(100% / 2 - 15px) !important;
+                &:nth-child(even){
+                    margin-right: 15px;
+                }
+                &:nth-child(odd){
+                    margin-left: 15px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 470px) {
+        & .sponsors-card-container {
+            & .sponsor-card {
+                width: 100% !important;
+            }
+        }
+    }
+}
