@@ -27,7 +27,7 @@
             <div class="tab-content" id="nav-tabContent">
                 {{-- Appartamenti visibili tab --}}
                 <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
-                    <div class="tab-pane-content d-flex flex-wrap pb-4 pt-2">
+                    <div class="tab-pan-content d-flex flex-wrap pb-4 pt-2">
                         @php( $visible_apartments = [] )
                         <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn-md" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="btn d-none text-decoration-none">
                             Crea appartmento <i class="fa-solid fa-plus"></i>

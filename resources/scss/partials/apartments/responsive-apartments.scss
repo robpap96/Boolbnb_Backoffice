@@ -6,8 +6,33 @@
             }
         }
     }
+    @media screen and (max-width: 1200px) {
+        & #nav-visible, & #nav-hidden {
+            & .apartment__actions {
+                & .action-name {
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 992px) {
+        & #nav-visible, & #nav-hidden {
+            & .apartment__actions {
+                & .action-name {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
     @media screen and (max-width: 769px) {
-        & .tab-pane-content {
+        & #nav-visible, & #nav-hidden {
+            & .apartment__actions {
+                & .action-name {
+                    font-size: 12px;
+                }
+            }
+        }
+        & .tab-pan-content {
             padding-top: 45px !important;
         }
         & #add-apartment-btn-md {
@@ -18,8 +43,24 @@
     }
     @media screen and (max-width: 720px) {
         & #nav-visible, & #nav-hidden {
+            & .apartment__actions {
+                & .action-name {
+                    font-size: 16px;
+                }
+            }
+        }
+        & #nav-visible, & #nav-hidden {
             & .card-container {
                 width: calc(100%);
+            }
+        }
+    }
+    @media screen and (max-width: 384px) {
+        & #nav-visible, & #nav-hidden {
+            & .apartment__actions {
+                & .action-name {
+                    display: none;
+                }
             }
         }
     }

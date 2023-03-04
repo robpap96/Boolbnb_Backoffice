@@ -47,15 +47,20 @@
     <div class="apartment__actions d-flex">
         <div class="col-4">
             <a class="d-block py-2 text-center" href="{{ route('admin.apartments.show', $apartment->slug) }}">
-            <i class="fa-solid fa-circle-info"></i> Info</a>
+                <i class="fa-solid fa-circle-info"></i> 
+                <span class="action-name">Info</span>
+            </a>
         </div>
         <div class="edit-button col-4 text-center">
             <a class="d-block py-2" href="{{ route('admin.apartments.edit', $apartment->slug) }}">
-            <i class="fa-solid fa-wand-magic-sparkles"></i> Modifica</a>
+                <i class="fa-solid fa-wand-magic-sparkles"></i> 
+                <span class="action-name">Modifica</span>
+            </a>
         </div>
         <!-- Button trigger modal -->
         <div type="div" class="col-4 py-2 text-white text-center" data-bs-toggle="modal" data-bs-target="#modal{{ $apartment->id }}" style="cursor:pointer">
-            <i class="fa-solid fa-trash-can"></i> Elimina
+            <i class="fa-solid fa-trash-can"></i> 
+            <span class="action-name">Elimina</span>
         </div>
         
         <!-- Modal -->
