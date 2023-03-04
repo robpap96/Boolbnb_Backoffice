@@ -82,7 +82,7 @@ class ApartmentSeeder extends Seeder
             // 50
         ];
 
-        for ($i=0; $i < 31; $i++) {
+        for ($i=0; $i < 50; $i++) {
             $new_apartment = new Apartment();
             $random_user = User::inRandomOrder()->first();
             $new_apartment->user_id = $random_user->id;
