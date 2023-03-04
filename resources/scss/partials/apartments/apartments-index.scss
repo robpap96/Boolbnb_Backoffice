@@ -3,6 +3,7 @@
         font-weight: bold;
     }
     & div.tab-content {
+        position: relative;
         & #nav-visible {
             border-left: .0625rem solid #dee2e6;
             border-right: .0625rem solid #dee2e6;
@@ -13,10 +14,14 @@
             border-right: .0625rem solid #dee2e6;
             border-bottom: .0625rem solid #dee2e6;
         }
+        & #add-apartment-btn-md {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
     }
 
     & .card-container {
-        // width: 20.625rem;
         width: calc(100% / 2 - 60px);
         margin: 20px 30px 0px 30px;
         & .image-container {
@@ -26,6 +31,7 @@
             height: 16.25rem;
             position: relative;
             & img{
+                object-fit: cover;
                 border-radius: .9375rem;
                 width: 406.44px;
                 height: 16.25rem;

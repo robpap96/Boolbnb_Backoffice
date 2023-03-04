@@ -1,7 +1,7 @@
 <div class="card-container d-flex flex-column align-items-start">
-    <div class="mt-3 mb-3 image-container">
-        <div class="apartment__image">
-            <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="" alt="">
+    <div class="mt-3 mb-3 image-container w-100">
+        <div class="apartment__image text-center">
+            <img src="{{ str_contains($apartment->image, 'uploads') ? asset("storage/{$apartment->image}") : $apartment->image}}" class="text-center" alt="">
         </div>
 
         @php

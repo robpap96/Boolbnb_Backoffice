@@ -27,13 +27,16 @@
             <div class="tab-content" id="nav-tabContent">
                 {{-- Appartamenti visibili tab --}}
                 <div class="tab-pane fade show active" id="nav-visible" role="tabpanel" aria-labelledby="nav-visible-tab" tabindex="0">
-                    <div class="d-flex flex-wrap pb-4 pt-2">
+                    <div class="tab-pane-content d-flex flex-wrap pb-4 pt-2">
                         @php( $visible_apartments = [] )
+                        <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn-md" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="btn d-none text-decoration-none">
+                            Crea appartmento <i class="fa-solid fa-plus"></i>
+                        </a>
 
                         @foreach ($apartments as $apartment)
                             @if ($apartment->is_visible == true)
                                 @php( $visible_apartments[] = $apartment->id )
-
+                                
                                 {{-- Layouts template HTMl blade --}}
                                 @include('layouts.apartments.index', $apartment)
                             @endif
@@ -49,8 +52,11 @@
 
                 {{-- Appartamenti non visibili tab --}}
                 <div class="tab-pane fade" id="nav-hidden" role="tabpanel" aria-labelledby="nav-hidden-tab" tabindex="0">
-                    <div class="d-flex flex-wrap pb-4 pt-2">
+                    <div class="tab-pan-content d-flex flex-wrap pb-4 pt-2">
                         @php( $hidden_apartments = [] )
+                        <a href="{{ route('admin.apartments.create') }}" id="add-apartment-btn-md" data-toggle="tooltip" title="Aggiungi un nuovo appartamento!" class="btn d-none text-decoration-none">
+                            Crea appartmento <i class="fa-solid fa-plus"></i>
+                        </a>
 
                         @foreach ($apartments as $apartment)
                             @if ($apartment->is_visible == false)

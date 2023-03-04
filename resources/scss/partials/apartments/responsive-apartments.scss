@@ -1,0 +1,26 @@
+#admin-apartments-index {
+    @media screen and (max-width: 1400px) {
+        & #nav-visible, & #nav-hidden {
+            & img {
+                width: 100%;
+            }
+        }
+    }
+    @media screen and (max-width: 769px) {
+        & .tab-pane-content {
+            padding-top: 45px !important;
+        }
+        & #add-apartment-btn-md {
+            background-color: #ff5a5f;
+            color: white;
+            display: block !important;
+        }
+    }
+    @media screen and (max-width: 720px) {
+        & #nav-visible, & #nav-hidden {
+            & .card-container {
+                width: calc(100%);
+            }
+        }
+    }
+}
