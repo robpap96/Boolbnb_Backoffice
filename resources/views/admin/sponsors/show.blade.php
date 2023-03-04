@@ -30,11 +30,13 @@
                 @error('apartment_sponsored')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+                    <button type="submit">invia</button>
             </form>
 
             <div class="mt-3 alert alert-warning">
                 <small><strong>Nota bene:</strong> Gli appartamenti non visibili non potranno essere sponsorizzati.</small>
             </div>
+
         </div>
 
         {{-- Make payment container --}}
