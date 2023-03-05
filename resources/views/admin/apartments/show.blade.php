@@ -54,41 +54,6 @@
                                 }
                             }
                         @endphp
-                        <p id="demo" class="absolute-left"></p>
-                        <script>
-                            const lastActiveSponsor = document.querySelector('.last-active-sponsor');
-                            if ( lastActiveSponsor?.innerHTML) {
-                                // Set the date we're counting down to
-                                var countDownDate = new Date(lastActiveSponsor.innerHTML).getTime();
-
-                                // Update the count down every 1 second
-                                var x = setInterval(function() {
-                                    // Get today's date and time
-                                    var now = new Date().getTime();
-                                        
-                                    // Find the distance between now and the count down date
-                                    var distance = countDownDate - now;
-                                        
-                                    // Time calculations for days, hours, minutes and seconds
-                                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                                        
-                                    // Output the result in an element with id="demo"
-                                    document.getElementById("demo").innerHTML = `<i class="fa-solid fa-hourglass-half"></i> ` + days + " gg - " + hours + " ore - "
-                                    + minutes + " m - " + seconds + " s ";
-                                        
-                                    // If the count down is over, write some text 
-                                    if (distance < 0) {
-                                        clearInterval(x);
-                                        document.getElementById("demo").innerHTML = "Sponsorizzazione terminata";
-                                    }
-                                }, 1000);
-                            } else {
-                                console.log('vuoto')
-                            }
-                        </script>
                     </div>
                 </div>    
                 <div class="row">
@@ -114,13 +79,63 @@
                                 Messaggi ricevuti: 
                                 <span class="fw-bold">{{ count($apartment->messages) }}</span>
                             </div>
-                            {{-- <div class="views">
-                                Visualizzazioni appartamento:
-                                <span class="fw-bold">0</span>
-                            </div> --}}
+                            <div class="d-flex align-items-center">
+                                <span id="timer" class="m-0 ms-2">Nessuna sponsorizzazione attiva.</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    const lastActiveSponsor = document.querySelector('.last-active-sponsor');
+                    const timer = document.getElementById("timer");
+
+                    
+
+                    if ( lastActiveSponsor?.innerHTML) {
+                        timer.innerHTML = `
+                        <span class='me-2'>Sponsor:</span> 
+                        <div class="spinner-grow spinner-grow-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <div class="spinner-grow spinner-grow-sm" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>`;
+
+                        // Set the date we're counting down to
+                        var countDownDate = new Date(lastActiveSponsor.innerHTML).getTime();
+
+                        // Update the count down every 1 second
+                        var x = setInterval(function() {
+                            // Get today's date and time
+                            var now = new Date().getTime();
+                                
+                            // Find the distance between now and the count down date
+                            var distance = countDownDate - now;
+                                
+                            // Time calculations for days, hours, minutes and seconds
+                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                
+                            // Output the result in an element with id="timer"
+                            timer.innerHTML = `<span class='me-2'>Sponsor:</span><i class="fa-solid fa-hourglass-half"></i> ` + days + " gg - " + hours + " ore - "
+                            + minutes + " m - " + seconds + " s ";
+                                
+                            // If the count down is over, write some text 
+                            if (distance < 0) {
+                                clearInterval(x);
+                                timer.innerHTML = "Sponsorizzazione terminata";
+                            }
+                        }, 1000);
+                    } else {
+                        console.log('vuoto')
+                    }
+                </script>
 
                 {{-- Dettagli appartamento --}}
                 <div class="apartment-details mt-4 mb-5 row">
