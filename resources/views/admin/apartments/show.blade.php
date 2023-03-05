@@ -10,7 +10,7 @@
         <div class="container p-0">
             <div class="card p-4">
                 <div class="card-title">
-                    <div class="apartment-title pb-3 d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="apartment-title pb-4 d-flex flex-wrap justify-content-between align-items-center">
                         <h3 class="col-10 mb-0 m-text-cursive">{{ $apartment->title }}</h3>
                         {{-- stampare il tipo di Sponsorizzazione attivo --}}
                         @php
@@ -54,7 +54,7 @@
                                 }
                             }
                         @endphp
-                        <p id="demo"></p>
+                        <p id="demo" class="absolute-left"></p>
                         <script>
                             const lastActiveSponsor = document.querySelector('.last-active-sponsor');
                             if ( lastActiveSponsor?.innerHTML) {
@@ -76,8 +76,8 @@
                                     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
                                         
                                     // Output the result in an element with id="demo"
-                                    document.getElementById("demo").innerHTML = days + "gg " + hours + "ore "
-                                    + minutes + "m " + seconds + "s ";
+                                    document.getElementById("demo").innerHTML = `<i class="fa-solid fa-hourglass-half"></i> ` + days + " gg - " + hours + " ore - "
+                                    + minutes + " m - " + seconds + " s ";
                                         
                                     // If the count down is over, write some text 
                                     if (distance < 0) {

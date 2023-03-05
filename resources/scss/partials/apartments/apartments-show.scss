@@ -29,8 +29,15 @@
                 }
             }
         }
+        & .absolute-left{
+            position: absolute;
+            right: 0;
+            top: 65%;
+            font-weight: 600;
+        }
     }
     & div.apartment-title {
+        position: relative;
         & h3 {
             font-size: 50px;
         }
