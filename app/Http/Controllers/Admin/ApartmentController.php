@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Apartment;
 use App\Models\Service;
 use App\Http\Controllers\Controller;
+use App\Models\sponsorship;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -110,12 +111,12 @@ class ApartmentController extends Controller
             // Check if showed apartment is sponsored
             if( !$apartment->sponsorships->isEmpty() ) {
                 // Get all sponsors from apartment in array
-                $apartment_sponsors = $apartment['sponsorships']->toArray();
+                $apartment_sponsors = $apartment->sponsorships()->get()->toArray();
 
                 // Get the last sponsor date time
                 $last_sponsor = end($apartment_sponsors);
                 $last_sponsor_end = $last_sponsor['pivot']['sponsor_end'];
-            
+
                 // Check if last sponsor end is passed
                 $is_passed = Carbon::createFromFormat('Y-m-d H:i:s', $last_sponsor_end)->isPast();
                 

@@ -171,6 +171,8 @@ class SponsorshipController extends Controller
         $sponsorship->apartments()->attach($data, [
             'sponsor_start' => $sponsor_start,
             'sponsor_end' => $sponsor_end,
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
         ]);
     }
 
