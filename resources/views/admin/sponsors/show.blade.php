@@ -30,7 +30,6 @@
                 @error('apartment_sponsored')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                    <button type="submit">invia</button>
             </form>
 
             <div class="mt-3 alert alert-warning">
