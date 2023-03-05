@@ -102,6 +102,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
+        $last_active_sponsor = 'null';
         $apartments = Apartment::where('user_id', Auth::user()->id)->get();
 
         if( $apartment->user_id === Auth::user()->id ){
@@ -122,7 +123,6 @@ class ApartmentController extends Controller
                     $last_active_sponsor = $last_sponsor_end;
                 }
             }
-
             return view('admin.apartments.show', compact('apartment', 'last_active_sponsor', 'apartments'));
         } else {
             return redirect()->route('admin.apartments.index')->with('invalid_op', 'Invalid operation.');
