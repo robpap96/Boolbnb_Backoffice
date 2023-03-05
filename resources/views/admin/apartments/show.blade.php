@@ -114,10 +114,10 @@
                                 Messaggi ricevuti: 
                                 <span class="fw-bold">{{ count($apartment->messages) }}</span>
                             </div>
-                            <div class="views">
+                            {{-- <div class="views">
                                 Visualizzazioni appartamento:
                                 <span class="fw-bold">0</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
